@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= link_to "編集", edit_user_path(current_user), class: "btn btn-success" %>
+      <%= link_to "通知", notifications_path(current_user), class: "btn btn-secondary" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-8">
+      <p>プロフィール画像</p>
+    </div>
+    <div class="col-4">
+      <p><%= current_user.display_name %></p>
+      <p><%= current_user.prefecture %></p>
+      <p><%= current_user.municipality %></p>
+      <p><%= current_user.sefl_introduction %></p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <p><%= link_to posts_path(current_user) do %>過去の投稿<% end %></p>
+    </div>
+  </div>
+</div>
