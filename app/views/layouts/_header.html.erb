@@ -1,0 +1,61 @@
+<header> 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <%= link_to root_path do %>
+          <%= image_tag "ones-community-logo", size: "100x100" %>
+        <% end %>
+      </a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "マイページ", current_user_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "About", about_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "投稿一覧", posts_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "チャット一覧", rooms_path(current_user) %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_user_session_path %>
+            </li>
+          <% elsif admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "会員一覧", admin_users_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "投稿一覧", admin_posts_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "チャット一覧", admin_rooms_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "タグ一覧", admin_tags_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログアウト", destroy_admin_session_path %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "新規登録", new_user_registration_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "ログイン", new_user_session_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "About", about_path %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "投稿一覧", posts_path %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
