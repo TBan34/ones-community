@@ -1,26 +1,37 @@
 <div class="container">
   <div class="row">
+    <% if @user == current_user %>
     <div class="col">
       <%= link_to "編集", edit_user_path(current_user), class: "btn btn-success" %>
       <%= link_to "通知", notifications_path(current_user), class: "btn btn-secondary" %>
     </div>
+    <% end %>
   </div>
   
   <div class="row">
-    <div class="col-8">
-      <p>プロフィール画像</p>
+    <div class="col-6">
+      <% if @user == current_user %>
+        <%= image_tag @user.get_profile_image(100, 100) %>
+        <p>氏名：<%= @user.name %></p>
+        <p>電話番号：<%= @user.telephone_number %></p>
+        <p>メールアドレス：<%= @user.email %></p>
+      <% else %>
+        <%= image_tag @user.get_profile_image(300, 300) %>
+      <% end %>
     </div>
-    <div class="col-4">
-      <p><%= current_user.display_name %></p>
-      <p><%= current_user.prefecture %></p>
-      <p><%= current_user.municipality %></p>
-      <p><%= current_user.sefl_introduction %></p>
+    <div class="col-6">
+      <p>ユーザー名：<%= @user.display_name %></p>
+      <p>都道府県：<%= @user.prefecture %></p>
+      <p>市区町村：<%= @user.municipality %></p>
+      <p>自己紹介：<%= @user.self_introduction %></p>
     </div>
   </div>
   
   <div class="row">
+    <% if @user == current_user %>
     <div class="col">
-      <p><%= link_to posts_path(current_user) do %>過去の投稿<% end %></p>
+      <p><%= link_to posts_path(@user) do %>過去の投稿<% end %></p>
     </div>
+    <% end %>
   </div>
 </div>
