@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   
   # 管理者用ルーティング
   namespace :admin do
-    root to: "posts#index"
     resources :users, only: [:index, :show, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :destroy]
     resources :tags, only: [:create, :index, :edit, :update]
