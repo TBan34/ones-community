@@ -10,7 +10,7 @@ class Public::UsersController < ApplicationController
   
   def update
     @user = current_user
-    if @user.update
+    if @user.update(user_params)
       redirect_to current_user
     end
   end
@@ -18,7 +18,10 @@ class Public::UsersController < ApplicationController
   def unsubscribe
   end
   
-  def withdraw
+  def withdrawal
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true)
+    redirect_to root_path
   end
   
   private
