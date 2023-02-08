@@ -9,9 +9,11 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto">
           <% if user_signed_in? %>
-            <li class="nav-item">
-              <%= link_to "マイページ", current_user %>
-            </li>
+            <% if current_user.name != "guestuser" %>
+              <li class="nav-item">
+                <%= link_to "マイページ", current_user %>
+              </li>
+            <% end %>
             <li class="nav-item">
               <%= link_to "About", about_path %>
             </li>
@@ -21,9 +23,15 @@
             <li class="nav-item">
               <%= link_to "チャット一覧", rooms_path(current_user) %>
             </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_user_session_path %>
-            </li>
+            <% if current_user.name != "guestuser" %>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_user_session_path %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "ログアウト", users_guest_sign_out_path, method: :post %>
+              </li>
+            <% end %>
           <% elsif admin_signed_in? %>
             <li class="nav-item">
               <%= link_to "会員一覧", admin_users_path %>
@@ -49,9 +57,6 @@
             </li>
             <li class="nav-item">
               <%= link_to "About", about_path %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "投稿一覧", posts_path %>
             </li>
           <% end %>
         </ul>
