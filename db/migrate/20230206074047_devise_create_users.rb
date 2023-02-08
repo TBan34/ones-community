@@ -8,18 +8,18 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :encrypted_password, null: false, default: ""
       ## テーブル定義書より追加
       # 氏名
-      t.string "name", null: false
+      t.string :name, null: false
       # 居住地（都道府県, 区市町村）
-      t.string "prefecture", null: false
-      t.string "municipality", null: false
+      t.string :prefecture, null: true
+      t.string :municipality, null: true
       # 電話番号
-      t.string "telephone_number", null: false
+      t.string :telephone_number, null: false
       # 表示名
-      t.string "display_name", null: false
+      t.string :display_name, null: true
       # 自己紹介
-      t.text "self-introduction", null: false
+      t.text :self_introduction, null: true
       # 退会処理（default: false）
-      t.boolean "is_deleted", default: false, null: false
+      t.boolean :is_deleted, default: false, null: false
       
       ## Recoverable
       t.string   :reset_password_token
