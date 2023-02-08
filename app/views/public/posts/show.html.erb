@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <% if @user == current_user %>
+    <div class="col">
+      <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success" %>
+      <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+    </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <%= image_tag @post.get_image(200, 200) %>
+      <p>タグ</p>
+    </div>
+    <div class="col-8">
+      <p>ユーザー名：<%= @user.display_name %></p>
+      <%= @post.title %>
+      <%= @post.body %>
+      <p>時間：<%= @post.time %></p>
+      <p>場所：<%= @post.place %></p>
+      <p>持ち物：<%= @post.belonging %></p>
+    </div>
+  </div>
+</div>

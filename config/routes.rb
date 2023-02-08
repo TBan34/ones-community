@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       patch "withdrawal" => "users#withdrawal"
     end
     resources :notifications, only: [:index]
-    resources :posts, only: [:new, :create, :index, :show, :edit, :destroy]
+    resources :posts
     resources :rooms, only: [:create, :index, :show]
   end
   

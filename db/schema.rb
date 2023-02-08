@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 2023_02_06_081657) do
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "room_id", null: false
+    t.integer "room_id"
     t.string "title", null: false
     t.text "body", null: false
     t.string "time", null: false
