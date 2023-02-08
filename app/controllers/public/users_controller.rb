@@ -17,12 +17,10 @@ class Public::UsersController < ApplicationController
     end
   end
   
-  def unsubscribe
-  end
-  
   def withdrawal
-    @user = User.find(params[:id])
+    @user = current_user
     @user.update(is_deleted: true)
+    reset_session
     redirect_to root_path
   end
   
