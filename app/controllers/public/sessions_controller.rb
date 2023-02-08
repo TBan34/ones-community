@@ -31,6 +31,13 @@ class Public::SessionsController < Devise::SessionsController
       root_path
     end
 
+    def user_state
+      @user_state = User.find_by(email: params[:user][:email])
+      return if !@user
+      if @user.valid_password?(params[:user][:password]) && !(@user.is_deleted == false)
+        redirect_to new_user_registration_path
+      end
+    end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])

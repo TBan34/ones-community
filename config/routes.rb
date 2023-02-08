@@ -12,7 +12,10 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "/about" => "homes#about"
     get "/searches" => "searches#search"
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+      get "unsubscribe" => "users#unsubscribe"
+      patch "withdrawal" => "users#withdrawal"
+    end
     resources :notifications, only: [:index]
     resources :posts, only: [:new, :create, :index, :show, :edit, :destroy]
     resources :rooms, only: [:create, :index, :show]
