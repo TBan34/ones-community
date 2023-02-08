@@ -1,1 +1,18 @@
-<h1>Topページ</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <h1>Topページ</h1>
+    </div>
+    <div class="col-6">
+      <% if current_user != User.guest %>
+        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
+      <% else %>
+        <%= link_to "ゲストログアウト", users_guest_sign_out_path, class: "btn btn-secondary", method: :post %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <h2>新着投稿</h2>
+  </div>
+</div>
+
