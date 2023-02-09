@@ -20,6 +20,24 @@
       <p>時間：<%= @post.time %></p>
       <p>場所：<%= @post.place %></p>
       <p>持ち物：<%= @post.belonging %></p>
+      <div class="comment_list">
+        <p>コメント数：<%= @post.comments.count %></p>
+        <% @post.comments.each do |comment| %>
+          <%= image_tag comment.user.get_profile_image(100, 100) %>
+          <%= comment.user.name %>
+          <%= comment.content %>
+          <% if comment.user == current_user %>
+            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="comment_form form-group field">
+        <%= form_with model: [@post, @comment] do |f| %>
+          <%= f.label :"新規コメント", class: "control-label" %>
+          <%= f.text_area :content, class: "form-control" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
