@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-4">
-      <p>検索欄</p>
+      <%= render "search_word" %>
       <% if current_user.name != "guestuser" %>
         <%= link_to "新規投稿", new_post_path %>
       <% end %>

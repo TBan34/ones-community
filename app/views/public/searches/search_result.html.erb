@@ -1,0 +1,11 @@
+<h2>"<%= @search_word %>"で検索しています</h2>
+  <% @posts.each do |post| %>
+    <p>ユーザー名：<%= post.user.display_name %></p>
+    <%= image_tag post.get_image(100, 100) %>
+    <%= post.title %>
+    <%= post.body %>
+    <p>時間：<%= post.time %></p>
+    <p>場所：<%= post.place %></p>
+    <p>持ち物：<%= post.belonging %></p>
+    <%= link_to "詳細", post_path(post.id) %>
+  <% end %>
