@@ -7,6 +7,8 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    tag = Tag.find(params[:post][:tag_ids])
+    @post.tags << tag
     @post.save
     redirect_to posts_path
   end
