@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "/about" => "homes#about"
-    get "/searches" => "searches#search"
+    get "/search" => "searches#search"
     resources :users, only: [:show, :edit, :update] do
       get "unsubscribe" => "users#unsubscribe"
       patch "withdrawal" => "users#withdrawal"

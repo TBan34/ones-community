@@ -17,4 +17,12 @@ class Post < ApplicationRecord
     image.variant(resize_to_limit: [width, height]).processed
   end
   
+  def self.search_word(search_word)
+    if search_word
+      @post = Post.where("title LIKE?", "%#{search_word}%")
+    else
+      "一致する検索結果はありませんでした"
+    end
+  end
+  
 end

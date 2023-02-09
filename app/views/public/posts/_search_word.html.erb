@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+  <div class="search_word_form">
+    <%= form_with url: search_path, local: true, method: :get do |f| %>
+      <%= f.text_field :search_word %>
+      <%= f.submit "検索", class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+<% end %>
