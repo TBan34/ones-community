@@ -18,6 +18,7 @@
         <p>持ち物：<%= post.belonging %></p>
         <p>タグ：<%= post.tags %></p>
         <p>♥<%= post.favorites.count %>いいね</p>
+        <p>コメント数：<%= post.comments.count %></p>
         <%= link_to "詳細", post_path(post.id) %>
       <% end %>
     </div>

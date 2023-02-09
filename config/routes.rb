@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :notifications, only: [:index]
     resources :posts do
       resource :favorites, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy]
     end
     resources :rooms, only: [:create, :index, :show]
   end
