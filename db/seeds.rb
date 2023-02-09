@@ -11,3 +11,16 @@ Admin.create!(
   email: "admin@admin",
   password: "testtest"
 )
+
+# 投稿タグの種類
+Tag.create([
+  { name: "サッカー" },
+  { name: "野球" },
+  { name: "バスケットボール" },
+  { name: "バレーボール" },
+  { name: "卓球" },
+  { name: "バドミントン" },
+  { name: "テニス" },
+  { name: "ランニング" },
+  { name: "その他" }
+  ])
