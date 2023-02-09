@@ -12,7 +12,7 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-    @posts = Post.all
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
   end
   
   def show
