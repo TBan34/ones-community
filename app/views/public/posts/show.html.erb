@@ -10,6 +10,7 @@
   <div class="row">
     <div class="col-4">
       <%= image_tag @post.get_image(200, 200) %>
+      <%= render "favorites", post: @post %>
       <p>タグ</p>
     </div>
     <div class="col-8">
