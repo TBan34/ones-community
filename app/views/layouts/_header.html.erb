@@ -25,7 +25,7 @@
             </li>
             <% if current_user.name != "guestuser" %>
               <li class="nav-item">
-                <%= link_to "ログアウト", destroy_user_session_path %>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
               </li>
             <% else %>
               <li class="nav-item">
@@ -46,7 +46,7 @@
               <%= link_to "タグ一覧", admin_tags_path %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログアウト", destroy_admin_session_path %>
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
             </li>
           <% else %>
             <li class="nav-item">
