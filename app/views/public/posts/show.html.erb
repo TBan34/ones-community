@@ -11,7 +11,9 @@
     <div class="col-4">
       <%= image_tag @post.get_image(200, 200) %>
       <%= render "favorites", post: @post %>
-      <p>タグ</p>
+      <% @post.tags.each do |tag| %>
+        <p>タグ：<%= tag.name %></p>
+      <% end %>
     </div>
     <div class="col-8">
       <p>ユーザー名：<%= @user.display_name %></p>
