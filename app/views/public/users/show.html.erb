@@ -4,6 +4,7 @@
       <div class="col">
         <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success" %>
         <%= link_to "通知", notifications_path(current_user), class: "btn btn-secondary" %>
+        <%= link_to "いいね一覧", user_favorites_path(@user.id), class: "btn btn-info" %>
       </div>
     <% end %>
   </div>

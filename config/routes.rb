@@ -15,9 +15,12 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :edit, :update] do
       get "unsubscribe" => "users#unsubscribe"
       patch "withdrawal" => "users#withdrawal"
+      resources :favorites, only: [:index]
     end
     resources :notifications, only: [:index]
-    resources :posts
+    resources :posts do
+      resource :favorites, only: [:create, :destroy]
+    end
     resources :rooms, only: [:create, :index, :show]
   end
   
