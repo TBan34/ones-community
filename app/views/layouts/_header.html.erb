@@ -1,62 +1,66 @@
+<!--ヘッダー-->
 <header> 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg" style="background-color: #365E94">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand ml-5" href="/">
         <%= link_to root_path do %>
           <%= image_tag "ones-community-logo", size: "100x100" %>
         <% end %>
       </a>
       <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ml-auto mr-5">
+        <!--ユーザー/ゲストユーザーログイン時-->
           <% if user_signed_in? %>
             <% if current_user.name != "guestuser" %>
               <li class="nav-item">
-                <%= link_to "マイページ", current_user %>
+                <%= link_to "マイページ", current_user, class: "btn btn-outline-light" %>
               </li>
             <% end %>
             <li class="nav-item">
-              <%= link_to "About", about_path %>
+              <%= link_to "About", about_path, class: "btn btn-outline-light" %>
             </li>
             <li class="nav-item">
-              <%= link_to "投稿一覧", posts_path %>
+              <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-light" %>
             </li>
             <li class="nav-item">
-              <%= link_to "チャット一覧", rooms_path(current_user) %>
+              <%= link_to "チャット一覧", rooms_path(current_user), class: "btn btn-outline-light" %>
             </li>
             <% if current_user.name != "guestuser" %>
               <li class="nav-item">
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+                <%= link_to "ログアウト", destroy_user_session_path, class: "btn btn-outline-light", method: :delete %>
               </li>
             <% else %>
               <li class="nav-item">
-                <%= link_to "ログアウト", users_guest_sign_out_path, method: :post %>
+                <%= link_to "ログアウト", users_guest_sign_out_path, class: "btn btn-outline-light", method: :post %>
               </li>
             <% end %>
+          <!--管理者ログイン時-->
           <% elsif admin_signed_in? %>
             <li class="nav-item">
-              <%= link_to "会員一覧", admin_users_path %>
+              <%= link_to "会員一覧", admin_users_path, class: "btn btn-outline-light" %>
             </li>
-            <li class="nav-item">
-              <%= link_to "投稿一覧", admin_posts_path %>
+            <li class="nav-item ml-3">
+              <%= link_to "投稿一覧", admin_posts_path, class: "btn btn-outline-light" %>
             </li>
-            <li class="nav-item">
-              <%= link_to "チャット一覧", admin_rooms_path %>
+            <li class="nav-item ml-3">
+              <%= link_to "チャット一覧", admin_rooms_path, class: "btn btn-outline-light" %>
             </li>
-            <li class="nav-item">
-              <%= link_to "タグ一覧", admin_tags_path %>
+            <li class="nav-item ml-3">
+              <%= link_to "タグ一覧", admin_tags_path, class: "btn btn-outline-light" %>
             </li>
-            <li class="nav-item">
-              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            <li class="nav-item ml-3">
+              <%= link_to "ログアウト", destroy_admin_session_path, class: "btn btn-outline-light", method: :delete %>
             </li>
           <% else %>
+          <!--未ログイン時-->
             <li class="nav-item">
-              <%= link_to "新規登録", new_user_registration_path %>
+              <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-light" %>
             </li>
             <li class="nav-item">
-              <%= link_to "ログイン", new_user_session_path %>
+              <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-light" %>
             </li>
             <li class="nav-item">
-              <%= link_to "About", about_path %>
+              <%= link_to "About", about_path, class: "btn btn-outline-light" %>
             </li>
           <% end %>
         </ul>
