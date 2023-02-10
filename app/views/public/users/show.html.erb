@@ -1,37 +1,67 @@
 <div class="container">
+  <h2 class="font-weight-bold">＜ユーザー詳細画面＞</h2>
+  
   <div class="row">
     <% if @user == current_user %>
-      <div class="col">
+      <div class="col-10 offset-2 text-right">
         <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success" %>
-        <%= link_to "通知", notifications_path(current_user), class: "btn btn-secondary" %>
-        <%= link_to "いいね一覧", user_favorites_path(@user.id), class: "btn btn-info" %>
+        <%= link_to "通知", notifications_path(current_user), class: "btn btn-secondary ml-3" %>
+        <%= link_to "いいね履歴", user_favorites_path(@user.id), class: "btn btn-info ml-3" %>
       </div>
     <% end %>
   </div>
   
   <div class="row">
-    <div class="col-6">
-      <% if @user == current_user %>
-        <%= image_tag @user.get_profile_image(100, 100) %>
-        <p>氏名：<%= @user.name %></p>
-        <p>電話番号：<%= @user.telephone_number %></p>
-        <p>メールアドレス：<%= @user.email %></p>
-      <% else %>
-        <%= image_tag @user.get_profile_image(300, 300) %>
-      <% end %>
-    </div>
-    <div class="col-6">
-      <p>ユーザー名：<%= @user.display_name %></p>
-      <p>都道府県：<%= @user.prefecture %></p>
-      <p>市区町村：<%= @user.municipality %></p>
-      <p>自己紹介：<%= @user.self_introduction %></p>
+    <div class="col text-center">
+      <%= image_tag @user.get_profile_image(300, 300) %>
     </div>
   </div>
   
   <div class="row">
     <% if @user == current_user %>
-    <div class="col">
-      <p><%= link_to posts_path(@user) do %>過去の投稿<% end %></p>
+      <div class="col-4">
+        <table class="table table-bordered">
+          <tr>
+            <th scope="row" class="table-secondary">氏名</th>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">電話番号</th>
+            <td><%= @user.telephone_number %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+        </table>
+      </div>
+    <% end %>
+    <div class="col-8">
+      <table class="table table-bordered">
+        <tr>
+          <th scope="row" class="table-secondary">ユーザー名</th>
+          <td><%= @user.display_name %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">都道府県</th>
+          <td><%= @user.prefecture %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">市区町村</th>
+          <td><%= @user.municipality %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">自己紹介</th>
+          <td><%= @user.self_introduction %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <% if @user == current_user %>
+    <div class="col text-right">
+      <p><%= link_to posts_path(@user) do %><u>過去の投稿</u><% end %></p>
     </div>
     <% end %>
   </div>
