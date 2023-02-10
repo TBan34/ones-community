@@ -21,6 +21,12 @@
     </div>
     <div class="col-6">
       <div class="form-group field">
+        <%= f.label :is_deleted, "ステータス（退会）", class: "control-label" %>
+        <%= f.radio_button :is_deleted, :true, class: "form-control" %>
+        <%= f.label :is_deleted, "ステータス（有効）", class: "control-label" %>
+        <%= f.radio_button :is_deleted, :false, class: "form-control" %>
+      </div>
+      <div class="form-group field">
         <%= f.label :"表示名", class: "control-label" %>
         <%= f.text_field :display_name, class: "form-control" %>
       </div>
