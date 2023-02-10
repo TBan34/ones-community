@@ -14,7 +14,7 @@
     </div>
     <div class="col-6">
       <p>ユーザーID：<%= @user.id %></p>
-      <p>ステータス：<%= @user.is_deleted ? "無効" : "有効" %></p>
+      <p>ステータス：<%= @user.is_deleted ? "退会" : "有効" %></p>
       <p>ユーザー名：<%= @user.display_name %></p>
       <p>都道府県：<%= @user.prefecture %></p>
       <p>市区町村：<%= @user.municipality %></p>
