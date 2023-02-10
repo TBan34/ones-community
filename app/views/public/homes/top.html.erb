@@ -1,18 +1,27 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-6">
-      <h1>Topページ</h1>
+    <div class="col-6 px-0">
+      <img src="/assets/top-image.jpg" class="img-responsive" alt="トップ画像" width="900" height="500" %>
     </div>
-    <div class="col-6">
+    <div class="col-6 text-center my-auto">
       <% if current_user != User.guest %>
-        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary", method: :post %>
+        <h4 class="font-weight-bold mb-5">ゲストログインすることで、他の人の投稿を確認することができます</h4>
+        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-lg", method: :post %>
       <% else %>
         <%= link_to "ゲストログアウト", users_guest_sign_out_path, class: "btn btn-secondary", method: :post %>
       <% end %>
     </div>
   </div>
-  <div class="row">
-    <h2>新着投稿</h2>
+  <div class="row mt-5">
+    <div class="col ml-3">
+      <% if user_signed_in? %>
+        <h3 class="font-weight-bold">＜ 新着投稿 ＞</h3>
+        <%= render "public/posts/latest_posts", posts: @posts %>
+        <p class="text-right"><u><%= link_to "全ての投稿を見る", posts_path %></u></p>
+      <% else %>
+        <p class="text-center">投稿の閲覧にはログインが必要です</p>
+      <% end %>
+    </div>
   </div>
 </div>
 

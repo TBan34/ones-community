@@ -2,11 +2,16 @@
 <header> 
   <nav class="navbar navbar-expand-lg" style="background-color: #365E94">
     <div class="container-fluid">
-      <a class="navbar-brand ml-5" href="/">
-        <%= link_to root_path do %>
-          <%= image_tag "ones-community-logo", size: "100x100" %>
-        <% end %>
-      </a>
+      <!--管理者ログイン時はトップページへ遷移しない-->
+      <% unless admin_signed_in? %>
+        <a class="navbar-brand ml-5" href="/">
+          <%= link_to root_path do %>
+            <%= image_tag "ones-community-logo", size: "100x100" %>
+          <% end %>
+        </a>
+      <% else %>
+        <%= image_tag "ones-community-logo", size: "100x100" %>
+      <% end %>
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto mr-5">
         <!--ユーザー/ゲストユーザーログイン時-->
@@ -16,21 +21,21 @@
                 <%= link_to "マイページ", current_user, class: "btn btn-outline-light" %>
               </li>
             <% end %>
-            <li class="nav-item">
+            <li class="nav-item ml-3">
               <%= link_to "About", about_path, class: "btn btn-outline-light" %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-3">
               <%= link_to "投稿一覧", posts_path, class: "btn btn-outline-light" %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-3">
               <%= link_to "チャット一覧", rooms_path(current_user), class: "btn btn-outline-light" %>
             </li>
             <% if current_user.name != "guestuser" %>
-              <li class="nav-item">
+              <li class="nav-item ml-3">
                 <%= link_to "ログアウト", destroy_user_session_path, class: "btn btn-outline-light", method: :delete %>
               </li>
             <% else %>
-              <li class="nav-item">
+              <li class="nav-item ml-3">
                 <%= link_to "ログアウト", users_guest_sign_out_path, class: "btn btn-outline-light", method: :post %>
               </li>
             <% end %>
@@ -51,15 +56,15 @@
             <li class="nav-item ml-3">
               <%= link_to "ログアウト", destroy_admin_session_path, class: "btn btn-outline-light", method: :delete %>
             </li>
-          <% else %>
           <!--未ログイン時-->
+          <% else %>
             <li class="nav-item">
               <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-light" %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-3">
               <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-light" %>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ml-3">
               <%= link_to "About", about_path, class: "btn btn-outline-light" %>
             </li>
           <% end %>
