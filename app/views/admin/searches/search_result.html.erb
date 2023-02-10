@@ -10,5 +10,5 @@
     <p>時間：<%= post.time %></p>
     <p>場所：<%= post.place %></p>
     <p>持ち物：<%= post.belonging %></p>
-    <%= link_to "詳細", post_path(post.id) %>
+    <%= link_to "詳細", admin_post_path(post.id) %>
   <% end %>

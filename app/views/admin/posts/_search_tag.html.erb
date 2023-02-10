@@ -1,0 +1,6 @@
+<div class="search_tag_form">
+  <%= form_with url: admin_posts_path, local: true, method: :get do |f| %>
+    <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), { prompt: "タグ検索" } %>
+    <%= f.submit "検索", class: "btn btn-secondary" %>
+  <% end %>
+</div>
