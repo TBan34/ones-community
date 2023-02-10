@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% @users.each do |user| %>
+        <p><%= image_tag user.get_profile_image(100, 100) %></p>
+        <p>ユーザーID：<%= user.id %></p>
+        <p>ステータス：<%= user.is_deleted ? "無効" : "有効" %></p>
+        <p>ユーザー名：<%= user.display_name %></p>
+        <p>都道府県：<%= user.prefecture %></p>
+        <p>市区町村<%= user.municipality %></p>
+        <%= link_to "詳細", admin_user_path(user.id) %>
+      <% end %>
+    </div>
+  </div>
+</div>

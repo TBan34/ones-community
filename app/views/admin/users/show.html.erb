@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success" %>
+      <%= link_to "通知", notifications_path(current_user), class: "btn btn-secondary" %>
+      <%= link_to "いいね一覧", user_favorites_path(@user.id), class: "btn btn-info" %>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-6">
+      <%= image_tag @user.get_profile_image(100, 100) %>
+      <p>氏名：<%= @user.name %></p>
+      <p>電話番号：<%= @user.telephone_number %></p>
+      <p>メールアドレス：<%= @user.email %></p>
+    </div>
+    <div class="col-6">
+      <p>ユーザーID：<%= @user.id %></p>
+      <p>ステータス：<%= @user.is_deleted ? "無効" : "有効" %></p>
+      <p>ユーザー名：<%= @user.display_name %></p>
+      <p>都道府県：<%= @user.prefecture %></p>
+      <p>市区町村：<%= @user.municipality %></p>
+      <p>自己紹介：<%= @user.self_introduction %></p>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col">
+      <p><%= link_to posts_path(@user) do %>過去の投稿<% end %></p>
+    </div>
+  </div>
+</div>

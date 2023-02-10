@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <%= render "search_word" %>
+      <%= render "search_tag" %>
+    </div>
+    <div class="col-8">
+      <% @posts.each do |post| %>
+        <p>ユーザー名：<%= post.user.display_name %></p>
+        <% post.tags.each do |tag| %>
+          <p>タグ：<%= tag.name %></p>
+        <% end %>
+        <%= image_tag post.get_image(100, 100) %>
+        <%= post.title %>
+        <%= post.body %>
+        <p>時間：<%= post.time %></p>
+        <p>場所：<%= post.place %></p>
+        <p>持ち物：<%= post.belonging %></p>
+        <p>♥<%= post.favorites.count %>いいね</p>
+        <p>コメント数：<%= post.comments.count %></p>
+        <%= link_to "詳細", admin_post_path(post.id) %>
+      <% end %>
+    </div>
+  </div>
+</div>
