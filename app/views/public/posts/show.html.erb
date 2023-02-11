@@ -27,7 +27,7 @@
           <td><%= @post.title %></td>
         </tr>
         <tr>
-          <th scope="row" class="table-secondary">時間</th>
+          <th scope="row" class="table-secondary">日時</th>
           <td><%= @post.time %></td>
         </tr>
         <tr>
@@ -40,10 +40,10 @@
         </tr>
         <tr>
           <th scope="row" class="table-secondary">詳細情報</th>
-          <td><%= @post.body %></td>
+          <td><%=safe_join(@post.body.split("\n"),tag(:br))%></td>
         </tr>
       </table>
-      <h5>＜コメント一覧＞</h5>
+      <p>＜コメント一覧＞</p>
       <% @post.comments.each do |comment| %>
         <table class="comment_list">
           <td style="width: 10%">
@@ -61,6 +61,9 @@
             <% end %>
           </td>
         </table>
+      <% end %>
+      <% unless @post.comments.present? %>
+        <p>&emsp;コメントは特にありません</p>
       <% end %>
       <%= form_with model: [@post, @comment] do |f| %>
         <div class="comment_form form-group field">
