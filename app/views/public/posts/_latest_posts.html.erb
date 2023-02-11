@@ -1,5 +1,5 @@
 <% posts.each do |post| %>
-  <div class="card d-inline-flex">
+  <div class="card d-inline-flex" style="width: 12%; height: 350px">
     <%= image_tag post.get_image(200, 200) %>
     <div class="card-body">
       <h5 class="card-title"><%= truncate(post.title, length: 10) %></h5>
