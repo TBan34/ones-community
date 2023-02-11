@@ -1,40 +1,48 @@
-<h2>Sign up</h2>
-
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
-
-  <!--本人確認を兼ねて、サインアップに氏名と電話番号の項目を追加-->
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autocomplete: "name" %>
+<div class="container">
+  <h2>新規登録</h2>
+  
+  <%= form_with model: @user, url: user_registration_path do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
+  
+    <!--本人確認を兼ねて、サインアップに氏名と電話番号の項目を追加-->
+    <div class="form-group field">
+      <%= f.label :"氏名", class: "control-label" %><br />
+      <%= f.text_field :name, autocomplete: "name", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"電話番号", class: "control-label" %><br />
+      <%= f.text_field :telephone_number, autocomplete: "telephone_number", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"メールアドレス", class: "control-label" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"パスワード", class: "control-label" %>
+      <% if @minimum_password_length %>
+      <em>（<%= @minimum_password_length %>文字以上）</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"パスワード（確認用）", class: "control-label" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="actions">
+      <%= f.submit "アカウントを作成する" %>
+    </div>
+  <% end %>
+  
+  <div class="mt-5">
+    <h3>既に登録済みの方</h3>
+    <p><%= link_to "こちら", new_user_session_path %>からログインしてください。</p>
   </div>
-
-  <div class="field">
-    <%= f.label :telephone_number %><br />
-    <%= f.text_field :telephone_number, autocomplete: "telephone_number" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+  
+</div>
 
 <%= render "public/shared/links" %>

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-3">
   <h2 class="font-weight-bold">＜ユーザー詳細画面＞</h2>
   
   <div class="row">
@@ -6,7 +6,7 @@
       <div class="col-10 offset-2 text-right">
         <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success" %>
         <%= link_to "通知", notifications_path(current_user), class: "btn btn-secondary ml-3" %>
-        <%= link_to "いいね履歴", user_favorites_path(@user.id), class: "btn btn-info ml-3" %>
+        <%= link_to "いいねした投稿", user_favorites_path(@user.id), class: "btn btn-info ml-3" %>
       </div>
     <% end %>
   </div>
