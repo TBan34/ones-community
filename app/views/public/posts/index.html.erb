@@ -1,28 +1,45 @@
-<div class="container">
+<div class="container-fluid w-75 my-3">
   <div class="row">
-    <div class="col-4">
+    <div class="col-3">
       <%= render "search_word" %>
       <%= render "search_tag" %>
       <% if current_user.name != "guestuser" %>
-        <%= link_to "新規投稿", new_post_path %>
+        <h5 class="font-weight-bold mt-5">＜新規投稿＞</h5>
+        <p><%= link_to "投稿する", new_post_path, class: "btn btn-primary btn-lg" %></p>
       <% end %>
     </div>
-    <div class="col-8">
-      <% @posts.each do |post| %>
-        <p>ユーザー名：<%= post.user.display_name %></p>
-        <% post.tags.each do |tag| %>
-          <p>タグ：<%= tag.name %></p>
-        <% end %>
-        <%= image_tag post.get_image(100, 100) %>
-        <%= post.title %>
-        <%= post.body %>
-        <p>時間：<%= post.time %></p>
-        <p>場所：<%= post.place %></p>
-        <p>持ち物：<%= post.belonging %></p>
-        <p>♥<%= post.favorites.count %>いいね</p>
-        <p>コメント数：<%= post.comments.count %></p>
-        <%= link_to "詳細", post_path(post.id) %>
+    <div class="col-9">
+      <h2 class="font-weight-bold">＜投稿一覧＞</h2>
+      <table class="table table-bordered text-center">
+        <tr class="table table-secondary">
+          <th scope="col"></th>
+          <th scope="col">投稿者</th>
+          <th scope="col">タイトル</th>
+          <th scope="col">タグ</th>
+          <th scope="col">時間</th>
+          <th scope="col">場所</th>
+          <th scope="col">いいね</th>
+          <th scope="col">コメント</th>
+          <th scope="col"></th>
+        </tr>
+        <% @posts.each do |post| %>
+        <tr>
+          <td><%= image_tag post.get_image(100, 100) %></td>
+          <td><%= post.user.display_name %></td>
+          <td><%= post.title %></td>
+          <td>
+            <% post.tags.each do |tag| %>
+              <p><%= tag.name %></p>
+            <% end %>
+          </td>
+          <td><%= post.time %></td>
+          <td><%= post.place %></td>
+          <td>♥<%= post.favorites.count %></td>
+          <td><%= post.comments.count %>件</td>
+          <td><%= link_to "詳細", post_path(post.id) %></td>
+        </tr>
       <% end %>
+      </table>
     </div>
   </div>
 </div>

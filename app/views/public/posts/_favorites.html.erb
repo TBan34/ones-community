@@ -1,3 +1,4 @@
+<!--いいねボタン-->
 <% if post.favorited_by?(current_user) %>
 <p>
   <%= link_to post_favorites_path(post), method: :delete do %>
