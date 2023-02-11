@@ -1,26 +1,33 @@
-<h2>Log in</h2>
-
-<%= form_with model: @user, url: user_session_path do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+<div class="container">
+  <h2>ログイン</h2>
+  
+  <%= form_with model: @user, url: user_session_path do |f| %>
+    <div class="form-group field">
+      <%= f.label :"メールアドレス", class: "control-label" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"パスワード", class: "control-label" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control col-sm-2" %>
+    </div>
+  
+    <% if devise_mapping.rememberable? %>
+      <div class="form-group field">
+        <%= f.check_box :remember_me %>
+        <%= f.label :"保存する" %>
+      </div>
+    <% end %>
+  
+    <div class="actions">
+      <%= f.submit "ログイン" %>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="mt-5">
+    <h3>ユーザー登録がお済みでない方</h3>
+    <p><%= link_to "こちら", new_user_registration_path %>から新規登録してください。</p>
   </div>
-<% end %>
+  
+</div>
 
 <%= render "public/shared/links" %>
