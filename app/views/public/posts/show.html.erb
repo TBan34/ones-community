@@ -1,45 +1,74 @@
-<div class="container">
+<div class="container mt-3">
   <div class="row">
+    <h2 class="font-weight-bold">＜投稿詳細＞</h2>
     <% if @user == current_user %>
-    <div class="col">
+    <div class="col text-right">
       <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success" %>
       <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
     </div>
     <% end %>
   </div>
-  <div class="row">
+  <div class="row mt-3">
     <div class="col-4">
       <%= image_tag @post.get_image(200, 200) %>
       <%= render "favorites", post: @post %>
       <% @post.tags.each do |tag| %>
-        <p>タグ：<%= tag.name %></p>
+        <p>#<%= tag.name %></p>
       <% end %>
     </div>
     <div class="col-8">
-      <p>ユーザー名：<%= @user.display_name %></p>
-      <%= @post.title %>
-      <%= @post.body %>
-      <p>時間：<%= @post.time %></p>
-      <p>場所：<%= @post.place %></p>
-      <p>持ち物：<%= @post.belonging %></p>
-      <div class="comment_list">
-        <p>コメント数：<%= @post.comments.count %></p>
-        <% @post.comments.each do |comment| %>
-          <%= image_tag comment.user.get_profile_image(100, 100) %>
-          <%= comment.user.name %>
-          <%= comment.content %>
-          <% if comment.user == current_user %>
-            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete %>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="comment_form form-group field">
-        <%= form_with model: [@post, @comment] do |f| %>
-          <%= f.label :"新規コメント", class: "control-label" %>
+      <table class="table table-bordered">
+        <tr>
+          <th scope="row" class="table-secondary" style="width: 20%">投稿者</th>
+          <td><%= @user.display_name %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">タイトル</th>
+          <td><%= @post.title %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">時間</th>
+          <td><%= @post.time %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">場所</th>
+          <td><%= @post.place %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">持ち物</th>
+          <td><%= @post.belonging %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">詳細情報</th>
+          <td><%= @post.body %></td>
+        </tr>
+      </table>
+      <h5>＜コメント一覧＞</h5>
+      <% @post.comments.each do |comment| %>
+        <table class="comment_list">
+          <td style="width: 10%">
+            <%= image_tag comment.user.get_profile_image(100, 100) %>
+          </td>
+          <td style="width: 10%">
+            <%= comment.user.name %>
+          </td>
+          <td style="width: 70%">
+            <%= comment.content %>
+          </td>
+          <td class="text-center" style="width: 10%">
+            <% if comment.user == current_user %>
+              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger" %>
+            <% end %>
+          </td>
+        </table>
+      <% end %>
+      <%= form_with model: [@post, @comment] do |f| %>
+        <div class="comment_form form-group field">
+          <%= f.label :"＜新規コメント＞", class: "control-label" %>
           <%= f.text_area :content, class: "form-control" %>
-          <%= f.submit "送信する" %>
-        <% end %>
-      </div>
+        </div>
+        <%= f.submit "送信する" %>
+      <% end %>
     </div>
   </div>
 </div>
