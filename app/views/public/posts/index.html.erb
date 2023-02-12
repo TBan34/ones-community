@@ -16,7 +16,7 @@
           <th scope="col">投稿者</th>
           <th scope="col">タイトル</th>
           <th scope="col">タグ</th>
-          <th scope="col">時間</th>
+          <th scope="col">日時</th>
           <th scope="col">場所</th>
           <th scope="col">いいね</th>
           <th scope="col">コメント</th>
@@ -38,7 +38,7 @@
           <td><%= post.comments.count %>件</td>
           <td><%= link_to "詳細", post_path(post.id) %></td>
         </tr>
-      <% end %>
+        <% end %>
       </table>
     </div>
   </div>
