@@ -11,7 +11,9 @@
   <div class="row mt-3">
     <div class="col-4">
       <%= image_tag @post.get_image(200, 200) %>
-      <%= render "favorites", post: @post %>
+      <div id="favorites-btn_<%= @post.id %>">
+        <%= render "public/favorites/favorites-btn", post: @post %>
+      </div>
       <% @post.tags.each do |tag| %>
         <p>#<%= tag.name %></p>
       <% end %>
@@ -43,35 +45,9 @@
           <td><%=safe_join(@post.body.split("\n"),tag(:br))%></td>
         </tr>
       </table>
-      <p>＜コメント一覧＞</p>
-      <% @post.comments.each do |comment| %>
-        <table class="comment_list">
-          <td style="width: 10%">
-            <%= image_tag comment.user.get_profile_image(100, 100) %>
-          </td>
-          <td style="width: 10%">
-            <%= comment.user.name %>
-          </td>
-          <td style="width: 70%">
-            <%= comment.content %>
-          </td>
-          <td class="text-center" style="width: 10%">
-            <% if comment.user == current_user %>
-              <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger" %>
-            <% end %>
-          </td>
-        </table>
-      <% end %>
-      <% unless @post.comments.present? %>
-        <p>&emsp;コメントは特にありません</p>
-      <% end %>
-      <%= form_with model: [@post, @comment] do |f| %>
-        <div class="comment_form form-group field">
-          <%= f.label :"＜新規コメント＞", class: "control-label" %>
-          <%= f.text_area :content, class: "form-control" %>
-        </div>
-        <%= f.submit "送信する" %>
-      <% end %>
+      <div id="comment">
+        <%= render "public/comments/comment", post: @post, comment: @comment %>
+      </div>
     </div>
   </div>
 </div>
