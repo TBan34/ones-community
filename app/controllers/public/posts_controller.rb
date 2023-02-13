@@ -14,13 +14,17 @@ class Public::PostsController < ApplicationController
   end
   
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_public.order(created_at: :desc).page(params[:page])
   end
   
   def show
     @post = Post.find(params[:id])
     @user = @post.user
     @comment = Comment.new
+    
+    if @post.status_private? && @user != current_user
+      redirect_to posts_path
+    end
   end
   
   def edit
@@ -43,13 +47,14 @@ class Public::PostsController < ApplicationController
     end
   end
   
-  def confirm
+  def draft
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_private.order(created_at: :desc).page(params[:page])
   end
   
   private
   
   def post_params
-    params.require(:post).permit(:user_id, :title, :body, :time, :place, :belonging, :image, tag_ids: [])
+    params.require(:post).permit(:user_id, :title, :body, :time, :place, :belonging, :image, :status, tag_ids: [])
   end
   
 end

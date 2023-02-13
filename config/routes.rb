@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :posts do
       resource :favorites, only: [:create, :destroy]
       resources :comments, only: [:create, :destroy]
+      get "draft" => "posts#draft"
     end
     resources :rooms, only: [:create, :index, :show]
   end
