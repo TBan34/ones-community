@@ -16,6 +16,10 @@ Rails.application.routes.draw do
       get "unsubscribe" => "users#unsubscribe"
       patch "withdrawal" => "users#withdrawal"
       resources :favorites, only: [:index]
+      resource :matchings, only: [:create, :destroy] do
+        get "followings" => "matchings#followings"
+        get "followers" => "matchings#followers"
+      end
     end
     resources :notifications, only: [:index]
     resources :posts do
