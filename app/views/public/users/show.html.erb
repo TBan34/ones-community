@@ -5,8 +5,9 @@
     <% if @user == current_user %>
       <div class="col-10 offset-2 text-right">
         <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success" %>
-        <%= link_to "通知", notifications_path(current_user), class: "btn btn-secondary ml-3" %>
+        <%= link_to "通知", notifications_path(current_user), class: "btn btn-warning text-white ml-3" %>
         <%= link_to "いいねした投稿", user_favorites_path(@user.id), class: "btn btn-info ml-3" %>
+        <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary ml-3" %>
       </div>
     <% end %>
   </div>

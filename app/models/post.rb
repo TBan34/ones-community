@@ -10,6 +10,8 @@ class Post < ApplicationRecord
   
   has_one_attached :image
   
+  enum status: { public: 0, private: 1 }, _prefix: true
+  
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/junbiundou.jpg')

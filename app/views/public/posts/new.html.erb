@@ -1,5 +1,8 @@
 <div class="container mt-3">
-  <h2 class="font-weight-bold">＜新規投稿＞</h2>
+  <div class="d-flex">
+    <h2 class="font-weight-bold">＜新規投稿＞</h2>
+    <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-outline-secondary ml-5" %>
+  </div>
   
   <%= form_with model: @post do |f| %>
     <div class="form-group field">
@@ -29,6 +32,12 @@
     <div class="form-group field">
       <%= f.label :"詳細情報", class: "control-label" %>
       <%= f.text_area :body, class: "form-control col-sm-6" %>
+    </div>
+    <div class="form-group field">
+      <%= f.label :"公開" %>
+      <%= f.radio_button :status, :public %><br>
+      <%= f.label :"非公開（下書き）" %>
+      <%= f.radio_button :status, :private %>
     </div>
     <%= f.submit "投稿する", class: "btn btn-success" %>
   <% end %>
