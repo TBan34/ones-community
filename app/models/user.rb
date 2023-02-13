@@ -11,6 +11,9 @@ class User < ApplicationRecord
   has_many :reverse_of_matchings, class_name: "Matching", foreign_key: "following_id", dependent: :destroy
   has_many :followings, through: :matchings, source: :following
   has_many :followers, through: :reverse_of_matchings, source: :follower
+  has_many :user_rooms, dependent: :destroy
+  has_many :rooms, through: :user_rooms
+  has_many :chats
   
   has_one_attached :profile_image
   

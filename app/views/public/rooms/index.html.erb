@@ -1,0 +1,20 @@
+<p>チャットルーム一覧</p>
+<% @another_user_room.each do |aur| %>
+<table>
+  <tr>
+    <td>
+      <%= link_to room_path(aur.room.id) do %>
+        <%= image_tag aur.user.get_profile_image(100, 100), class: "rounded-circle" %>
+        <%= aur.user.name %>
+      <% end %>
+    </td>
+    <td>
+      <% chat = Chat.find_by(id: aur.room.chat_ids.last).message %>
+      <%= truncate(chat, length: 10) %>
+    </td>
+    <td>
+      <h6 style="color: #C0C0C0;"><%= aur.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
+    </td>
+  </tr>
+</table>
+<% end %>

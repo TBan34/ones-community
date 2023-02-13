@@ -52,6 +52,25 @@
           <%= link_to "Let's play Sports!!", user_matchings_path(@user.id), method: :post, class: "btn btn-primary" %>
         <% end %>
       </div>
+      <div class="room-link-btn text-right mt-2">
+        <% unless @user.id == current_user.id %>
+          <% if @user.followers.include?(current_user) %>
+          <% if @is_room == true %>
+            <%= link_to room_path(@room_id) do %>
+              <%= f.submit "チャットへ", class: "btn btn-primary" %>
+            <% end %>
+          <% else %>
+            <%= form_with model: @room, url: rooms_path do |f| %>
+              <%= fields_for @user_room do |ur| %>
+                <%= ur.hidden_field :user_id, value: @user.id %>
+              <% end %>
+              <%= f.hidden_field :post_id, value: @post.id %>
+              <%= f.submit "チャットを始める", class: "btn btn-primary" %>
+            <% end %>
+          <% end %>
+          <% end %>
+        <% end %>
+      </div>
       <div id="comment">
         <%= render "public/comments/comment", post: @post, comment: @comment %>
       </div>

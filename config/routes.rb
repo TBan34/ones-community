@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get "draft" => "posts#draft"
     end
     resources :rooms, only: [:create, :index, :show]
+    resources :chats, only: [:create]
   end
   
   # 管理者用ルーティング
