@@ -8,6 +8,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.string "time", null: false
       t.string "place", null: false
       t.string "belonging", null: false
+      t.integer "status", null: false, default: 0
       t.timestamps
     end
   end
