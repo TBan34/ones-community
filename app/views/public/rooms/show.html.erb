@@ -5,12 +5,13 @@
 <% end %>
 
 <div id="chats">
-  <%= render "public/chats/chat", chat: @chats %>
+  <%= render "public/chats/chat", chats: @chats %>
 </div>
 
 <%= form_with model: @chat do |f| %>
   <div class="chat_form form-group field">
     <%= f.label "新しいメッセージ", class: "control-label" %>
     <%= f.text_field :message, class: "form-control" %>
+    <%= f.submit "送信する" %>
   </div>
 <% end %>

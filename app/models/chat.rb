@@ -5,6 +5,6 @@ class Chat < ApplicationRecord
   belongs_to :room
   
   # ブロードキャスト
-  after_create_commit { ChatBroadcastJob.perform_later self }
+  # after_create_commit { ChatBroadcastJob.perform_later self }
   
 end
