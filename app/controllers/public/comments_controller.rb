@@ -7,6 +7,7 @@ class Public::CommentsController < ApplicationController
     content = current_user.comments.new(comment_params)
     content.post_id = post.id
     content.save
+    post.create_notification_comment!(current_user, @comment.id)
   end
   
   def destroy

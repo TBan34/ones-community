@@ -1,6 +1,7 @@
 <div class="container-fluid mt-3">
   <h2 class="font-weight-bold">＜いいねした投稿＞</h2>
   
+  <% if @favorite_posts.present? %>
   <table class="table table-bordered text-center">
     <tr class="table table-secondary">
       <th scope="col"></th>
@@ -31,4 +32,7 @@
     </tr>
     <% end %>
   </table>
+  <% else %>
+    <p class="text-center my-5">いいねした投稿はありません</p>
+  <% end %>
 </div>

@@ -19,7 +19,7 @@ class Public::RoomsController < ApplicationController
   def show
     @room = Room.find(params[:id])
     if UserRoom.where(user_id: current_user.id, room_id: @room.id).present?
-      @chat = Chat.new
+      @chat = Chat.new(room_id: params[:id])
       @chats = @room.chats
       @user_rooms = @room.user_rooms
     else
