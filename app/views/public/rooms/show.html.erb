@@ -11,6 +11,7 @@
 <%= form_with model: @chat do |f| %>
   <div class="chat_form form-group field">
     <%= f.label "新しいメッセージ", class: "control-label" %>
+    <%= f.hidden_field :room_id %>
     <%= f.text_field :message, class: "form-control" %>
     <%= f.submit "送信する" %>
   </div>

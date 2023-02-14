@@ -1,19 +1,19 @@
 class Public::ChatsController < ApplicationController
   
   def create
-    @room = Room.find_by(params[:chat][:room_id])
-    @chat = Chat.new(user_id: current_user.id, room_id: @room.id, message: params[:chat][:message])
+    @chat = Chat.new(chat_params.merge({user_id: current_user.id}))
     if @chat.save
-      redirect_to room_path(@room)
+      @chat.create_notification_chat!(current_user)
+      redirect_to room_path(params[:chat][:room_id])
     else
-      redirect_to room_path(@room)
+      redirect_to room_path(params[:chat][:room_id])
     end
   end
   
   private
   
   def chat_params
-    params.require(:chat).permit(:user_id, :room_id, :message)
+    params.require(:chat).permit(:room_id, :message)
   end
   
 end

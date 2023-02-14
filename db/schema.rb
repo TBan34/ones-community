@@ -83,12 +83,12 @@ ActiveRecord::Schema.define(version: 2023_02_06_081657) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "user_notification_id", null: false
-    t.integer "post_id", null: false
-    t.integer "chat_id", null: false
-    t.integer "favorite_id", null: false
-    t.integer "comment_id", null: false
-    t.string "action", null: false
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
+    t.integer "chat_id"
+    t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -122,13 +122,6 @@ ActiveRecord::Schema.define(version: 2023_02_06_081657) do
 
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "user_notifications", force: :cascade do |t|
-    t.integer "visitor_id", null: false
-    t.integer "visited_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
