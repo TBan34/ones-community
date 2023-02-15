@@ -1,4 +1,5 @@
 class Public::PostsController < ApplicationController
+  before_action :is_post_user?, only:[:edit, :update, :destroy]
   
   def new
     @post = Post.new
@@ -73,6 +74,13 @@ class Public::PostsController < ApplicationController
   
   def post_params
     params.require(:post).permit(:user_id, :title, :body, :time, :place, :belonging, :image, :status, tag_ids: [])
+  end
+  
+  def is_post_user?
+    user_id = params[:user_id].to_i
+    unless user_id == current_user.id
+      redirect_to root_path
+    end
   end
   
 end
