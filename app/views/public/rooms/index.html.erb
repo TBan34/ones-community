@@ -1,29 +1,39 @@
 <div class="container-fluid w-75 my-3">
   <h2 class="font-weight-bold">＜チャット一覧＞</h2>
-  <% @another_user_room.each do |aur| %>
-  <table>
-    <tr>
-      <td>
-        <%= link_to room_path(aur.room.id) do %>
-          <%= image_tag aur.user.get_profile_image(100, 100), class: "rounded-circle" %>
-          <%= aur.user.name %>
-        <% end %>
-      </td>
-      <td>
-        <%= aur.room.post.title %>
-      </td>
-      <td>
-        <% if aur.room.chats.present? %>
-          <% chat = Chat.find_by(id: aur.room.chat_ids.last).message %>
-          <%= truncate(chat, length: 10) %>
-        <% else %>
-          <h6>チャットを始めましょう</h6>
-        <% end %>
-      </td>
-      <td>
-        <h6 style="color: #C0C0C0;"><%= aur.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
-      </td>
-    </tr>
+  <table class="w-100" style="table-layout: fixed;">
+    <thead>
+      <tr class="table table-secondary text-center">
+        <th scope="col">ユーザー</th>
+        <th scope="col">タイトル</th>
+        <th scope="col">メッセージ</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @another_user_room.each do |aur| %>
+      <tr class="border-bottom text-center">
+        <td width="20%">
+          <%= link_to room_path(aur.room.id) do %>
+            <%= image_tag aur.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= aur.user.name %>
+          <% end %>
+        </td>
+        <td width="20%">
+          <strong><%= aur.room.post.title %></strong>
+        </td>
+        <td>
+          <% if aur.room.chats.present? %>
+            <% chat = Chat.find_by(id: aur.room.chat_ids.last).message %>
+            <%= truncate(chat, length: 10) %>
+          <% else %>
+            <h6>チャットを始めましょう</h6>
+          <% end %>
+        </td>
+        <td width="15%">
+          <h6 style="color: #C0C0C0;"><%= aur.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
   </table>
-  <% end %>
 </div>
