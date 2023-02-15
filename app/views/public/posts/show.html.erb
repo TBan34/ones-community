@@ -45,7 +45,7 @@
           <td><%=safe_join(@post.body.split("\n"),tag(:br))%></td>
         </tr>
       </table>
-      <% unless @user.id == current_user.id %>
+      <% unless @user.id == current_user.id || current_user.name == "guestuser" %>
         <div class="matching-btn text-right">
           <% if current_user.following?(@user) %>
             <%= link_to "辞退する", user_matchings_path(@user.id), method: :delete, class: "btn btn-danger" %>
