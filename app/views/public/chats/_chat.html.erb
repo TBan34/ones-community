@@ -1,6 +1,6 @@
 <% chats.each do |chat| %>
   <p>
-    <%= image_tag chat.user.get_profile_image(100, 100), class: "profile-img-circle" %>
+    <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %>
     <%= chat.user.name %>
   </p>
   <p>
