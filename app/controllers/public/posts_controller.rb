@@ -77,7 +77,8 @@ class Public::PostsController < ApplicationController
   end
   
   def is_post_user?
-    user_id = params[:user_id].to_i
+    @post = Post.find(params[:id])
+    user_id = @post.user.id
     unless user_id == current_user.id
       redirect_to root_path
     end
