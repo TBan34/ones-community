@@ -13,7 +13,7 @@ class Public::RoomsController < ApplicationController
     @current_user_room.each do |user_room|
       myRoomIds << user_room.room.id
     end
-    @another_user_room = UserRoom.where(room_id: myRoomIds).where.not(user_id: current_user.id).order(created_at: :desc)
+    @another_user_room = UserRoom.where(room_id: myRoomIds).where.not(user_id: current_user.id).order(created_at: :desc).page(params[:page])
   end
   
   def show
