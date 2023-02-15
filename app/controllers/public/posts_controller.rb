@@ -66,7 +66,6 @@ class Public::PostsController < ApplicationController
   end
   
   def draft
-    @post = Post.find(params[:id])
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_private.order(created_at: :desc).page(params[:page])
   end
   

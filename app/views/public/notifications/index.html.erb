@@ -1,8 +1,10 @@
-<h2 class="font-weight-bold">＜通知一覧＞</h2>
-<% if @notifications.exists? %>
-  <% @notifications.each do |notification| %>
-    <%= render "notifications", notification: notification %>
+<div class="container-fluid w-75 my-3">
+  <h2 class="font-weight-bold">＜通知一覧＞</h2>
+  <% if @notifications.exists? %>
+    <% @notifications.each do |notification| %>
+      <%= render "notifications", notification: notification %>
+    <% end %>
+  <% else %>
+    <p class="text-center my-5">通知はありません</p>
   <% end %>
-<% else %>
-  <p class="text-center my-5">通知はありません</p>
-<% end %>
+</div>
