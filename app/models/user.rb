@@ -20,13 +20,13 @@ class User < ApplicationRecord
   has_one_attached :profile_image
   
   validates :name, presence: true
-  validates :telephone_number, presence: true
-  validates :email, presence: true
+  validates :telephone_number, presence: true, uniqueness: true, numericality: { only_integer: true }, length: { in: 10..11 }
+  validates :email, presence: true, uniqueness: true
   validates :display_name, presence: true
   
   def get_profile_image(width, height)
     unless profile_image.attached?
-      file_path = Rails.root.join('app/assets/images/syoumeisyashin_man.jpg')
+      file_path = Rails.root.join('app/assets/images/no_image.jpeg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
   
   def self.guest
-    find_or_create_by!(name: "guestuser", telephone_number: "99999999999" , email: "guest@example.com") do |user|
+    find_or_create_by!(display_name: "ゲストユーザー", name: "guestuser", telephone_number: "00000000000" , email: "guest@example.com") do |user|
       user.password = SecureRandom.urlsafe_base64
       user.name = "guestuser"
     end
