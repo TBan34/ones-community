@@ -1,0 +1,43 @@
+<div class="container-fluid w-75 my-3">
+  <h2 class="font-weight-bold">＜チャット一覧＞</h2>
+  <% if @rooms.present? %>
+  <table class="w-100" style="table-layout: fixed;">
+    <thead>
+      <tr class="table table-secondary text-center">
+        <th scope="col">ユーザー</th>
+        <th scope="col">タイトル</th>
+        <th scope="col">メッセージ</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+      <tr class="border-bottom text-center">
+        <td width="20%">
+          <%= link_to room_path(room.id) do %>
+            <%= image_tag room.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= room.user.name %>
+          <% end %>
+        </td>
+        <td width="20%">
+          <strong><%= room.post.title %></strong>
+        </td>
+        <td>
+          <% if room.chats.present? %>
+            <% chat = Chat.find_by(id: room.chat_ids.last).message %>
+            <%= truncate(chat, length: 10) %>
+          <% else %>
+            <p class="text-center my-5">チャットを始めましょう</p>
+          <% end %>
+        </td>
+        <td width="15%">
+          <h6 style="color: #C0C0C0;"><%= room.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% else %>
+    <p class="text-center my-5">チャットが見つかりませんでした</p>
+  <% end %>
+</div>

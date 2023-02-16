@@ -40,10 +40,7 @@
           <th scope="row" class="table-secondary">持ち物</th>
           <td><%= @post.belonging %></td>
         </tr>
-        <tr>
-          <th scope="row" class="table-secondary">詳細情報</th>
-          <td><%=safe_join(@post.body.split("\n"),tag(:br))%></td>
-        </tr>
+        
       </table>
       <% unless @user.id == current_user.id || current_user.name == "guestuser" %>
         <div class="matching-btn text-right">

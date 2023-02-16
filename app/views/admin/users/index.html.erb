@@ -1,27 +1,30 @@
 <div class="container mt-3">
   <h2 class="font-weight-bold">＜ユーザー一覧＞</h2>
-
-  <table class="table table-bordered text-center">
-    <tr class="table table-secondary">
-      <th scotde="col"></th>
-      <th scotde="col">ID</th>
-      <th scotde="col">ステータス</th>
-      <th scotde="col">ユーザー名</th>
-      <th scotde="col">都道府県</th>
-      <th scotde="col">市区町村</th>
-      <th scotde="col"></th>
-    </tr>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= image_tag user.get_profile_image(100, 100) %></td>
-      <td><%= user.id %></td>
-      <td><%= user.is_deleted ? "退会" : "有効" %></td>
-      <td><%= user.display_name %></td>
-      <td><%= user.prefecture %></td>
-      <td><%= user.municipality %></td>
-      <td><%= link_to "詳細", admin_user_path(user.id) %></td>
-    </tr>
-    <% end %>
-  </table>
-
+  
+  <% if @users.present? %>
+    <table class="table table-bordered text-center">
+      <tr class="table table-secondary">
+        <th scotde="col"></th>
+        <th scotde="col">ID</th>
+        <th scotde="col">ステータス</th>
+        <th scotde="col">ユーザー名</th>
+        <th scotde="col">都道府県</th>
+        <th scotde="col">市区町村</th>
+        <th scotde="col"></th>
+      </tr>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= image_tag user.get_profile_image(100, 100) %></td>
+        <td><%= user.id %></td>
+        <td><%= user.is_deleted ? "退会" : "有効" %></td>
+        <td><%= user.display_name %></td>
+        <td><%= user.prefecture %></td>
+        <td><%= user.municipality %></td>
+        <td><%= link_to "詳細", admin_user_path(user.id) %></td>
+      </tr>
+      <% end %>
+    </table>
+  <% else %>
+    <p class="text-center my-5">ユーザーが見つかりませんでした</p>
+  <% end %>
 </div>

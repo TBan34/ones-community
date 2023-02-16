@@ -67,7 +67,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.user.id = current_user.id
     if @post.destroy
-      redirect_to posts_path
+      redirect_to posts_path, danger: "投稿を削除しました"
     end
   end
   
