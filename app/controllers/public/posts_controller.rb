@@ -10,8 +10,11 @@ class Public::PostsController < ApplicationController
     @post.user_id = current_user.id
     tag = Tag.find(params[:post][:tag_ids])
     @post.tags << tag
-    @post.save
-    redirect_to posts_path
+    if @post.save
+      redirect_to posts_path, success: "投稿しました"
+    else
+      render :new
+    end
   end
   
   def index
@@ -54,7 +57,9 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.user.id = current_user.id
     if @post.update(post_params)
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post.id), success: "投稿を更新しました"
+    else
+      render :edit
     end
   end
   

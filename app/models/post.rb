@@ -10,6 +10,12 @@ class Post < ApplicationRecord
   
   has_one_attached :image
   
+  validates :title, presence: true
+  validates :time, presence: true
+  validates :place, presence: true
+  validates :belonging, presence: true
+  validates :body, presence: true
+  
   enum status: { public: 0, private: 1 }, _prefix: true
   
   def get_image(width, height)

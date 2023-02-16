@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable
   
   has_many :posts, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -18,6 +18,11 @@ class User < ApplicationRecord
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   
   has_one_attached :profile_image
+  
+  validates :name, presence: true
+  validates :telephone_number, presence: true
+  validates :email, presence: true
+  validates :display_name, presence: true
   
   def get_profile_image(width, height)
     unless profile_image.attached?

@@ -6,7 +6,7 @@ class Public::ChatsController < ApplicationController
       @chat.create_notification_chat!(current_user)
       redirect_to room_path(params[:chat][:room_id])
     else
-      redirect_to room_path(params[:chat][:room_id])
+      redirect_to room_path(params[:chat][:room_id]), danger: "メッセージを入力してください"
     end
   end
   

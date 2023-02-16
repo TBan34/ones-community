@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2023_02_06_081657) do
     t.string "prefecture"
     t.string "municipality"
     t.string "telephone_number", null: false
-    t.string "display_name"
+    t.string "display_name", null: false
     t.text "self_introduction"
     t.boolean "is_deleted", default: false, null: false
     t.string "reset_password_token"

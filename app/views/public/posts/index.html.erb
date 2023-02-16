@@ -5,7 +5,7 @@
       <%= render "search_tag" %>
       <% if current_user.name != "guestuser" %>
         <h5 class="font-weight-bold mt-5">＜新規投稿＞</h5>
-        <p><%= link_to "投稿する", new_post_path, class: "btn btn-primary btn-lg" %></p>
+        <p><%= link_to "投稿を作成する", new_post_path, class: "btn btn-info" %></p>
         <h5 class="font-weight-bold mt-5">＜非公開（下書き）＞</h5>
         <p><%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary" %></p>
       <% end %>

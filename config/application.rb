@@ -14,7 +14,7 @@ module OnesCommunity
     # Configuration for the application, engines, and railties goes here.
     config.time_zone = "Tokyo"
     config.i18n.default_locale = :ja
-    config.i18n.load_path += Dir[Rails.root.join("config/locales/*.yml").to_s]
+    config.i18n.load_path += Dir[Rails.root.join("config/locales/**/*.yml").to_s]
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
