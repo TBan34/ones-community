@@ -17,7 +17,8 @@ class Public::RoomsController < ApplicationController
   end
   
   def show
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id: params[:id])
+    return redirect_to request.referer unless @room.present?
     if UserRoom.where(user_id: current_user.id, room_id: @room.id).present?
       @chat = Chat.new(room_id: params[:id])
       @chats = @room.chats

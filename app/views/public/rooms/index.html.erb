@@ -1,6 +1,6 @@
 <div class="container-fluid w-75 my-3">
   <h2 class="font-weight-bold">＜チャット一覧＞</h2>
-  <% if current_user.name != "guestuser" || @rooms.present? %>
+  <% if current_user.name != "guestuser" && @another_user_room.present? %>
   <table class="w-100" style="table-layout: fixed;">
     <thead>
       <tr class="table table-secondary text-center">
@@ -38,9 +38,9 @@
     </tbody>
   </table>
   <% else %>
-    <p class="text-center my-5">チャット機能を利用するためには、アカウントを作成する必要があります</p>
+    <p class="text-center my-5">チャットが見つかりませんでした</p>
   <% end %>
   <div class="pagination justify-content-center">
-    <%= paginate @rooms %>
+    <%= paginate @another_user_room %>
   </div>
 </div>

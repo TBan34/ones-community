@@ -3,7 +3,7 @@
   <% post.comments.each do |comment| %>
     <table class="comment_list">
       <td style="width: 10%">
-        <%= image_tag comment.user.get_profile_image(100, 100) %>
+        <%= image_tag comment.user.get_profile_image(100, 100), class: "rounded-circle" %>
       </td>
       <td style="width: 10%">
         <%= comment.user.name %>

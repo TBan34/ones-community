@@ -14,9 +14,8 @@
       <% @rooms.each do |room| %>
       <tr class="border-bottom text-center">
         <td>
-          <%= link_to room_path(room.id) do %>
-            <%= image_tag room.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
-            <%= room.user.name %>
+          <%= link_to admin_room_path(room.id) do %>
+            <%= room.users.name %>
           <% end %>
         </td>
         <td>
