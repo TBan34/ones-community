@@ -20,7 +20,7 @@
   
   <div class="row">
     <div class="col text-center">
-      <%= image_tag @user.get_profile_image(300, 300) %>
+      <%= image_tag @user.get_profile_image(300, 300), class: "rounded-circle" %>
     </div>
   </div>
   
@@ -59,7 +59,7 @@
         </tr>
         <tr>
           <th scope="row" class="table-secondary">自己紹介</th>
-          <td><%= @user.self_introduction %></td>
+          <td><%= simple_format(h(@user.self_introduction)) %></td>
         </tr>
       </table>
     </div>

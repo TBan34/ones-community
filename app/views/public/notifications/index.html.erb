@@ -7,4 +7,7 @@
   <% else %>
     <p class="text-center my-5">通知はありません</p>
   <% end %>
+  <div class="pagination justify-content-center">
+    <%= paginate @notifications %>
+  </div>
 </div>

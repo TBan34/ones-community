@@ -27,4 +27,7 @@
   <% else %>
     <p class="text-center my-5">ユーザーが見つかりませんでした</p>
   <% end %>
+  <div class="pagination justify-content-center">
+    <%= paginate @users %>
+  </div>
 </div>

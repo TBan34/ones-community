@@ -7,21 +7,26 @@
     </div>
   </div>
   <div class="row mt-3">
-    <div class="col-4">
-      <%= image_tag @post.get_image(200, 200) %>
-      <p>♥<%= @post.favorites.count %></p>
-      <% @post.tags.each do |tag| %>
-        <p>#<%= tag.name %></p>
-      <% end %>
+    <div class="col-4 text-center">
+      <div class="post-image border-bottom">
+        <%= image_tag @post.get_image(200, 200) %>
+        <p>♥<%= @post.favorites.count %></p>
+        <% @post.tags.each do |tag| %>
+          <p>#<%= tag.name %></p>
+        <% end %>
+        <div class="post-user mt-3">
+          <p class="font-weight-bold mb-0">投稿者</p>
+          <%= link_to admin_user_path(@user) do %>
+            <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle" %><br>
+            <%= @user.display_name %>
+          <% end %>
+        </div>
+      </div>
     </div>
     <div class="col-8">
       <table class="table table-bordered">
         <tr>
-          <th scope="row" class="table-secondary" style="width: 20%">投稿者</th>
-          <td><%= @user.display_name %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="table-secondary">タイトル</th>
+          <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>
           <td><%= @post.title %></td>
         </tr>
         <tr>
@@ -38,7 +43,7 @@
         </tr>
         <tr>
           <th scope="row" class="table-secondary">詳細情報</th>
-          <td><%=safe_join(@post.body.split("\n"),tag(:br))%></td>
+          <td><%= simple_format(h(@post.body))%></td>
         </tr>
       </table>
         <div class="comment_list">
