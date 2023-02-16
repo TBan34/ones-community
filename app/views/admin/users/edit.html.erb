@@ -1,3 +1,12 @@
+<% if @user.errors.any? %>
+  <%= @user.errors.count %>件のエラーが発生しました。
+  <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div class="container">
   <div class="row">
      <%= form_with model: [:admin, @user] do |f| %>
@@ -27,15 +36,15 @@
         <%= f.radio_button :is_deleted, :false, class: "form-control" %>
       </div>
       <div class="form-group field">
-        <%= f.label :"表示名", class: "control-label" %>
+        <%= f.label :"ユーザー名", class: "control-label" %>
         <%= f.text_field :display_name, class: "form-control" %>
       </div>
       <div class="form-group field">
-        <%= f.label :"居住地（都道府県）", class: "control-label" %>
+        <%= f.label :"都道府県", class: "control-label" %>
         <%= f.text_field :prefecture, class: "form-control" %>
       </div>
       <div class="form-group field">
-        <%= f.label :"居住地（市区町村）", class: "control-label" %>
+        <%= f.label :"市区町村", class: "control-label" %>
         <%= f.text_field :municipality, class: "form-control" %>
       </div>
       <div class="form-group field">

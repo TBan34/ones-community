@@ -1,0 +1,14 @@
+<div class="container-fluid w-25 my-3">
+  <table class="table table-bordered w-100 text-center" style="table-layout: fixed;">
+    <tr class="table table-secondary" width="20%">
+      <th scope="col">id</th>
+      <th scope="col">タグ名</th>
+    </tr>
+    <% @tags.each do |tag| %>
+    <tr>
+      <td><%= tag.id %></td>
+      <td><%= tag.name %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>
