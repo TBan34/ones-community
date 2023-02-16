@@ -20,7 +20,7 @@ class Post < ApplicationRecord
   
   def get_image(width, height)
     unless image.attached?
-      file_path = Rails.root.join('app/assets/images/junbiundou.jpg')
+      file_path = Rails.root.join('app/assets/images/no_image_square.jpeg')
       image.attach(io: File.open(file_path), filename: 'default-sports-image.jpg', content_type: 'image/jpeg')
     end
     image.variant(resize_to_limit: [width, height]).processed
@@ -31,11 +31,8 @@ class Post < ApplicationRecord
   end
   
   def self.search_word(search_word)
-    if search_word
-      @post = Post.where("title LIKE?", "%#{search_word}%")
-    else
-      "一致する検索結果はありませんでした"
-    end
+    search_word
+    @post = Post.where("title LIKE?", "%#{search_word}%")
   end
   
   def create_notification_favorite!(current_user)

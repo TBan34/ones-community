@@ -7,20 +7,35 @@
     <!--ゲストログイン-->
     <div class="col-6 text-center my-auto">
       <% if current_user != User.guest %>
-        <h4 class="font-weight-bold mb-5">ゲストログインすることで、他の人の投稿を確認することができます</h4>
-        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-lg", method: :post %>
+        <h4 class="font-weight-bold">ゲストログインすることで、他の人の投稿を確認することができます</h4>
+        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-lg my-5", method: :post %>
+        <p>
+          ※アカウントを作成すると、以下の機能を利用できます<br>
+          ユーザー機能 / 投稿機能（公開・非公開の設定含む） / マッチング機能<br>
+          いいね機能 / コメント機能 / チャット機能 / 通知機能
+        </p>
       <% else %>
-        <%= link_to "ゲストログアウト", users_guest_sign_out_path, class: "btn btn-secondary", method: :post %>
+        <h4 class="font-weight-bold">アカウントを作成するためには、一度ログアウトする必要があります</h4>
+        <%= link_to "ゲストログアウト", users_guest_sign_out_path, class: "btn btn-secondary btn-lg my-5", method: :post %>
+        <p>
+          ※アカウントを作成すると、以下の機能を利用できます<br>
+          ユーザー機能 / 投稿機能（公開・非公開の設定含む） / マッチング機能<br>
+          いいね機能 / コメント機能 / チャット機能 / 通知機能
+        </p>
       <% end %>
     </div>
   </div>
   <!--新着投稿（最新8件）-->
   <div class="row mt-5">
     <div class="col ml-3">
+      <h3 class="font-weight-bold">＜ 新着投稿 ＞</h3>
       <% if user_signed_in? %>
-        <h3 class="font-weight-bold">＜ 新着投稿 ＞</h3>
-        <%= render "public/posts/latest_posts", posts: @posts %>
-        <p class="text-right"><u><%= link_to "全ての投稿を見る", posts_path %></u></p>
+        <% if @posts.present? %>
+          <%= render "public/posts/latest_posts", posts: @posts %>
+          <p class="text-right"><u><%= link_to "全ての投稿を見る", posts_path %></u></p>
+        <% else %>
+          <p class="text-center my-5">投稿が見つかりませんでした</p>
+        <% end %>
       <% else %>
         <p class="text-center">投稿の閲覧にはログインが必要です</p>
       <% end %>
