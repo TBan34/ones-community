@@ -35,4 +35,7 @@
   <% else %>
     <p class="text-center my-5">いいねした投稿はありません</p>
   <% end %>
+  <div class="pagination justify-content-center">
+    <%= paginate @favorite_posts %>
+  </div>
 </div>

@@ -9,23 +9,28 @@
     <% end %>
   </div>
   <div class="row mt-3">
-    <div class="col-4">
-      <%= image_tag @post.get_image(200, 200) %>
-      <div id="favorites-btn_<%= @post.id %>">
-        <%= render "public/favorites/favorites-btn", post: @post %>
+    <div class="col-4 text-center">
+      <div class="post-image border-bottom">
+        <%= image_tag @post.get_image(200, 200) %>
+        <div id="favorites-btn_<%= @post.id %>">
+          <%= render "public/favorites/favorites-btn", post: @post %>
+        </div>
+        <% @post.tags.each do |tag| %>
+          <p>#<%= tag.name %></p>
+        <% end %>
       </div>
-      <% @post.tags.each do |tag| %>
-        <p>#<%= tag.name %></p>
-      <% end %>
+      <div class="post-user mt-3">
+        <p class="font-weight-bold mb-0">投稿者</p>
+        <%= link_to user_path(@user) do %>
+          <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle" %><br>
+          <%= @user.display_name %>
+        <% end %>
+      </div>
     </div>
     <div class="col-8">
       <table class="table table-bordered">
         <tr>
-          <th scope="row" class="table-secondary" style="width: 20%">投稿者</th>
-          <td><%= @user.display_name %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="table-secondary">タイトル</th>
+          <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>
           <td><%= @post.title %></td>
         </tr>
         <tr>
@@ -40,7 +45,10 @@
           <th scope="row" class="table-secondary">持ち物</th>
           <td><%= @post.belonging %></td>
         </tr>
-        
+        <tr>
+          <th scope="row" class="table-secondary">詳細情報</th>
+          <td><%= simple_format(h(@post.body)) %></td>
+        </tr>
       </table>
       <% unless @user.id == current_user.id || current_user.name == "guestuser" %>
         <div class="matching-btn text-right">

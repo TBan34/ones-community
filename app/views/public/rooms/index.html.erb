@@ -4,22 +4,22 @@
   <table class="w-100" style="table-layout: fixed;">
     <thead>
       <tr class="table table-secondary text-center">
-        <th scope="col">ユーザー</th>
-        <th scope="col">タイトル</th>
+        <th scope="col" width="20%">ユーザー</th>
+        <th scope="col" width="20%">タイトル</th>
         <th scope="col">メッセージ</th>
-        <th scope="col"></th>
+        <th scope="col" width="15%"></th>
       </tr>
     </thead>
     <tbody>
       <% @another_user_room.each do |aur| %>
       <tr class="border-bottom text-center">
-        <td width="20%">
+        <td>
           <%= link_to room_path(aur.room.id) do %>
             <%= image_tag aur.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
             <%= aur.user.name %>
           <% end %>
         </td>
-        <td width="20%">
+        <td>
           <strong><%= aur.room.post.title %></strong>
         </td>
         <td>
@@ -30,7 +30,7 @@
             <p class="text-center my-5">チャットを始めましょう</p>
           <% end %>
         </td>
-        <td width="15%">
+        <td>
           <h6 style="color: #C0C0C0;"><%= aur.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
         </td>
       </tr>
@@ -40,4 +40,7 @@
   <% else %>
     <p class="text-center my-5">チャット機能を利用するためには、アカウントを作成する必要があります</p>
   <% end %>
+  <div class="pagination justify-content-center">
+    <%= paginate @rooms %>
+  </div>
 </div>
