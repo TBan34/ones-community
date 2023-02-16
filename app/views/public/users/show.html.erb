@@ -68,7 +68,7 @@
   <div class="row">
     <% if @user == current_user %>
     <div class="col text-right">
-      <p><%= link_to posts_path(@user) do %><u>過去の投稿</u><% end %></p>
+      <p><%= link_to posts_path(user_id: @user.id) do %><u>過去の投稿</u><% end %></p>
     </div>
     <% end %>
   </div>

@@ -1,6 +1,8 @@
-<div class="container-fluid w-75" style="background-color: #eaf4fc;">
+<div class="container-fluid w-75 py-3" style="background-color: #eaf4fc;">
+  <div class="delete-link text-right">
+    <%= link_to "削除", admin_room_path, method: :delete, class: "btn btn-danger" %>
+  </div>
   <div class="row justify-content-center py-3">
-    <%= link_to "削除", admin_post_room_path, method: :delete, class: "btn btn-danger" %>
     <% @user_rooms.each do |ur| %>
       <% if ur.user != current_user %>
         <h2><u><%= link_to "#{ur.room.post.title}", post_path(ur.room.post) %></u></h2>
@@ -8,17 +10,18 @@
     <% end %>
   </div>
   
-<% @chats.each do |chat| %>
-  <table class="w-100" style="table-layout: fixed;">
-    <tr>
-      <td width="20%">
-        <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
-        <%= chat.user.name %>
-      </td>
-      <td>
-        <h6><%= simple_format(h(chat.message)) %></h6>
-        <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
-      </td>
-    </tr>
-  </table>
-<% end %>
+  <% @chats.each do |chat| %>
+    <table class="w-100" style="table-layout: fixed;">
+      <tr>
+        <td width="20%">
+          <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+          <%= chat.user.name %>
+        </td>
+        <td>
+          <h6><%= simple_format(h(chat.message)) %></h6>
+          <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        </td>
+      </tr>
+    </table>
+  <% end %>
+</div>

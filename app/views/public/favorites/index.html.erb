@@ -1,7 +1,7 @@
 <div class="container-fluid mt-3">
   <h2 class="font-weight-bold">＜いいねした投稿＞</h2>
   
-  <% if @favorite_posts.present? %>
+  <% if @favorited_posts.present? %>
   <table class="table table-bordered text-center">
     <tr class="table table-secondary">
       <th scope="col"></th>
@@ -14,7 +14,7 @@
       <th scope="col">コメント</th>
       <th scope="col"></th>
     </tr>
-    <% @favorite_posts.each do |post| %>
+    <% @favorited_posts.each do |post| %>
     <tr>
       <td><%= image_tag post.get_image(100, 100) %></td>
       <td><%= post.user.display_name %></td>
@@ -36,6 +36,6 @@
     <p class="text-center my-5">いいねした投稿はありません</p>
   <% end %>
   <div class="pagination justify-content-center">
-    <%= paginate @favorite_posts %>
+    <%= paginate @favorited_posts %>
   </div>
 </div>

@@ -24,7 +24,7 @@
           <% end %>
         <% when "chat" then %>
           <% if notification.chat.user_id == visitor.id %>
-            <%= link_to room_path(notification.chat.room) do %>
+            <%= link_to room_path(notification.chat.room_id) do %>
               チャット
             <% end %>
             を送信しました
