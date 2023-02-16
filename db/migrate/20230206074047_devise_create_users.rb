@@ -14,8 +14,8 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.string :municipality, null: true
       # 電話番号
       t.string :telephone_number, null: false
-      # 表示名
-      t.string :display_name, null: true
+      # ユーザー名
+      t.string :display_name, null: false
       # 自己紹介
       t.text :self_introduction, null: true
       # 退会処理（default: false）

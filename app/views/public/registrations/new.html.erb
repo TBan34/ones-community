@@ -3,7 +3,13 @@
   
   <%= form_with model: @user, url: user_registration_path do |f| %>
     <%= render "public/shared/error_messages", resource: resource %>
-  
+    
+    <!--ユーザー画面や投稿画面で名無し時の条件式を省くため、登録時にユーザー名の項目を追加-->
+    <div class="form-group field">
+      <%= f.label :"ユーザー名", class: "control-label" %><br />
+      <%= f.text_field :display_name, autocomplete: "name", class: "form-control col-sm-2" %>
+    </div>
+    
     <!--本人確認を兼ねて、サインアップに氏名と電話番号の項目を追加-->
     <div class="form-group field">
       <%= f.label :"氏名", class: "control-label" %><br />
@@ -11,7 +17,7 @@
     </div>
   
     <div class="form-group field">
-      <%= f.label :"電話番号", class: "control-label" %><br />
+      <%= f.label :"電話番号（ハイフンなし）", class: "control-label" %><br />
       <%= f.text_field :telephone_number, autocomplete: "telephone_number", class: "form-control col-sm-2" %>
     </div>
   

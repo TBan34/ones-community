@@ -4,6 +4,8 @@ class Chat < ApplicationRecord
   belongs_to :user
   belongs_to :room
   
+  validates :message, presence: true
+  
   def create_notification_chat!(current_user)
     temp_users = room.users.where.not(id: current_user.id)
     temp_users.each do |temp_user|

@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :is_login_user?, only:[:edit, :update, :withdrawal]
+  before_action :is_login_user?, only:[:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
   
   def show
@@ -13,7 +13,9 @@ class Public::UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to current_user
+      redirect_to current_user, success: "ユーザー情報を更新しました"
+    else
+      render :edit
     end
   end
   
@@ -21,7 +23,7 @@ class Public::UsersController < ApplicationController
     @user = current_user
     @user.update(is_deleted: true)
     reset_session
-    redirect_to root_path
+    redirect_to root_path, danger: "退会しました"
   end
   
   private

@@ -1,3 +1,12 @@
+<% if @post.errors.any? %>
+  <%= @post.errors.count %>件のエラーが発生しました。
+  <ul>
+    <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <div class="container mt-3">
   <div class="d-flex">
     <h2 class="font-weight-bold">＜新規投稿＞</h2>
@@ -39,6 +48,6 @@
       <%= f.label :"非公開（下書き）" %>
       <%= f.radio_button :status, :private %>
     </div>
-    <%= f.submit "投稿する", class: "btn btn-success" %>
+    <%= f.submit "投稿する", class: "btn btn-success my-2" %>
   <% end %>
 </div>

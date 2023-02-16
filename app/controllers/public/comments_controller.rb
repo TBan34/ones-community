@@ -6,8 +6,11 @@ class Public::CommentsController < ApplicationController
     post = Post.find(params[:post_id])
     content = current_user.comments.new(comment_params)
     content.post_id = post.id
-    content.save
-    post.create_notification_comment!(current_user, @comment.id)
+    if content.save
+      post.create_notification_comment!(current_user, @comment.id)
+    else
+      redirect_to request.referer, danger: "コメントを入力してください"
+    end
   end
   
   def destroy
