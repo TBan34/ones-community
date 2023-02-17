@@ -5,6 +5,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new
   end
   
+  # 投稿時にTag情報を含める
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
@@ -17,8 +18,10 @@ class Public::PostsController < ApplicationController
     end
   end
   
+  # Tag情報も併せて一覧表示
   def index
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts.page(params[:page]) : Post.status_public.order(created_at: :desc).page(params[:page])
+    # マイページから過去の投稿一覧を表示（本人のみ）
     if params[:user_id]
       @posts = Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page])
     end
@@ -29,26 +32,27 @@ class Public::PostsController < ApplicationController
     @user = @post.user
     @comment = Comment.new
     
+    # 他のユーザーが非公開（下書き）の投稿を閲覧できないよう制限
     if @post.status_private? && @user != current_user
       redirect_to posts_path
     end
     
-    # フォローと同時にチャットルームを作成する
+    # 投稿詳細からマッチング後、「チャットを始める」ボタンを押すと、両者にチャットルームが作成される
     @current_user_room = UserRoom.where(user_id: current_user.id)
     @another_user_room = UserRoom.where(user_id: @user.id)
-    unless @user.id == current_user.id
-      @current_user_room.each do |current_user|
-        @another_user_room.each do |another_user|
-          if current_user.room_id == another_user.room_id then
-            @is_room = true
-            @room_id = current_user.room_id
-          end
+    # マッチングしている場合、チャットルームのリンクを表示する
+    @current_user_room.each do |current_user|
+      @another_user_room.each do |another_user|
+        if current_user.room_id == another_user.room_id then
+          @is_room = true
+          @room_id = current_user.room_id
         end
       end
+    end
+    # マッチングしていない場合、チャットルームを作成する
     unless @is_room
       @room = Room.new
       @user_room = UserRoom.new
-    end
     end
   end
   
@@ -74,6 +78,7 @@ class Public::PostsController < ApplicationController
     end
   end
   
+  # 非公開（下書き）の投稿一覧
   def draft
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_private.order(created_at: :desc).page(params[:page])
   end
@@ -84,6 +89,7 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:user_id, :title, :body, :time, :place, :belonging, :image, :status, tag_ids: [])
   end
   
+  # 投稿者以外が投稿を編集できないよう制限
   def is_post_user?
     @post = Post.find(params[:id])
     user_id = @post.user.id

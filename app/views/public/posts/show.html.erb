@@ -60,19 +60,19 @@
         </div>
         <div class="room-link-btn text-right mt-2">
           <% if @user.followers.include?(current_user) %>
-          <%= form_with model: @room, url: rooms_path do |f| %>
-          <% if @is_room == true %>
-            <%= link_to room_path(@room_id) do %>
-              <%= f.submit "チャットへ", class: "btn btn-primary" %>
-            <% end %>
-          <% else %>
-              <%= fields_for @user_room do |ur| %>
-                <%= ur.hidden_field :user_id, value: @user.id %>
+            <%= form_with model: @room, url: rooms_path do |f| %>
+              <% if @is_room == true %>
+                <%= link_to room_path(@room_id) do %>
+                  <%= f.submit "チャットへ", class: "btn btn-primary" %>
+                <% end %>
+              <% else %>
+                <%= fields_for @user_room do |ur| %>
+                  <%= ur.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <%= f.hidden_field :post_id, value: @post.id %>
+                <%= f.submit "チャットを始める", class: "btn btn-primary" %>
               <% end %>
-              <%= f.hidden_field :post_id, value: @post.id %>
-              <%= f.submit "チャットを始める", class: "btn btn-primary" %>
             <% end %>
-          <% end %>
           <% end %>
         </div>
       <% end %>

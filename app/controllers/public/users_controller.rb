@@ -7,18 +7,19 @@ class Public::UsersController < ApplicationController
   end
   
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
   
   def update
-    @user = current_user
+    @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to current_user, success: "ユーザー情報を更新しました"
+      redirect_to user_path(@user.id), success: "ユーザー情報を更新しました"
     else
       render :edit
     end
   end
   
+  # 退会処理
   def withdrawal
     @user = current_user
     @user.update(is_deleted: true)
@@ -32,6 +33,7 @@ class Public::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :prefecture, :municipality, :telephone_number, :display_name, :self_introduction, :profile_image)
   end
   
+  # 本人以外がユーザー情報を編集できないよう制限
   def is_login_user?
     user_id = params[:id].to_i
     unless user_id == current_user.id
@@ -39,6 +41,7 @@ class Public::UsersController < ApplicationController
     end
   end
   
+  # ゲストユーザーが情報を編集できないよう制限
   def ensure_guest_user
     @user = User.find(params[:id])
     if @user.name == "guestuser"

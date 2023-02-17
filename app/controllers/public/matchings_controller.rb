@@ -1,8 +1,8 @@
 class Public::MatchingsController < ApplicationController
   
   def create
-    @user = User.find(params[:user_id])
     current_user.follow(params[:user_id])
+    @user = User.find(params[:user_id])
     @user.create_notification_follow!(current_user)
     redirect_to request.referer, info: "マッチングしました"
   end
