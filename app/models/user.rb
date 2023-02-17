@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: "visitor_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key: "visited_id", dependent: :destroy
   
+  # プロフィール画像を添付
   has_one_attached :profile_image
   
   validates :name, presence: true
@@ -24,6 +25,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :display_name, presence: true
   
+  # デフォルト画像の設定、画像サイズの指定方法
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpeg')
@@ -32,10 +34,12 @@ class User < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
   
+  # 退会済のユーザーをログインさせない
   def active_for_authentication?
     super && (is_deleted == false)
   end
   
+  # ゲストユーザーのログイン情報
   def self.guest
     find_or_create_by!(display_name: "ゲストユーザー", name: "guestuser", telephone_number: "00000000000" , email: "guest@example.com") do |user|
       user.password = SecureRandom.urlsafe_base64
@@ -43,18 +47,22 @@ class User < ApplicationRecord
     end
   end
   
+  # フォローする（Let's play Sports!!）
   def follow(user_id)
     matchings.create(following_id: user_id)
   end
   
+  # フォローを外す（辞退する）
   def unfollow(user_id)
     matchings.find_by(following_id: user_id).destroy
   end
   
+  # ユーザーのフォロー（マッチング）判定
   def following?(user)
     followings.include?(user)
   end
   
+  # フォロー（マッチング）通知の作成
   def create_notification_follow!(current_user)
     temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ?", current_user.id, id, "follow"])
     if temp.blank?

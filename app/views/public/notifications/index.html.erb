@@ -1,6 +1,6 @@
 <div class="container-fluid w-50 my-3">
   <h2 class="font-weight-bold">＜通知一覧＞</h2>
-  <% if @notifications.exists? %>
+  <% if @notifications.present? %>
     <% @notifications.each do |notification| %>
       <%= render "notifications", notification: notification %>
     <% end %>
