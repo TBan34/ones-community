@@ -1,3 +1,4 @@
+<!--バリデーションエラー-->
 <% if @post.errors.any? %>
   <%= @post.errors.count %>件のエラーが発生しました。
   <ul>
@@ -7,12 +8,12 @@
   </ul>
 <% end %>
 
+<!--新規投稿-->
 <div class="container mt-3">
   <div class="d-flex">
     <h2 class="font-weight-bold">＜新規投稿＞</h2>
     <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-outline-secondary ml-5" %>
   </div>
-  
   <%= form_with model: @post do |f| %>
     <div class="form-group field">
       <%= f.label :"イメージ画像", class: "control-label" %>

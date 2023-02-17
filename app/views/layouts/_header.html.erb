@@ -2,16 +2,17 @@
 <header> 
   <nav class="navbar navbar-expand-lg" style="background-color: #365E94">
     <div class="container-fluid">
-      <!--管理者ログイン時はトップページへ遷移しない-->
-      <% unless admin_signed_in? %>
+      <!--ヘッダー左（管理者ログイン時、ロゴのリンクなし）-->
+      <% if admin_signed_in? %>
+        <%= image_tag "ones-community-logo", size: "100x100" %>
+      <% else %>
         <a class="navbar-brand ml-5" href="/">
           <%= link_to root_path do %>
             <%= image_tag "ones-community-logo", size: "100x100" %>
           <% end %>
         </a>
-      <% else %>
-        <%= image_tag "ones-community-logo", size: "100x100" %>
       <% end %>
+      <!--ヘッダー右-->
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto mr-5">
         <!--ユーザー/ゲストユーザーログイン時-->
@@ -47,7 +48,7 @@
             <% else %>
               <li class="nav-item ml-3">
                 <%= link_to users_guest_sign_out_path, class: "btn btn-outline-light", method: :post do %>
-                  <i class="fas fa-sign-out-alt"></i>ログアウト
+                  <i class="fas fa-sign-out-alt"></i>ゲストログアウト
                 <% end %>
               </li>
             <% end %>

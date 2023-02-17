@@ -1,6 +1,8 @@
+<!--ユーザー一覧-->
 <div class="container mt-3">
   <h2 class="font-weight-bold">＜ユーザー一覧＞</h2>
   
+  <!--ユーザー一覧表示-->
   <% if @users.present? %>
     <table class="table table-bordered text-center">
       <tr class="table table-secondary">
@@ -27,6 +29,8 @@
   <% else %>
     <p class="text-center my-5">ユーザーが見つかりませんでした</p>
   <% end %>
+  
+  <!--ページネーション-->
   <div class="pagination justify-content-center">
     <%= paginate @users %>
   </div>

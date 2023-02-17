@@ -1,3 +1,4 @@
+<!--ルーム一覧-->
 <div class="container-fluid w-75 my-3">
   <h2 class="font-weight-bold">＜チャット一覧＞</h2>
   <% if current_user.name != "guestuser" && @another_user_room.present? %>
@@ -40,6 +41,8 @@
   <% else %>
     <p class="text-center my-5">チャットが見つかりませんでした</p>
   <% end %>
+  
+  <!--ページネーション-->
   <div class="pagination justify-content-center">
     <%= paginate @another_user_room %>
   </div>

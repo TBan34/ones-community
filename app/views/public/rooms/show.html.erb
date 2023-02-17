@@ -1,4 +1,6 @@
+<!--ルーム詳細-->
 <div class="container-fluid w-75" style="background-color: #eaf4fc;">
+  <!--ルームタイトル-->
   <div class="row justify-content-center py-3">
     <% @user_rooms.each do |ur| %>
       <% if ur.user != current_user %>
@@ -7,10 +9,12 @@
     <% end %>
   </div>
   
+  <!--チャットメッセージ-->
   <div id="chats">
     <%= render "public/chats/chat", chats: @chats %>
   </div>
   
+  <!--チャットフォーム-->
   <%= form_with model: @chat do |f| %>
     <div class="chat_form form-group field mb-0 py-5">
       <%= f.label "新しいメッセージ", class: "control-label" %>
