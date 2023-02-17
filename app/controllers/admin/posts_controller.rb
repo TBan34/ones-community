@@ -1,7 +1,9 @@
 class Admin::PostsController < ApplicationController
   
+  # Tag情報も併せて一覧表示
   def index
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts.page(params[:page]) : Post.status_public.order(created_at: :desc).page(params[:page])
+    # マイページから過去の投稿一覧を表示
     if params[:user_id]
       @posts = Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page])
     end
