@@ -77,6 +77,6 @@ Rails.application.configure do
   # Railsアプリケーションを画面表示するため
   config.hosts.clear
   
-  # ActiveStorageによるエラー回避のため
+  # システムテストを実行した際に、ActiveStorageによるエラーを回避するため
   config.active_job.queue_adapter = :inline
 end

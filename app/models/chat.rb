@@ -6,6 +6,7 @@ class Chat < ApplicationRecord
   
   validates :message, presence: true
   
+  # チャット通知の作成
   def create_notification_chat!(current_user)
     temp_users = room.users.where.not(id: current_user.id)
     temp_users.each do |temp_user|
@@ -17,8 +18,5 @@ class Chat < ApplicationRecord
     notification = current_user.active_notifications.new(chat_id: id, visited_id: visited_id, action: "chat")
     notification.save if notification.valid?
   end
-  
-  # ブロードキャスト
-  # after_create_commit { ChatBroadcastJob.perform_later self }
   
 end
