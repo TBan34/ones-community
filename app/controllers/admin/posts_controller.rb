@@ -1,7 +1,10 @@
 class Admin::PostsController < ApplicationController
   
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_public.order(created_at: :desc).page(params[:page])
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts.page(params[:page]) : Post.status_public.order(created_at: :desc).page(params[:page])
+    if params[:user_id]
+      @posts = Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page])
+    end
   end
   
   def show

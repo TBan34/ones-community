@@ -4,7 +4,7 @@
   <table class="w-100" style="table-layout: fixed;">
     <thead>
       <tr class="table table-secondary text-center">
-        <th scope="col" width="20%">ユーザー</th>
+        <th scope="col" width="20%">投稿者</th>
         <th scope="col" width="20%">タイトル</th>
         <th scope="col">メッセージ</th>
         <th scope="col" width="15%"></th>
@@ -15,7 +15,7 @@
       <tr class="border-bottom text-center">
         <td>
           <%= link_to admin_room_path(room.id) do %>
-            <%= room.users.name %>
+            <%= room.post.user.name %>
           <% end %>
         </td>
         <td>

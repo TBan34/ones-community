@@ -42,27 +42,48 @@
           </tr>
         </table>
       </div>
+      <div class="col-8">
+        <table class="table table-bordered">
+          <tr>
+            <th scope="row" class="table-secondary">ユーザー名</th>
+            <td><%= @user.display_name %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">都道府県</th>
+            <td><%= @user.prefecture %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">市区町村</th>
+            <td><%= @user.municipality %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">自己紹介</th>
+            <td><%= simple_format(h(@user.self_introduction)) %></td>
+          </tr>
+        </table>
+      </div>
+    <% else %>
+      <div class="col-8 mx-auto">
+        <table class="table table-bordered" style="table-layout: fixed;">
+          <tr>
+            <th scope="row" class="table-secondary" width="25%">ユーザー名</th>
+            <td><%= @user.display_name %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">都道府県</th>
+            <td><%= @user.prefecture %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">市区町村</th>
+            <td><%= @user.municipality %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">自己紹介</th>
+            <td><%= simple_format(h(@user.self_introduction)) %></td>
+          </tr>
+        </table>
+      </div>
     <% end %>
-    <div class="col-8">
-      <table class="table table-bordered">
-        <tr>
-          <th scope="row" class="table-secondary">ユーザー名</th>
-          <td><%= @user.display_name %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="table-secondary">都道府県</th>
-          <td><%= @user.prefecture %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="table-secondary">市区町村</th>
-          <td><%= @user.municipality %></td>
-        </tr>
-        <tr>
-          <th scope="row" class="table-secondary">自己紹介</th>
-          <td><%= simple_format(h(@user.self_introduction)) %></td>
-        </tr>
-      </table>
-    </div>
   </div>
   
   <div class="row">
