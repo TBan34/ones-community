@@ -1,6 +1,8 @@
+<!--いいねした投稿一覧-->
 <div class="container-fluid mt-3">
   <h2 class="font-weight-bold">＜いいねした投稿＞</h2>
   
+  <!--いいねした投稿一覧表示-->
   <% if @favorited_posts.present? %>
   <table class="table table-bordered text-center">
     <tr class="table table-secondary">
@@ -35,6 +37,8 @@
   <% else %>
     <p class="text-center my-5">いいねした投稿はありません</p>
   <% end %>
+  
+  <!--ページネーション-->
   <div class="pagination justify-content-center">
     <%= paginate @favorited_posts %>
   </div>

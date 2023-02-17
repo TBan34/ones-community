@@ -1,3 +1,4 @@
+<!--コメント一覧-->
 <p>＜コメント一覧＞</p>
 <% if current_user.name != "guestuser" %>
   <% post.comments.each do |comment| %>
@@ -21,6 +22,8 @@
   <% unless post.comments.present? %>
     <p>&emsp;コメントは特にありません</p>
   <% end %>
+  
+  <!--コメントフォーム-->
   <%= form_with model: [post, comment], local: false do |f| %>
     <div class="comment_form form-group field mt-4">
       <%= f.label :"＜新規コメント＞", class: "control-label" %>

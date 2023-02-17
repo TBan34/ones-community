@@ -1,11 +1,16 @@
+<!--投稿一覧-->
 <div class="container-fluid w-75 my-3">
   <div class="row">
+    
+    <!--検索窓-->
     <div class="col-3">
       <% if params[:user_id].blank? %>
         <%= render "search_word" %>
         <%= render "search_tag" %>
       <% end %>
     </div>
+    
+    <!--投稿一覧表示-->
     <div class="col-9">
       <h2 class="font-weight-bold">＜投稿一覧＞</h2>
       <% if @posts.present? %>
@@ -42,6 +47,8 @@
       <% else %>
         <p class="text-center my-5">投稿が見つかりませんでした</p>
       <% end %>
+      
+      <!--ページネーション-->
       <div class="pagination justify-content-center">
         <%= paginate @posts %>
       </div>

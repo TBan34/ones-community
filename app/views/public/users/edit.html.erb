@@ -1,3 +1,4 @@
+<!--バリデーションエラー-->
 <% if @user.errors.any? %>
   <%= @user.errors.count %>件のエラーが発生しました。
   <ul>
@@ -7,6 +8,7 @@
   </ul>
 <% end %>
 
+<!--ユーザー編集-->
 <div class="container mt-3">
   <h2 class="font-weight-bold">＜ユーザー編集画面＞</h2>
   <div class="row d-block">
