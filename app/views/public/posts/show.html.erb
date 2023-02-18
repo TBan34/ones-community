@@ -74,12 +74,13 @@
                   <%= f.submit "チャットへ", class: "btn btn-primary" %>
                 <% end %>
               <% else %>
-                <%= fields_for @user_room do |ur| %>
+               <%= fields_for @user_room do |ur| %>
                   <%= ur.hidden_field :user_id, value: @user.id %>
                 <% end %>
+                
                 <%= f.hidden_field :post_id, value: @post.id %>
                 <%= f.submit "チャットを始める", class: "btn btn-primary" %>
-              <% end %>
+              <% end %> 
             <% end %>
           <% end %>
         </div>
