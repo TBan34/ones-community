@@ -37,29 +37,15 @@ class Public::PostsController < ApplicationController
       redirect_to posts_path
     end
     
-    # 投稿詳細からマッチング後、「チャットを始める」ボタンを押すと、両者にチャットルームが作成される
-    # @current_user_room = UserRoom.where(user_id: current_user.id)
-    # @another_user_room = UserRoom.where(user_id: @user.id)
+    # マッチング・チャットルームの作成
     @user_rooms = UserRoom.eager_load(:room).where(user_id: [current_user.id, @user.id]).where(room: {post_id: @post.id})
-    # @another_user_room = UserRoom.joins(:room).where(user_id: @user.id).where(room_id: @post.id)
-    # @post_room = Room.where(post_id: @post.id)
-    # マッチングしている場合、チャットルームのリンクを表示する
-    @is_room = false
+    # 投稿に対して投稿者・マッチングユーザーのチャットルームが存在する場合、「チャットへ」を表示
     if @user_rooms.exists?(user_id: current_user.id)
       @is_room = true
       @room_id = @user_rooms.find_by(user_id: current_user.id).room_id
-    end
-    # byebug
-    # @current_user_room.each do |current_user|
-    #   @another_user_room.each do |another_user|
-    #     if current_user.room_id == another_user.room_id then
-    #       @is_room = true
-    #       @room_id = current_user.room_id
-    #     end
-    #   end
-    # end
-    # マッチングしていない場合、チャットルームを作成する
-    unless @is_room
+    # 投稿に対して投稿者・マッチングユーザーのチャットルームが存在しない場合、「マッチング済（チャットを始める）」を表示
+    else
+      @is_room = false
       @room = Room.new
       @user_room = UserRoom.new
     end
