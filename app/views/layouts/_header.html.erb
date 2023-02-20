@@ -1,0 +1,104 @@
+<!--ヘッダー-->
+<header> 
+  <nav class="navbar navbar-expand-lg" style="background-color: #365E94">
+    <div class="container-fluid">
+      <!--ヘッダー左（管理者ログイン時、ロゴのリンクなし）-->
+      <% if admin_signed_in? %>
+        <%= image_tag "ones-community-logo", size: "100x100" %>
+      <% else %>
+        <a class="navbar-brand ml-5" href="/">
+          <%= link_to root_path do %>
+            <%= image_tag "ones-community-logo", size: "100x100" %>
+          <% end %>
+        </a>
+      <% end %>
+      <!--ヘッダー右-->
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto mr-5">
+        <!--ユーザー/ゲストユーザーログイン時-->
+          <% if user_signed_in? %>
+            <% if current_user.name != "guestuser" %>
+              <li class="nav-item">
+                <%= link_to current_user, class: "btn btn-outline-light" do %>
+                  <i class="fas fa-user"></i>マイページ
+                <% end %>
+              </li>
+            <% end %>
+            <li class="nav-item ml-3">
+              <%= link_to about_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-key"></i>About
+              <% end %>
+            </li>
+            <li class="nav-item ml-3">
+              <%= link_to posts_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-inbox"></i>投稿一覧
+              <% end %>
+            </li>
+            <li class="nav-item ml-3">
+              <%= link_to rooms_path(current_user), class: "btn btn-outline-light" do %>
+                <i class="fas fa-comments"></i>チャット一覧
+              <% end %>
+            </li>
+            <% if current_user.name != "guestuser" %>
+              <li class="nav-item ml-3">
+                <%= link_to destroy_user_session_path, class: "btn btn-outline-light", method: :delete do %>
+                  <i class="fas fa-sign-out-alt"></i>ログアウト
+                <% end %>
+              </li>
+            <% else %>
+              <li class="nav-item ml-3">
+                <%= link_to users_guest_sign_out_path, class: "btn btn-outline-light", method: :post do %>
+                  <i class="fas fa-sign-out-alt"></i>ゲストログアウト
+                <% end %>
+              </li>
+            <% end %>
+          <!--管理者ログイン時-->
+          <% elsif admin_signed_in? %>
+            <li class="nav-item">
+              <%= link_to admin_users_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-users"></i>ユーザー一覧
+              <% end %>
+            </li>
+            <li class="nav-item ml-3">
+              <%= link_to admin_posts_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-inbox"></i>投稿一覧
+              <% end %>
+            </li>
+            <li class="nav-item ml-3">
+              <%= link_to admin_rooms_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-comments"></i>チャット一覧
+              <% end %>
+            </li>
+            <li class="nav-item ml-3">
+              <%= link_to admin_tags_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-tags"></i>タグ一覧
+              <% end %>
+            </li>
+            <li class="nav-item ml-3">
+              <%= link_to destroy_admin_session_path, class: "btn btn-outline-light", method: :delete do %>
+                <i class="fas fa-sign-out-alt"></i>ログアウト
+              <% end %>
+            </li>
+          <!--未ログイン時-->
+          <% else %>
+            <li class="nav-item">
+              <%= link_to new_user_registration_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-user-plus"></i>新規登録
+              <% end %>
+            </li>
+            <li class="nav-item ml-3">
+              <%= link_to new_user_session_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-sign-in-alt"></i>ログイン
+              <% end %>
+            </li>
+            <li class="nav-item ml-3">
+              <%= link_to about_path, class: "btn btn-outline-light" do %>
+                <i class="fas fa-key"></i>About
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

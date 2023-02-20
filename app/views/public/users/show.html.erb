@@ -1,0 +1,103 @@
+<!--ユーザー詳細-->
+<div class="container mt-3">
+  <h2 class="font-weight-bold">＜ユーザー詳細画面＞</h2>
+  
+  <div class="row">
+    <!--編集、通知、いいねした投稿、非公開（下書き）一覧はユーザー本人のみ閲覧可能-->
+    <% if @user == current_user %>
+      <div class="col-10 offset-2 text-right">
+        <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success" %>
+        <% if current_user.passive_notifications.where(checked: false).any? %>
+          <%= link_to notifications_path(visited_id: @user.id), class: "btn btn-warning text-white ml-3" do %>
+            通知<i class="fas fa-exclamation-circle"></i>
+          <% end %>
+        <% else %>
+          <%= link_to "通知", notifications_path(visited_id: @user.id), class: "btn btn-warning text-white ml-3" %>
+        <% end %>
+        <%= link_to "いいねした投稿", user_favorites_path(@user.id), class: "btn btn-info ml-3" %>
+        <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary ml-3" %>
+      </div>
+    <% end %>
+  </div>
+  
+  <!--プロフィール画像-->
+  <div class="row">
+    <div class="col text-center">
+      <%= image_tag @user.get_profile_image(300, 300), class: "rounded-circle" %>
+    </div>
+  </div>
+  
+  <!--ユーザー情報-->
+  <div class="row">
+    <!--ユーザー本人の表示-->
+    <% if @user == current_user %>
+      <div class="col-4">
+        <table class="table table-bordered">
+          <tr>
+            <th scope="row" class="table-secondary">氏名</th>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">電話番号</th>
+            <td><%= @user.telephone_number %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">メールアドレス</th>
+            <td><%= @user.email %></td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-8">
+        <table class="table table-bordered">
+          <tr>
+            <th scope="row" class="table-secondary">ユーザー名</th>
+            <td><%= @user.display_name %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">都道府県</th>
+            <td><%= @user.prefecture %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">市区町村</th>
+            <td><%= @user.municipality %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">自己紹介</th>
+            <td><%= simple_format(h(@user.self_introduction)) %></td>
+          </tr>
+        </table>
+      </div>
+    <!--他のユーザーの表示-->
+    <% else %>
+      <div class="col-8 mx-auto">
+        <table class="table table-bordered" style="table-layout: fixed;">
+          <tr>
+            <th scope="row" class="table-secondary" width="25%">ユーザー名</th>
+            <td><%= @user.display_name %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">都道府県</th>
+            <td><%= @user.prefecture %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">市区町村</th>
+            <td><%= @user.municipality %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="table-secondary">自己紹介</th>
+            <td><%= simple_format(h(@user.self_introduction)) %></td>
+          </tr>
+        </table>
+      </div>
+    <% end %>
+  </div>
+  
+  <!--過去の投稿はユーザー本人のみ閲覧可能-->
+  <div class="row">
+    <% if @user == current_user %>
+    <div class="col text-right">
+      <p><%= link_to posts_path(user_id: @user.id) do %><u>過去の投稿</u><% end %></p>
+    </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,94 @@
+<!--投稿詳細-->
+<div class="container mt-3">
+  <div class="row">
+    <h2 class="font-weight-bold">＜投稿詳細＞</h2>
+    <!--編集、削除はユーザー本人のみ可能-->
+    <% if @user == current_user %>
+      <div class="col text-right">
+        <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success" %>
+        <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+      </div>
+    <% end %>
+  </div>
+  
+  <!--イメージ画像、いいね、タグ、投稿者情報-->
+  <div class="row mt-3">
+    <div class="col-4 text-center">
+      <div class="post-image border-bottom">
+        <%= image_tag @post.get_image(200, 200) %>
+        <div id="favorites-btn_<%= @post.id %>">
+          <%= render "public/favorites/favorites-btn", post: @post %>
+        </div>
+        <% @post.tags.each do |tag| %>
+          <p>#<%= tag.name %></p>
+        <% end %>
+      </div>
+      <div class="post-user mt-3">
+        <p class="font-weight-bold mb-0">投稿者</p>
+        <%= link_to user_path(@user) do %>
+          <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle" %><br>
+          <%= @user.display_name %>
+        <% end %>
+      </div>
+    </div>
+    
+    <!--投稿情報-->
+    <div class="col-8">
+      <table class="table table-bordered">
+        <tr>
+          <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>
+          <td><%= @post.title %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">日時</th>
+          <td><%= @post.time %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">場所</th>
+          <td><%= @post.place %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">持ち物</th>
+          <td><%= @post.belonging %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">詳細情報</th>
+          <td><%= simple_format(h(@post.body)) %></td>
+        </tr>
+      </table>
+      <% unless @user.id == current_user.id || current_user.name == "guestuser" %>
+        <!--マッチングボタン（投稿者本人・ゲストユーザー除く）-->
+        <div class="matching-btn text-right">
+          <% if current_user.following?(@user) %>
+            <%= link_to "マッチングを解除する", user_matchings_path(@user.id), method: :delete, class: "btn btn-danger" %>
+          <% else %>
+            <%= link_to "マッチングする", user_matchings_path(@user.id), method: :post, class: "btn btn-primary" %>
+          <% end %>
+        </div>
+        <!--ルームボタン（投稿者本人・ゲストユーザー除く）-->
+        <div class="room-link-btn text-right mt-2">
+          <% if @user.followers.include?(current_user) %>
+            <%= form_with model: @room, url: rooms_path do |f| %>
+              <% if @is_room == true %>
+                <%= link_to room_path(@room_id) do %>
+                  <%= f.submit "チャットへ", class: "btn btn-primary" %>
+                <% end %>
+              <% else %>
+                <%= fields_for @user_room do |ur| %>
+                  <%= ur.hidden_field :user_id, value: @user.id %>
+                <% end %>
+                <%= f.hidden_field :post_id, value: @post.id %>
+                <%= f.submit "マッチング済（チャットを始める）", class: "btn btn-success" %>
+              <% end %> 
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <!--コメント一覧・フォーム-->
+      <div id="comment">
+        <%= render "public/comments/comment", post: @post, comment: @comment %>
+      </div>
+    </div>
+  </div>
+</div>

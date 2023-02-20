@@ -5,3 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+#管理者ログイン用
+Admin.create!(
+  email: "admin@admin",
+  password: "testtest"
+)
+
+# 投稿タグの種類
+Tag.create([
+  { name: "サッカー" },
+  { name: "野球" },
+  { name: "バスケットボール" },
+  { name: "バレーボール" },
+  { name: "卓球" },
+  { name: "バドミントン" },
+  { name: "テニス" },
+  { name: "ランニング" },
+  { name: "その他" }
+  ])

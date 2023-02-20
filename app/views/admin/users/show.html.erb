@@ -1,0 +1,73 @@
+<!--ユーザー詳細-->
+<div class="container mt-3">
+  <h2 class="font-weight-bold">＜ユーザー詳細画面＞</h2>
+  
+  <!--編集ボタン-->
+  <div class="row">
+    <div class="col-10 offset-2 text-right">
+      <%= link_to "編集", edit_admin_user_path(@user.id), class: "btn btn-success" %>
+    </div>
+  </div>
+  
+  <!--プロフィール画像-->
+  <div class="row">
+    <div class="col text-center">
+      <%= image_tag @user.get_profile_image(300, 300), class: "rounded-circle" %>
+    </div>
+  </div>
+  
+  <!--ユーザー情報-->
+  <div class="row">
+    <div class="col-4">
+      <table class="table table-bordered">
+        <tr>
+          <th scope="row" class="table-secondary">氏名</th>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">電話番号</th>
+          <td><%= @user.telephone_number %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="col-8">
+      <table class="table table-bordered">
+        <tr>
+          <th scope="row" class="table-secondary">ID</th>
+          <td><%= @user.id %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">ステータス</th>
+          <td><%= @user.is_deleted ? "退会" : "有効" %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">ユーザー名</th>
+          <td><%= @user.display_name %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">都道府県</th>
+          <td><%= @user.prefecture %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">市区町村</th>
+          <td><%= @user.municipality %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">自己紹介</th>
+          <td><%= simple_format(h(@user.self_introduction)) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  
+  <!--過去の投稿-->
+  <div class="row">
+    <div class="col text-right">
+      <p><%= link_to admin_posts_path(user_id: @user.id) do %><u>過去の投稿</u><% end %></p>
+    </div>
+  </div>
+</div>

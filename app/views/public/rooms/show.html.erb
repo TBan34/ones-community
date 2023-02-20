@@ -1,0 +1,26 @@
+<!--ルーム詳細-->
+<div class="container-fluid w-75" style="background-color: #eaf4fc;">
+  <!--ルームタイトル-->
+  <div class="row justify-content-center py-3">
+    <% @user_rooms.each do |ur| %>
+      <% if ur.user != current_user %>
+        <h2><u><%= link_to "#{ur.room.post.title}", post_path(ur.room.post) %></u></h2>
+      <% end %>
+    <% end %>
+  </div>
+  
+  <!--チャットメッセージ-->
+  <div id="chats">
+    <%= render "public/chats/chat", chats: @chats %>
+  </div>
+  
+  <!--チャットフォーム-->
+  <%= form_with model: @chat do |f| %>
+    <div class="chat_form form-group field mb-0 py-5">
+      <%= f.label "新しいメッセージ", class: "control-label" %>
+      <%= f.hidden_field :room_id %>
+      <%= f.text_field :message, class: "form-control" %>
+      <%= f.submit "送信する", class: "my-2" %>
+    </div>
+  <% end %>
+</div>

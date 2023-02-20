@@ -1,0 +1,36 @@
+<!--コメント一覧-->
+<p>＜コメント一覧＞</p>
+<% if current_user.name != "guestuser" %>
+  <% post.comments.each do |comment| %>
+    <table class="comment_list">
+      <td style="width: 10%">
+        <%= image_tag comment.user.get_profile_image(100, 100), class: "rounded-circle" %>
+      </td>
+      <td style="width: 10%">
+        <%= comment.user.name %>
+      </td>
+      <td style="width: 70%">
+        <%= comment.content %>
+      </td>
+      <td class="text-center" style="width: 10%">
+        <% if comment.user == current_user %>
+          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-danger" %>
+        <% end %>
+      </td>
+    </table>
+  <% end %>
+  <% unless post.comments.present? %>
+    <p>&emsp;コメントは特にありません</p>
+  <% end %>
+  
+  <!--コメントフォーム-->
+  <%= form_with model: [post, comment], local: false do |f| %>
+    <div class="comment_form form-group field mt-4">
+      <%= f.label :"＜新規コメント＞", class: "control-label" %>
+      <%= f.text_area :content, class: "form-control" %>
+      <%= f.submit "送信する", class: "my-2" %>
+    </div>
+  <% end %>
+<% else %>
+  <p class="text-center my-5">コメント機能を利用するためには、アカウントを作成する必要があります</p>
+<% end %>

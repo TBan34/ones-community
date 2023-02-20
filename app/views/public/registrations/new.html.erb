@@ -1,0 +1,52 @@
+<!--サインアップ-->
+<div class="container mt-3">
+  <h2 class="font-weight-bold">＜新規登録＞</h2>
+  
+  <%= form_with model: @user, url: user_registration_path do |f| %>
+    <%= render "public/shared/error_messages", resource: resource %>
+    
+    <!--ユーザー画面や投稿画面で名無し時の条件式を省くため、登録時にユーザー名の項目を追加-->
+    <div class="form-group field">
+      <%= f.label :"ユーザー名", class: "control-label" %><br />
+      <%= f.text_field :display_name, autocomplete: "name", class: "form-control col-sm-2" %>
+    </div>
+    
+    <!--本人確認を兼ねて、サインアップに氏名と電話番号の項目を追加-->
+    <div class="form-group field">
+      <%= f.label :"氏名", class: "control-label" %><br />
+      <%= f.text_field :name, autocomplete: "name", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"電話番号（ハイフンなし）", class: "control-label" %><br />
+      <%= f.text_field :telephone_number, autocomplete: "telephone_number", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"メールアドレス", class: "control-label" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"パスワード", class: "control-label" %>
+      <% if @minimum_password_length %>
+      <em>（<%= @minimum_password_length %>文字以上）</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="form-group field">
+      <%= f.label :"パスワード（確認用）", class: "control-label" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control col-sm-2" %>
+    </div>
+  
+    <div class="actions">
+      <%= f.submit "アカウントを作成する" %>
+    </div>
+  <% end %>
+  
+  <div class="mt-5">
+    <h3>既に登録済みの方</h3>
+    <p><%= link_to "こちら", new_user_session_path %>からログインしてください。</p>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<!--投稿詳細-->
+<div class="container mt-3">
+  <div class="row">
+    <h2 class="font-weight-bold">＜投稿詳細＞</h2>
+    <!--編集・削除ボタン-->
+    <div class="col text-right">
+      <%= link_to "編集", edit_admin_post_path(@post.id), class: "btn btn-success" %>
+      <%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+    </div>
+  </div>
+  
+  <!--イメージ画像、いいね、タグ、投稿者情報-->
+  <div class="row mt-3">
+    <div class="col-4 text-center">
+      <div class="post-image border-bottom">
+        <%= image_tag @post.get_image(200, 200) %>
+        <p>♥<%= @post.favorites.count %></p>
+        <% @post.tags.each do |tag| %>
+          <p>#<%= tag.name %></p>
+        <% end %>
+      </div>
+      <div class="post-user mt-3">
+        <p class="font-weight-bold mb-0">投稿者</p>
+        <%= link_to admin_user_path(@user) do %>
+          <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle" %><br>
+          <%= @user.display_name %>
+        <% end %>
+      </div>
+    </div>
+    
+    <!--投稿情報-->
+    <div class="col-8">
+      <table class="table table-bordered">
+        <tr>
+          <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>
+          <td><%= @post.title %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">日時</th>
+          <td><%= @post.time %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">場所</th>
+          <td><%= @post.place %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">持ち物</th>
+          <td><%= @post.belonging %></td>
+        </tr>
+        <tr>
+          <th scope="row" class="table-secondary">詳細情報</th>
+          <td><%= simple_format(h(@post.body))%></td>
+        </tr>
+      </table>
+      
+      <!--コメント一覧-->
+      <div class="comment_list">
+        <p>＜コメント一覧＞</p>
+        <% @post.comments.each do |comment| %>
+          <table class="comment_list">
+            <td style="width: 10%">
+              <%= image_tag comment.user.get_profile_image(100, 100), class: "rounded-circle" %>
+            </td>
+            <td style="width: 10%">
+              <%= comment.user.name %>
+            </td>
+            <td style="width: 70%">
+              <%= comment.content %>
+            </td>
+            <td class="text-center" style="width: 10%">
+              <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger" %>
+            </td>
+          </table>
+        <% end %>
+        <% unless @post.comments.present? %>
+          <p>&emsp;コメントは特にありません</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
