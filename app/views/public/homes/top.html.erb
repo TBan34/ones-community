@@ -3,7 +3,7 @@
     <% if user_signed_in? && current_user != User.guest %>
       <!--メインビジュアル（通常ログイン時）-->
       <div class="col px-0">
-        <img src="/assets/top-image.jpg" class="img-responsive mx-auto d-block" alt="トップ画像" width="900" height="500" %>
+        <%= image_tag asset_path("top-image.jpg"), class="img-responsive mx-auto d-block" width="900" height="500" %>
       </div>
     <% else %>
       <!--ゲストログイン時、又は未ログイン時-->
