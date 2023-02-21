@@ -1,12 +1,5 @@
 <!--バリデーションエラー-->
-<% if @post.errors.any? %>
-  <%= @post.errors.count %>件のエラーが発生しました。
-  <ul>
-    <% @post.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
+<%= render "error_messages", post: @post %>
 
 <!--新規投稿-->
 <div class="container mt-3">
@@ -15,40 +8,7 @@
     <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-outline-secondary ml-5" %>
   </div>
   <%= form_with model: @post do |f| %>
-    <div class="form-group field">
-      <%= f.label :"イメージ画像", class: "control-label" %>
-      <%= f.file_field :image, accept: "image/*", class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"タグ", class: "control-label" %><br>
-      <%= f.collection_select :tag_ids, Tag.all, :id, :name, class: "form-control col-sm-2" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"タイトル", class: "control-label" %>
-      <%= f.text_field :title, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"日時", class: "control-label" %>
-      <%= f.text_field :time, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"場所", class: "control-label" %>
-      <%= f.text_field :place, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"持ち物", class: "control-label" %>
-      <%= f.text_field :belonging, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"詳細情報", class: "control-label" %>
-      <%= f.text_area :body, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"公開" %>
-      <%= f.radio_button :status, :public %><br>
-      <%= f.label :"非公開（下書き）" %>
-      <%= f.radio_button :status, :private %>
-    </div>
+    <%= render "form_post", f: f %>
     <%= f.submit "投稿する", class: "btn btn-success my-2" %>
   <% end %>
 </div>

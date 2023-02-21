@@ -10,7 +10,6 @@
       <div class="col-6 px-0">
         <%= image_tag asset_path("top-image.jpg"), class: "img-responsive", width: "900", height: "500" %>
       </div>
-      <!--ゲストログイン中か確認-->
       <div class="col-6 text-center my-auto">
         <% if current_user == User.guest %>
           <h4 class="font-weight-bold">アカウントを作成するためには、一度ログアウトする必要があります</h4>
