@@ -75,7 +75,7 @@ class Public::PostsController < ApplicationController
   
   # 非公開（下書き）の投稿一覧
   def draft
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_private.order(created_at: :desc).page(params[:page])
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_private.where(user_id: current_user.id).order(created_at: :desc).page(params[:page])
   end
   
   private

@@ -23,7 +23,7 @@
           <p>#<%= tag.name %></p>
         <% end %>
       </div>
-      <div class="post-user mt-3">
+      <div class="post-user my-3">
         <p class="font-weight-bold mb-0">投稿者</p>
         <%= link_to user_path(@user) do %>
           <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle" %><br>
