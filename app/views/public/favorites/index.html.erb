@@ -1,5 +1,5 @@
 <!--いいねした投稿一覧-->
-<div class="container-fluid mt-3">
+<div class="container-fluid w-75 mt-3">
   <h2 class="font-weight-bold">＜いいねした投稿＞</h2>
   
   <!--いいねした投稿一覧表示-->
@@ -12,9 +12,9 @@
       <th scope="col">タグ</th>
       <th scope="col">日時</th>
       <th scope="col">場所</th>
-      <th scope="col">いいね</th>
-      <th scope="col">コメント</th>
-      <th scope="col"></th>
+      <th scope="col" width="8%">いいね</th>
+      <th scope="col" width="10%">コメント</th>
+      <th scope="col" width="8%"></th>
     </tr>
     <% @favorited_posts.each do |post| %>
     <tr>

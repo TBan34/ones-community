@@ -22,7 +22,7 @@ class Public::SessionsController < Devise::SessionsController
   protected
   
     # サインアップ後の遷移先
-    def after_sign_up_path_fot(resource)
+    def after_sign_up_path_for(resource)
       user_path(current_user.id)
     end
   
@@ -36,12 +36,12 @@ class Public::SessionsController < Devise::SessionsController
       root_path
     end
 
-    # ログイン時の入力情報
+    # ログイン時の入力情報を規定
     def user_state
       @user = User.find_by(email: params[:user][:email])
       return if !@user
       if @user.valid_password?(params[:user][:password]) && !(@user.is_deleted == false)
-        redirect_to new_user_registration_path
+        redirect_to new_user_registration_path, danger: "退会済のユーザーです"
       end
     end
     
