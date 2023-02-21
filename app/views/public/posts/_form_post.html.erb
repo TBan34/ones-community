@@ -1,0 +1,35 @@
+<!--新規投稿フォーム、投稿編集フォーム-->
+<div class="form-group field">
+  <%= f.label :"イメージ画像", class: "control-label" %>
+  <%= f.file_field :image, accept: "image/*", class: "form-control col-sm-6" %>
+</div>
+<div class="form-group field">
+  <%= f.label :"タグ", class: "control-label" %><br>
+  <%= f.collection_select :tag_ids, Tag.all, :id, :name, class: "form-control col-sm-2" %>
+</div>
+<div class="form-group field">
+  <%= f.label :"タイトル", class: "control-label" %>
+  <%= f.text_field :title, class: "form-control col-sm-6" %>
+</div>
+<div class="form-group field">
+  <%= f.label :"日時", class: "control-label" %>
+  <%= f.text_field :time, class: "form-control col-sm-6" %>
+</div>
+<div class="form-group field">
+  <%= f.label :"場所", class: "control-label" %>
+  <%= f.text_field :place, class: "form-control col-sm-6" %>
+</div>
+<div class="form-group field">
+  <%= f.label :"持ち物", class: "control-label" %>
+  <%= f.text_field :belonging, class: "form-control col-sm-6" %>
+</div>
+<div class="form-group field">
+  <%= f.label :"詳細情報", class: "control-label" %>
+  <%= f.text_area :body, class: "form-control col-sm-6" %>
+</div>
+<div class="form-group field">
+  <%= f.label :"公開" %>
+  <%= f.radio_button :status, :public %><br>
+  <%= f.label :"非公開（下書き）" %>
+  <%= f.radio_button :status, :private %>
+</div>

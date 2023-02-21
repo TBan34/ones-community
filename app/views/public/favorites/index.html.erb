@@ -2,38 +2,13 @@
 <div class="container-fluid w-75 mt-3">
   <h2 class="font-weight-bold">＜いいねした投稿＞</h2>
   
-  <!--いいねした投稿一覧表示-->
   <% if @favorited_posts.present? %>
-  <table class="table table-bordered text-center">
-    <tr class="table table-secondary">
-      <th scope="col"></th>
-      <th scope="col">投稿者</th>
-      <th scope="col">タイトル</th>
-      <th scope="col">タグ</th>
-      <th scope="col">日時</th>
-      <th scope="col">場所</th>
-      <th scope="col" width="8%">いいね</th>
-      <th scope="col" width="10%">コメント</th>
-      <th scope="col" width="8%"></th>
-    </tr>
-    <% @favorited_posts.each do |post| %>
-    <tr>
-      <td><%= image_tag post.get_image(100, 100) %></td>
-      <td><%= post.user.display_name %></td>
-      <td><%= post.title %></td>
-      <td>
-        <% post.tags.each do |tag| %>
-          <p><%= tag.name %></p>
-        <% end %>
-      </td>
-      <td><%= post.time %></td>
-      <td><%= post.place %></td>
-      <td>♥<%= post.favorites.count %></td>
-      <td><%= post.comments.count %>件</td>
-      <td><%= link_to "詳細", post_path(post.id) %></td>
-    </tr>
-    <% end %>
-  </table>
+    <table class="table table-bordered text-center">
+      <%= render "public/posts/posts-thead" %>
+      <% @favorited_posts.each do |post| %>
+        <%= render "public/posts/posts-tbody", post: post %>
+      <% end %>
+    </table>
   <% else %>
     <p class="text-center my-5">いいねした投稿はありません</p>
   <% end %>

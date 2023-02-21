@@ -1,0 +1,9 @@
+<!--新規メッセージフォーム-->
+<%= form_with model: chat do |f| %>
+  <div class="chat_form form-group field mb-0 py-5">
+    <%= f.label "新しいメッセージ", class: "control-label" %>
+    <%= f.hidden_field :room_id %>
+    <%= f.text_field :message, class: "form-control" %>
+    <%= f.submit "送信する", class: "my-2" %>
+  </div>
+<% end %>
