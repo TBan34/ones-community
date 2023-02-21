@@ -23,7 +23,7 @@ class Public::PostsController < ApplicationController
     @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts.status_public.order(created_at: :desc).page(params[:page]) : Post.status_public.order(created_at: :desc).page(params[:page])
     # マイページから過去の投稿一覧を表示（本人のみ）
     if params[:user_id]
-      @posts = Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page])
+      @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page]) : Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page])
     end
   end
   
