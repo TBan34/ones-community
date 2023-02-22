@@ -12,10 +12,9 @@
           <% end %>
         </a>
       <% end %>
-      <!--ヘッダー右-->
+      <!--ヘッダー右(ユーザー/ゲストユーザーログイン時)-->
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto mr-5">
-        <!--ユーザー/ゲストユーザーログイン時-->
           <% if user_signed_in? %>
             <% if current_user.name != "guestuser" %>
               <li class="nav-item">
@@ -35,7 +34,7 @@
               <% end %>
             </li>
             <li class="nav-item ml-3">
-              <%= link_to rooms_path(current_user), class: "btn btn-outline-light" do %>
+              <%= link_to rooms_path(user_id: current_user.id), class: "btn btn-outline-light" do %>
                 <i class="fas fa-comments"></i>チャット一覧
               <% end %>
             </li>

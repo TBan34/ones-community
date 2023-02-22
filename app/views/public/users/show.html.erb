@@ -29,7 +29,7 @@
   
   <!--ユーザー情報-->
   <div class="row">
-    <!--ユーザー本人の表示-->
+    <!--ユーザー本人の閲覧時-->
     <% if @user == current_user %>
       <div class="col-4">
         <table class="table table-bordered">
@@ -67,7 +67,7 @@
           </tr>
         </table>
       </div>
-    <!--他のユーザーの表示-->
+    <!--他のユーザーの閲覧時-->
     <% else %>
       <div class="col-8 mx-auto">
         <table class="table table-bordered" style="table-layout: fixed;">
@@ -95,9 +95,9 @@
   <!--過去の投稿はユーザー本人のみ閲覧可能-->
   <div class="row">
     <% if @user == current_user %>
-    <div class="col text-right">
-      <p><%= link_to posts_path(user_id: @user.id) do %><u>過去の投稿</u><% end %></p>
-    </div>
+      <div class="col text-right">
+        <p><%= link_to posts_path(user_id: @user.id) do %><u>過去の投稿</u><% end %></p>
+      </div>
     <% end %>
   </div>
 </div>

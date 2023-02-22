@@ -18,13 +18,9 @@ class Public::PostsController < ApplicationController
     end
   end
   
-  # Tag情報も併せて一覧表示
+  # 投稿データからステータスが公開でアクティブなユーザを取得、タグ検索用にtagsも結合
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts.page(params[:page]) : Post.status_public.order(created_at: :desc).page(params[:page])
-    # マイページから過去の投稿一覧を表示（本人のみ）
-    if params[:user_id]
-      @posts = Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page])
-    end
+    @posts = Post.list(params[:tag_id], params[:page], params[:user_id])
   end
   
   def show
@@ -75,7 +71,7 @@ class Public::PostsController < ApplicationController
   
   # 非公開（下書き）の投稿一覧
   def draft
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_private.order(created_at: :desc).page(params[:page])
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_private.where(user_id: current_user.id).order(created_at: :desc).page(params[:page])
   end
   
   private
