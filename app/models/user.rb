@@ -20,10 +20,11 @@ class User < ApplicationRecord
   # プロフィール画像を添付
   has_one_attached :profile_image
   
+  validates :display_name, presence: true
   validates :name, presence: true
   validates :telephone_number, presence: true, uniqueness: true, numericality: { only_integer: true }, length: { in: 10..11 }
   validates :email, presence: true, uniqueness: true
-  validates :display_name, presence: true
+  validates :password, on: :create, presence: true, length: { in: 6..128 }
   
   # デフォルト画像の設定、画像サイズの指定方法
   def get_profile_image(width, height)
