@@ -48,12 +48,12 @@ class User < ApplicationRecord
     end
   end
   
-  # フォローする（Let's play Sports!!）
+  # フォローする（マッチングする）
   def follow(user_id)
     matchings.create(following_id: user_id)
   end
   
-  # フォローを外す（辞退する）
+  # フォローを外す（マッチングを解除する）
   def unfollow(user_id)
     matchings.find_by(following_id: user_id).destroy
   end

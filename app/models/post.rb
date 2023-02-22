@@ -20,6 +20,21 @@ class Post < ApplicationRecord
   # 投稿の公開・非公開を設定
   enum status: { public: 0, private: 1 }, _prefix: true
   
+  # 投稿データからステータスが公開でアクティブなユーザを取得、タグ検索用にtagsも結合
+  def self.list(tag_id, page, user_id)
+    posts = status_public.left_joins(:user, :tags).where(user: {is_deleted: false})
+
+    if tag_id.present?
+      posts = posts.where(tags: {id: tag_id})
+    end
+    if user_id.present?
+      posts = posts.where(user_id: user_id)
+    end
+
+    posts = posts.order(created_at: :desc).page(page)
+    return posts
+  end
+  
   # デフォルト画像の設定、画像サイズの指定方法
   def get_image(width, height)
     unless image.attached?
