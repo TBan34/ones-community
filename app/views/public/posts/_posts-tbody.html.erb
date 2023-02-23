@@ -6,7 +6,7 @@
     <td><%= post.title %></td>
     <td>
       <% post.tags.each do |tag| %>
-        <p><%= tag.name %></p>
+        <%= tag.name %>
       <% end %>
     </td>
     <td><%= post.time %></td>

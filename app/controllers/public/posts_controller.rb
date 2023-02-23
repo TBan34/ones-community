@@ -8,7 +8,6 @@ class Public::PostsController < ApplicationController
   # 投稿時にTag情報を含める
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user.id
     tag = Tag.find(params[:post][:tag_ids])
     @post.tags << tag
     if @post.save
@@ -53,7 +52,14 @@ class Public::PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
-    @post.user.id = current_user.id
+    tag = Tag.find(params[:post][:tag_ids])
+    
+    tag_data = @post.post_tags.find_or_create_by(post_id: @post.id) do |t|
+      t.tag_id = tag.id
+    end
+    
+      tag_data.update(tag_id: tag.id) unless tag_data.nil?
+    
     if @post.update(post_params)
       redirect_to post_path(@post.id), success: "投稿を更新しました"
     else
@@ -63,7 +69,6 @@ class Public::PostsController < ApplicationController
   
   def destroy
     @post = Post.find(params[:id])
-    @post.user.id = current_user.id
     if @post.destroy
       redirect_to posts_path, danger: "投稿を削除しました"
     end
