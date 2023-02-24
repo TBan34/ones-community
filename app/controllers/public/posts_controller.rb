@@ -8,6 +8,7 @@ class Public::PostsController < ApplicationController
   # 投稿時にTag情報を含める
   def create
     @post = Post.new(post_params)
+    @post.user_id = current_user.id
     tag = Tag.find(params[:post][:tag_ids])
     @post.tags << tag
     if @post.save
@@ -52,6 +53,7 @@ class Public::PostsController < ApplicationController
   
   def update
     @post = Post.find(params[:id])
+    @post.user_id = current_user.id
     tag = Tag.find(params[:post][:tag_ids])
     
     tag_data = @post.post_tags.find_or_create_by(post_id: @post.id) do |t|
