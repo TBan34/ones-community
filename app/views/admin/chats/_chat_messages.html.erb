@@ -4,7 +4,7 @@
     <tr>
       <td width="20%">
         <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
-        <%= chat.user.name %>
+        <%= chat.user.display_name %>
       </td>
       <td>
         <h6><%= simple_format(h(chat.message)) %></h6>
