@@ -3,8 +3,10 @@
   <table class="w-100" style="table-layout: fixed;">
     <tr>
       <td width="20%">
-        <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
-        <%= chat.user.display_name %>
+        <%= link_to admin_user_path(chat.user) do %>
+          <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+          <%= chat.user.display_name %>
+        <% end %>
       </td>
       <td>
         <h6><%= simple_format(h(chat.message)) %></h6>
