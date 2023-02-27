@@ -20,17 +20,16 @@ class Public::SessionsController < Devise::SessionsController
   # end
 
   protected
-  
     # サインアップ後の遷移先
     def after_sign_up_path_for(resource)
       user_path(current_user.id)
     end
-  
+
     # ログイン後の遷移先
     def after_sign_in_path_for(resource)
       root_path
     end
-    
+
     # ログアウト後の遷移先
     def after_sign_out_path_for(resource)
       root_path
@@ -44,7 +43,7 @@ class Public::SessionsController < Devise::SessionsController
         redirect_to new_user_registration_path, danger: "退会済のユーザーです"
       end
     end
-    
+
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
