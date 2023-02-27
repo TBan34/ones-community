@@ -1,5 +1,4 @@
 class Public::NotificationsController < ApplicationController
-  
   # ユーザー詳細画面におけるユーザーIDを基に、当該ユーザーの通知一覧を表示
   # 通知一覧を開いた際に、これまでの通知は確認されたものとする
   def index
@@ -10,11 +9,9 @@ class Public::NotificationsController < ApplicationController
       end
     end
   end
-  
+
   private
-  
-  def notification_params
-    params.require(:notification).permit(:visited_id)
-  end
-  
+    def notification_params
+      params.require(:notification).permit(:visited_id)
+    end
 end

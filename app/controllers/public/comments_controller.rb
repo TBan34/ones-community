@@ -1,5 +1,4 @@
 class Public::CommentsController < ApplicationController
-  
   def create
     @post = Post.find(params[:post_id])
     @comment = Comment.new
@@ -12,17 +11,15 @@ class Public::CommentsController < ApplicationController
       redirect_to request.referer, danger: "コメントを入力してください"
     end
   end
-  
+
   def destroy
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
     @comment.destroy
   end
-  
+
   private
-  
-  def comment_params
-    params.require(:comment).permit(:content)
-  end
-  
+    def comment_params
+      params.require(:comment).permit(:content)
+    end
 end

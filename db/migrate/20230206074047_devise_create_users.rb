@@ -20,11 +20,11 @@ class DeviseCreateUsers < ActiveRecord::Migration[6.1]
       t.text :self_introduction, null: true
       # 退会処理（default: false）
       t.boolean :is_deleted, default: false, null: false
-      
+
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
-      
+
       ## Rememberable
       t.datetime :remember_created_at
 
