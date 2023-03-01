@@ -2,7 +2,7 @@
 <% if current_user.name != "guestuser" %>
   <% if post.favorited_by?(current_user) %>
     <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
-      ♥<%= post.favorites.count %> 
+      <div style="color: red">♥<%= post.favorites.count %></div>
     <% end %>
   <% else %>
     <%= link_to post_favorites_path(post), method: :post, remote: true do %>
@@ -11,7 +11,7 @@
   <% end %>
 <% else %>
   <p>
-    ♥<%= post.favorites.count %><br>
+    <span style="color: red">♥<%= post.favorites.count %></span></br>
     <small>いいね機能を利用するためには、<br>
     アカウントを作成する必要があります</small>
   </p>

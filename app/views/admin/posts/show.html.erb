@@ -14,7 +14,7 @@
     <div class="col-4 text-center">
       <div class="post-image border-bottom">
         <%= image_tag @post.get_image(200, 200) %>
-        <p>♥<%= @post.favorites.count %></p>
+        <div style="color: red">♥<%= @post.favorites.count %></div>
         <% @post.tags.each do |tag| %>
           <p>#<%= tag.name %></p>
         <% end %>
