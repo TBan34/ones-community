@@ -5,11 +5,7 @@
     <%= link_to "削除", admin_room_path, method: :delete, class: "btn btn-danger" %>
   </div>
   <div class="row justify-content-center py-3">
-    <% @user_rooms.each do |ur| %>
-      <% if ur.user != current_user %>
-        <h2><u><%= link_to "#{ur.room.post.title}", post_path(ur.room.post) %></u></h2>
-      <% end %>
-    <% end %>
+    <h2><u><%= link_to "#{@room.post.title}", admin_post_path(@room.post) %></u></h2>
   </div>
   
   <!--チャットメッセージ-->
