@@ -26,7 +26,7 @@
         <td>
           <% if aur.room.chats.present? %>
             <% chat = Chat.find_by(id: aur.room.chat_ids.last).message %>
-            <%= truncate(chat, length: 10) %>
+            <%= truncate(chat, length: 30) %>
           <% else %>
             <p class="text-center my-5">チャットを始めましょう</p>
           <% end %>
