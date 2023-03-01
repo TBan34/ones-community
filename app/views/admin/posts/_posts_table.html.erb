@@ -24,7 +24,7 @@
       </td>
       <td><%= post.time %></td>
       <td><%= post.place %></td>
-      <td>♥<%= post.favorites.count %></td>
+      <td style="color: red">♥<%= post.favorites.count %></td>
       <td><%= post.comments.count %>件</td>
       <td><%= link_to "詳細", admin_post_path(post.id) %></td>
     </tr>
