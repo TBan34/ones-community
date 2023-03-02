@@ -34,7 +34,7 @@ class Public::RoomsController < ApplicationController
     users = User.where(id: user_ids).where(is_deleted: true)
     if users.present?
       users.each do |user|
-        flash.now[:danger] = "#{user.display_name}は退会済のユーザーです"
+        flash.now[:info] = "#{user.display_name}は退会済のユーザーです"
       end
     end
   end
