@@ -13,9 +13,9 @@ class Admin::RoomsController < ApplicationController
     user_names = users.pluck(:display_name)
     if users.present?
       if users.count == 2
-        flash.now[:danger] = "#{user_names[0]}, #{user_names[1]}は退会済のユーザーです"
+        flash.now[:info] = "#{user_names[0]}, #{user_names[1]}は退会済のユーザーです"
       else
-        flash.now[:danger] = "#{user_names[0]}は退会済のユーザーです"
+        flash.now[:info] = "#{user_names[0]}は退会済のユーザーです"
       end
     end
   end
