@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  # フラッシュメッセージにBootstrapのスタイルを適用
+  # リダイレクト時のフラッシュメッセージにBootstrapのスタイルを適用
   add_flash_types :success, :info, :warning, :danger
 
   protected

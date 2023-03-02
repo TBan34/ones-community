@@ -28,6 +28,15 @@ class Public::RoomsController < ApplicationController
     else
       redirect_to request.referer
     end
+    
+    # 退会済ユーザーの情報を取得し、チャット画面上部に表示（最大1名）
+    user_ids = @user_rooms.pluck(:user_id)
+    users = User.where(id: user_ids).where(is_deleted: true)
+    if users.present?
+      users.each do |user|
+        flash.now[:danger] = "#{user.display_name}は退会済のユーザーです"
+      end
+    end
   end
 
   private
