@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   # リダイレクト時のフラッシュメッセージにBootstrapのスタイルを適用
-  add_flash_types :success, :info, :warning, :danger
+  add_flash_types :success, :info, :warning, :danger, :secondary
 
   protected
     # サインアップ時の入力情報を追加（ユーザー名、氏名、電話番号）

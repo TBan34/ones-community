@@ -12,7 +12,11 @@ class Public::PostsController < ApplicationController
     tag = Tag.find(params[:post][:tag_ids])
     @post.tags << tag
     if @post.save
-      redirect_to posts_path, success: "投稿しました"
+      if @post.status_public?
+        redirect_to posts_path, success: "投稿しました"
+      else
+        redirect_to post_draft_path(current_user), secondary: "非公開（下書き）にしました"
+      end
     else
       render :new
     end
@@ -78,7 +82,7 @@ class Public::PostsController < ApplicationController
 
   # 非公開（下書き）の投稿一覧
   def draft
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.status_private.where(user_id: current_user.id).order(created_at: :desc).page(params[:page])
+    @posts = Post.status_private.where(user_id: current_user.id).order(created_at: :desc).page(params[:page])
   end
 
   private
