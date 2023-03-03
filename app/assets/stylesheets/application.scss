@@ -13,3 +13,20 @@
  *= require_tree .
  *= require_self
  */
+
+//コンテンツ量に関わらずフッターを最下部に表示 
+.FixedFooterBottom{
+  min-height: 100vh; //コンテンツ高さの最小値=ブラウザの高さ
+  position: relative; //footerを相対位置で指定
+  padding-bottom: 60px; //footer直上のコンテンツとの間隔
+  box-sizing: border-box;
+}
+
+footer{
+  position: absolute; //footerの絶対位置
+  bottom: 0; //ブラウザの一番下
+  width: 100%;
+  height: 50px;
+  background-color: #365E94;
+  color: white;
+}
