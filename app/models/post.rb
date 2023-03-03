@@ -31,7 +31,7 @@ class Post < ApplicationRecord
     end
 
     posts = posts.order(created_at: :desc).page(page)
-    posts
+    return posts
   end
 
   # デフォルト画像の設定、画像サイズの指定方法
