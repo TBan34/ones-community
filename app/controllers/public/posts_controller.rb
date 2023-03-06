@@ -9,9 +9,14 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    tag = Tag.find(params[:post][:tag_ids])
-    @post.tags << tag
+    # tag = Tag.find_by(params[:id])
+    # tag_data = Tag.find_or_create_by(id: [:tags][:id]) do |t|
+      # t.tag_id = tag.id
+    # end
+    # tag_data.update(tag_id: tag.id) unless tag_data.nil?
+    # @post.tags << tag_data
     if @post.save
+      @post.save_tags(params[:post][:tag])
       if @post.status_public?
         redirect_to posts_path, success: "投稿しました"
       else

@@ -19,6 +19,17 @@ class Post < ApplicationRecord
   # 投稿の公開・非公開を設定
   enum status: { public: 0, private: 1 }, _prefix: true
 
+  # 投稿時のタグ保存
+  def save_tags(tags)
+    tag_list = tags.split(",")
+    current_tags = self.tags.pluck(:name)
+    new_tags = tag_list - current_tags
+    new_tags.each do |new|
+      new_post_tag = Tag.find_or_create_by(name: new)
+      self.tags << new_post_tag
+    end
+  end
+
   # 投稿データからステータスが公開でアクティブなユーザを取得、タグ検索用にtagsも結合
   def self.list(tag_id, page, user_id)
     posts = status_public.left_joins(:user, :tags).where(user: { is_deleted: false })
