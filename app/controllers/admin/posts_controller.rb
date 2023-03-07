@@ -15,14 +15,6 @@ class Admin::PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    # tag = Tag.find(params[:post][:tag_ids])
-
-    # tag_data = @post.post_tags.find_or_create_by(post_id: @post.id) do |t|
-      # t.tag_id = tag.id
-    # end
-
-    # tag_data.update(tag_id: tag.id) unless tag_data.nil?
-
     if @post.update(post_params)
       @post.save_tags(params[:post][:tag])
       redirect_to admin_post_path(@post.id), success: "投稿を更新しました"
