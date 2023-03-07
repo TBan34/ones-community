@@ -16,7 +16,7 @@
         <%= image_tag @post.get_image(200, 200) %>
         <div style="color: red">♥<%= @post.favorites.count %></div>
         <% @post.tags.each do |tag| %>
-          <p>#<%= tag.name %></p>
+          <h7>#<%= tag.name %></h7><br>
         <% end %>
       </div>
       <div class="post-user my-3">

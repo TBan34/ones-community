@@ -19,7 +19,7 @@
           <%= render "public/favorites/favorites-btn", post: @post %>
         </div>
         <% @post.tags.each do |tag| %>
-          <p>#<%= tag.name %></p>
+          <h7>#<%= tag.name %></h7><br>
         <% end %>
       </div>
       <!--投稿者情報-->
