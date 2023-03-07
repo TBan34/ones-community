@@ -10,7 +10,6 @@ ja:
         email: メールアドレス
         display_name: ユーザー名
       post:
-        tags: タグ
         title: タイトル
         time: 日時
         place: 場所

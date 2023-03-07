@@ -67,7 +67,8 @@ class Post < ApplicationRecord
 
   # キーワード検索（部分一致）
   def self.search_word(search_word)
-    @post = Post.where("title LIKE?", "%#{search_word}%")
+    @post = Post.where("title LIKE? OR body LIKE? OR time LIKE? OR place LIKE?", 
+    "%#{search_word}%", "%#{search_word}%", "%#{search_word}%", "%#{search_word}%")
   end
 
   # いいね通知の作成（投稿に対して他のユーザーから初めていいねされた場合）
