@@ -20,16 +20,16 @@ class Post < ApplicationRecord
   enum status: { public: 0, private: 1 }, _prefix: true
 
   # 投稿のタグ保存/更新
-  def save_tags(tags)
-    all_tags = tags.split(",")
+  def save_tags(tag_data)
+    posting_tags = tag_data.split(",")
     current_tags = self.tags.pluck(:name)
     
-    old_tags = current_tags - all_tags
+    old_tags = current_tags - posting_tags
     old_tags.each do |old|
       self.tags.delete Tag.find_by(name: old)
     end
     
-    new_tags = all_tags - current_tags
+    new_tags = posting_tags - current_tags
     new_tags.each do |new|
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag

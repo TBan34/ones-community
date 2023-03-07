@@ -1,11 +1,11 @@
 <!--新規投稿フォーム、投稿編集フォーム-->
 <div class="form-group field">
-  <%= f.label :"イメージ画像", class: "control-label" %>
-  <%= f.file_field :image, accept: "image/*", class: "form-control col-sm-6" %>
+  <%= f.label :"イメージ画像" %><br>
+  <%= f.file_field :image, accept: "image/*" %>
 </div>
 <div class="form-group field">
   <%= f.label :"タグ", class: "control-label" %><br>
-  <%= f.text_field :tag, value: post.tags.pluck(:name).join(','), class: "form-control col-sm-6" %>
+  <%= f.text_field :tag, value: post.tags.pluck(:name).join(','), placeholder: "タグをカンマ( , )区切りで入力(例 サッカー, リフティング)", class: "form-control col-sm-6" %>
 </div>
 <div class="form-group field">
   <%= f.label :"タイトル", class: "control-label" %>
