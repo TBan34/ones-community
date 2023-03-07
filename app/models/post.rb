@@ -19,11 +19,17 @@ class Post < ApplicationRecord
   # 投稿の公開・非公開を設定
   enum status: { public: 0, private: 1 }, _prefix: true
 
-  # 投稿時のタグ保存
+  # 投稿のタグ保存/更新
   def save_tags(tags)
-    tag_list = tags.split(",")
+    all_tags = tags.split(",")
     current_tags = self.tags.pluck(:name)
-    new_tags = tag_list - current_tags
+    
+    old_tags = current_tags - all_tags
+    old_tags.each do |old|
+      self.tags.delete Tag.find_by(name: old)
+    end
+    
+    new_tags = all_tags - current_tags
     new_tags.each do |new|
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
@@ -32,10 +38,10 @@ class Post < ApplicationRecord
 
   # 投稿データからステータスが公開でアクティブなユーザを取得、タグ検索用にtagsも結合
   def self.list(tag_id, page, user_id)
-    posts = status_public.left_joins(:user, :tags).where(user: { is_deleted: false })
+    posts = status_public.left_joins(:user).where(user: { is_deleted: false })
 
     if tag_id.present?
-      posts = posts.where(tags: { id: tag_id })
+      posts = posts.left_joins(:tags).where(tags: { id: tag_id })
     end
     if user_id.present?
       posts = posts.where(user_id: user_id)
@@ -53,8 +59,6 @@ class Post < ApplicationRecord
     end
     image.variant(resize: "#{width}x#{height}!").processed
   end
-
-
 
   # いいねをしたか確認
   def favorited_by?(user)

@@ -5,16 +5,9 @@ class Public::PostsController < ApplicationController
     @post = Post.new
   end
 
-  # 投稿時にTag情報を含める
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    # tag = Tag.find_by(params[:id])
-    # tag_data = Tag.find_or_create_by(id: [:tags][:id]) do |t|
-      # t.tag_id = tag.id
-    # end
-    # tag_data.update(tag_id: tag.id) unless tag_data.nil?
-    # @post.tags << tag_data
     if @post.save
       @post.save_tags(params[:post][:tag])
       if @post.status_public?
@@ -63,15 +56,8 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.user_id = current_user.id
-    tag = Tag.find(params[:post][:tag_ids])
-
-    tag_data = @post.post_tags.find_or_create_by(post_id: @post.id) do |t|
-      t.tag_id = tag.id
-    end
-
-    tag_data.update(tag_id: tag.id) unless tag_data.nil?
-
     if @post.update(post_params)
+      @post.save_tags(params[:post][:tag])
       redirect_to post_path(@post.id), success: "投稿を更新しました"
     else
       render :edit
@@ -92,7 +78,7 @@ class Public::PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:user_id, :title, :body, :time, :place, :belonging, :image, :status, tag_ids: [])
+      params.require(:post).permit(:user_id, :title, :body, :time, :place, :belonging, :image, :status)
     end
 
     # 投稿者以外が投稿を編集できないよう制限
