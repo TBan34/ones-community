@@ -16,7 +16,9 @@
         <%= image_tag @post.get_image(200, 200) %>
         <div style="color: red">♥<%= @post.favorites.count %></div>
         <% @post.tags.each do |tag| %>
-          <h7>#<%= tag.name %></h7><br>
+          <%= link_to admin_posts_path(tag_id: tag.id), class: "Tag" do %>
+            <h7><small>#<%= tag.name %></small></h7>
+          <% end %>
         <% end %>
       </div>
       <div class="post-user my-3">
