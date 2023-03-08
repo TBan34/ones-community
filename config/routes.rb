@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:destroy]
     end
-    resources :tags, only: [:index]
+    resources :tags, only: [:index, :destroy]
     resources :rooms, only: [:index, :show, :destroy]
   end
 
