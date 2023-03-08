@@ -6,7 +6,9 @@
     <td><%= post.title %></td>
     <td>
       <% post.tags.each do |tag| %>
-        <h7>#<%= tag.name %></h7><br>
+        <%= link_to posts_path(tag_id: tag.id), class: "Tag" do %>
+          <h7><small>#<%= tag.name %></small></h7>
+        <% end %>
       <% end %>
     </td>
     <td><%= post.time %></td>
