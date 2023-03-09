@@ -1,12 +1,8 @@
-<!--ユーザー一覧-->
+<!--ユーザー検索結果-->
 <div class="container mt-3">
-  <h2 class="font-weight-bold">＜ユーザー一覧＞</h2>
-  
-  <!--検索窓-->
-  <div class="search_user">
-    <%= render "search_user" %>
-  </div>
-  
+  <h2 class="font-weight-bold">＜検索結果＞</h2>
+  <p>"<%= @search_user %>"で検索しています</p>
+
   <!--ユーザー一覧テーブル-->
   <%= render "admin/users/users_table", users: @users %>
   

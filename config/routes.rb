@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   # 管理者用ルーティング
   namespace :admin do
     get "/search" => "searches#search"
+    get "/search_user" => "searches#search_user"
     resources :users, only: [:index, :show, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:destroy]
