@@ -1,5 +1,9 @@
 <!--キーワード検索結果-->
 <div class="container mt-3">
+  <div class="SearchForm d-inline-flex justify-content-end w-100">
+    <%= render "admin/posts/search_word" %>
+    <%= render "admin/posts/search_tag" %>
+  </div>
   <h2 class="font-weight-bold">＜検索結果＞</h2>
   <p>"<%= @search_word %>"で検索しています</p>
 

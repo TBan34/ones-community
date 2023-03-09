@@ -1,7 +1,5 @@
 <!--タグ検索欄-->
-<h5 class="font-weight-bold mt-5">＜タグ検索＞</h5>
-
-<div class="search_tag_form">
+<div class="SearchTagForm">
   <% unless params[:user_id] %>
     <%= form_with url: admin_posts_path, local: true, method: :get do |f| %>
       <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), { prompt: "タグ検索" } %>
