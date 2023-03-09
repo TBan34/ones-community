@@ -1,7 +1,6 @@
 <!--キーワード検索欄-->
 <% if user_signed_in? %>
-  <h5 class="font-weight-bold mt-3">＜キーワード検索＞</h5>
-  <div class="SearchWordForm">
+  <div class="SearchWordForm mr-3">
     <%= form_with url: search_post_path, local: true, method: :get do |f| %>
       <%= f.text_field :search_word, placeholder: "キーワードを入力" %>
       <%= f.submit "検索", class: "btn btn-secondary btn-sm" %>

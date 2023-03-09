@@ -1,18 +1,17 @@
 <!--キーワード検索結果-->
 <div class="container-fluid w-75 my-3">
-  <h2 class="font-weight-bold">＜検索結果＞</h2>
+  <div class="PostListMenu d-inline-flex justify-content-between w-100">
+    <h2 class="font-weight-bold">＜検索結果＞</h2>
+    <div class="PostBtn">
+      <% if current_user.name != "guestuser" %>
+        <%= link_to "新規投稿", new_post_path, class: "btn btn-info mr-4" %>
+        <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary" %>
+      <% end %>
+    </div>
+  </div>
   <p>"<%= @search_word %>"で検索しています</p>
   
-  <% if @posts.present? %>
-    <table class="table table-bordered text-center" style="table-layout: fixed;">
-      <%= render "public/posts/posts-thead" %>
-      <% @posts.each do |post| %>
-        <%= render "public/posts/posts-tbody", post: post %>
-      <% end %>
-    </table>
-  <% else %>
-    <p class="text-center my-5">投稿が見つかりませんでした</p>
-  <% end %>
+  <%= render "public/posts/posts_table", posts: @posts %>
   
   <div class="Pagination justify-content-center">
     <%= paginate @posts %>

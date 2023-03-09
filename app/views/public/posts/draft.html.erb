@@ -2,19 +2,9 @@
 <div class="container-fluid w-75 my-3">
   <h2 class="font-weight-bold">＜非公開（下書き）一覧＞</h2>
   
-  <% if @posts.present? %>
-    <table class="table table-bordered text-center" style="table-layout: fixed;">
-      <%= render "posts-thead" %>
-      <% @posts.each do |post| %>
-        <%= render "posts-tbody", post: post %>
-      <% end %>
-    </table>
-  <% else %>
-    <p class="text-center my-5">非公開（下書き）の投稿はありません</p>
-  <% end %>
+  <%= render "posts_table", posts: @posts %>
       
-  <!--ページネーション-->
-  <div class="pagination justify-content-center">
+  <div class="Pagination justify-content-center">
     <%= paginate @posts %>
   </div>
 </div>
