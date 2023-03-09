@@ -40,6 +40,11 @@ class User < ApplicationRecord
     super && (is_deleted == false)
   end
 
+  # ユーザー検索（管理者画面）
+  def self.search_user(search_user)
+    @user = User.where("name LIKE? OR display_name LIKE?", "%#{search_user}%", "%#{search_user}%")
+  end
+
   # ゲストユーザーのログイン情報
   def self.guest
     find_or_create_by!(display_name: "ゲストユーザー", name: "guestuser", telephone_number: "00000000000", email: "guest@example.com") do |user|
