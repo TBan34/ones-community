@@ -1,5 +1,10 @@
 <!--キーワード検索結果-->
 <div class="container-fluid w-75 my-3">
+  <div class="SearchForm d-inline-flex justify-content-end w-100 my-3">
+    <%= render "public/posts/search_word" %>
+    <%= render "public/posts/search_tag" %>
+  </div>
+  
   <div class="PostListMenu d-inline-flex justify-content-between w-100">
     <h2 class="font-weight-bold">＜検索結果＞</h2>
     <div class="PostBtn">
