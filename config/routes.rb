@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     get "/about" => "homes#about"
-    get "/search" => "searches#search"
+    get "/search_post" => "searches#search_post"
     resources :users, only: [:show, :edit, :update] do
       get "unsubscribe" => "users#unsubscribe"
       patch "withdrawal" => "users#withdrawal"
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   # 管理者用ルーティング
   namespace :admin do
-    get "/search" => "searches#search"
+    get "/search_post" => "searches#search_post"
     get "/search_user" => "searches#search_user"
     resources :users, only: [:index, :show, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do

@@ -1,5 +1,5 @@
 <!--キーワード検索結果-->
-<div class="container mt-3">
+<div class="container-fluid w-75 my-3">
   <h2 class="font-weight-bold">＜検索結果＞</h2>
   <p>"<%= @search_word %>"で検索しています</p>
   
@@ -14,8 +14,7 @@
     <p class="text-center my-5">投稿が見つかりませんでした</p>
   <% end %>
   
-  <!--ページネーション-->
-  <div class="pagination justify-content-center">
+  <div class="Pagination justify-content-center">
     <%= paginate @posts %>
   </div>
 </div>
