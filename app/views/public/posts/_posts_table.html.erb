@@ -1,0 +1,40 @@
+<% if posts.present? %>
+  <table class="table table-bordered text-center" style="table-layout: fixed;">
+    <thead>
+      <tr class="table table-secondary">
+        <th scope="col" width="10%"></th>
+        <th scope="col">投稿者</th>
+        <th scope="col">タイトル</th>
+        <th scope="col">タグ</th>
+        <th scope="col">日時</th>
+        <th scope="col">場所</th>
+        <th scope="col" width="7%">いいね</th>
+        <th scope="col" width="8%">コメント</th>
+        <th scope="col" width="5%"></th>
+      </tr>
+    </thead>
+    <% posts.each do |post| %>
+      <tbody>
+        <tr>
+          <td><%= image_tag post.get_image(100, 100) %></td>
+          <td><%= post.user.display_name %></td>
+          <td><%= post.title %></td>
+          <td>
+            <% post.tags.each do |tag| %>
+              <%= link_to posts_path(tag_id: tag.id), class: "Tag" do %>
+                <h7><small>#<%= tag.name %></small></h7>
+              <% end %>
+            <% end %>
+          </td>
+          <td><%= post.time %></td>
+          <td><%= post.place %></td>
+          <td style="color: red">♥<%= post.favorites.count %></td>
+          <td><%= post.comments.count %>件</td>
+          <td><%= link_to "詳細", post_path(post.id) %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+<% else %>
+  <p class="text-center my-5">投稿が見つかりませんでした</p>
+<% end %>
