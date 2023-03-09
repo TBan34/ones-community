@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   belongs_to :user
-  has_many :rooms
+  has_many :rooms, dependent: :destroy
   has_many :notifications, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :comments, dependent: :destroy
