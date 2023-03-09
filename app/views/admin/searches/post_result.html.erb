@@ -1,0 +1,17 @@
+<!--キーワード検索結果-->
+<div class="container-fluid w-75 my-3">
+  <div class="SearchForm d-inline-flex justify-content-end w-100">
+    <%= render "admin/posts/search_word" %>
+    <%= render "admin/posts/search_tag" %>
+  </div>
+  
+  <div class="SearchResult">
+    <h2 class="font-weight-bold">＜検索結果＞</h2>
+    <p>"<%= @search_word %>"で検索しています</p>
+    <%= render "admin/posts/posts_table", posts: @posts %>
+    
+    <div class="Pagination justify-content-center">
+      <%= paginate @posts %>
+    </div>
+  </div>
+</div>
