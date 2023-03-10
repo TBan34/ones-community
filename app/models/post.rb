@@ -11,9 +11,9 @@ class Post < ApplicationRecord
   has_one_attached :image
 
   validates :title, presence: true
-  validates :time, presence: true
-  validates :place, presence: true
-  validates :belonging, presence: true
+  validates :since_when, presence: true
+  validates :at_where, presence: true
+  validates :for_playing, presence: true
   validates :body, presence: true
 
   # 投稿の公開・非公開を設定
@@ -67,16 +67,16 @@ class Post < ApplicationRecord
 
   # キーワード検索（部分一致）
   def self.search_word(search_word)
-    @post = Post.where("title LIKE? OR body LIKE? OR time LIKE? OR place LIKE?", 
+    @post = Post.where("title LIKE? OR body LIKE? OR since_when LIKE? OR at_where LIKE?", 
     "%#{search_word}%", "%#{search_word}%", "%#{search_word}%", "%#{search_word}%")
   end
 
   # いいね通知の作成（投稿に対して他のユーザーから初めていいねされた場合）
   def create_notification_favorite!(current_user)
-    temp_favorite = Notification.where(["visitor_id = ? and visited_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, "favorite"])
+    temp_favorite = Notification.where(["sender_id = ? and receiver_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, "favorite"])
     if temp_favorite.blank?
-      notification = current_user.active_notifications.new(post_id: id, visited_id: user_id, action: "favorite")
-      notification.checked = false unless notification.visitor_id != notification.visited_id
+      notification = current_user.active_notifications.new(post_id: id, receiver_id: user_id, action: "favorite")
+      notification.checked = false unless notification.sender_id != notification.receiver_id
       notification.save if notification.valid?
     end
   end
@@ -90,9 +90,9 @@ class Post < ApplicationRecord
     save_notification_comment!(current_user, comment_id, user_id) if temp_users.blank?
   end
 
-  def save_notification_comment!(current_user, comment_id, visited_id)
-    notification = current_user.active_notifications.new(post_id: id, comment_id: comment_id, visited_id: visited_id, action: "comment")
-    notification.checked = false unless notification.visitor_id != notification.visited_id
+  def save_notification_comment!(current_user, comment_id, receiver_id)
+    notification = current_user.active_notifications.new(post_id: id, comment_id: comment_id, receiver_id: receiver_id, action: "comment")
+    notification.checked = false unless notification.sender_id != notification.receiver_id
     notification.save if notification.valid?
   end
 end
