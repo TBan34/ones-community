@@ -78,7 +78,7 @@ class Public::PostsController < ApplicationController
 
   private
     def post_params
-      params.require(:post).permit(:user_id, :title, :body, :time, :place, :belonging, :image, :status)
+      params.require(:post).permit(:user_id, :title, :body, :since_when, :at_where, :for_playing, :image, :status)
     end
 
     # 投稿者以外が投稿を編集できないよう制限

@@ -8,11 +8,11 @@
       <div class="col-10 offset-2 text-right">
         <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success" %>
         <% if current_user.passive_notifications.where(checked: false).any? %>
-          <%= link_to notifications_path(visited_id: @user.id), class: "btn btn-warning text-white ml-3" do %>
+          <%= link_to notifications_path(receiver_id: @user.id), class: "btn btn-warning text-white ml-3" do %>
             通知<i class="fas fa-exclamation-circle"></i>
           <% end %>
         <% else %>
-          <%= link_to "通知", notifications_path(visited_id: @user.id), class: "btn btn-warning text-white ml-3" %>
+          <%= link_to "通知", notifications_path(receiver_id: @user.id), class: "btn btn-warning text-white ml-3" %>
         <% end %>
         <%= link_to "いいねした投稿", user_favorites_path(@user.id), class: "btn btn-info ml-3" %>
         <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary ml-3" %>
