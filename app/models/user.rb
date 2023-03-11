@@ -47,9 +47,8 @@ class User < ApplicationRecord
 
   # ゲストユーザーのログイン情報
   def self.guest
-    find_or_create_by!(display_name: "ゲストユーザー", name: "guestuser", telephone_number: "00000000000", email: "guest@example.com") do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.name = "guestuser"
+    find_or_create_by!(display_name: "ゲストユーザー", name: "guestuser", telephone_number: "00000000000", email: "guest@example.com") do |guest_user|
+      guest_user.password = SecureRandom.urlsafe_base64
     end
   end
 
