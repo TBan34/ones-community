@@ -4,29 +4,29 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
 
-  has_many :posts, dependent: :destroy
-  has_many :favorites, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :matchings, class_name: "Matching", foreign_key: "follower_id", dependent: :destroy
-  has_many :reverse_of_matchings, class_name: "Matching", foreign_key: "following_id", dependent: :destroy
-  has_many :followings, through: :matchings, source: :following
-  has_many :followers, through: :reverse_of_matchings, source: :follower
-  has_many :user_rooms, dependent: :destroy
-  has_many :rooms, through: :user_rooms
+  has_many :posts,                 dependent: :destroy
+  has_many :favorites,             dependent: :destroy
+  has_many :comments,              dependent: :destroy
+  has_many :matchings,             class_name: "Matching",         foreign_key: "follower_id",  dependent: :destroy
+  has_many :reverse_of_matchings,  class_name: "Matching",         foreign_key: "following_id", dependent: :destroy
+  has_many :followings,            through: :matchings,            source: :following
+  has_many :followers,             through: :reverse_of_matchings, source: :follower
+  has_many :user_rooms,            dependent: :destroy
+  has_many :rooms,                 through: :user_rooms
   has_many :chats
-  has_many :active_notifications, class_name: "Notification", foreign_key: "sender_id", dependent: :destroy
-  has_many :passive_notifications, class_name: "Notification", foreign_key: "receiver_id", dependent: :destroy
+  has_many :active_notifications,  class_name: "Notification",     foreign_key: "sender_id",    dependent: :destroy
+  has_many :passive_notifications, class_name: "Notification",     foreign_key: "receiver_id",  dependent: :destroy
 
   # プロフィール画像を添付
   has_one_attached :profile_image
 
-  validates :display_name, presence: true
-  validates :name, presence: true
+  validates :display_name,     presence: true
+  validates :name,             presence: true
   validates :telephone_number, presence: true, uniqueness: true, numericality: { only_integer: true }, length: { in: 10..11 }
-  validates :email, presence: true, uniqueness: true
-  validates :password, on: :create, presence: true, length: { in: 6..128 }
+  validates :email,            presence: true, uniqueness: true
+  validates :password,         on: :create,    presence: true,   length: { in: 6..128 }
 
-  # デフォルト画像の設定、画像サイズの指定方法
+  # デフォルト画像の設定、サイズの指定
   def get_profile_image(width, height)
     unless profile_image.attached?
       file_path = Rails.root.join("app/assets/images/no_image.jpeg")
@@ -35,7 +35,7 @@ class User < ApplicationRecord
     profile_image.variant(resize: "#{width}x#{height}!").processed
   end
 
-  # 退会済のユーザーをログインさせない
+  # 退会ステータスのユーザーをログインさせない
   def active_for_authentication?
     super && (is_deleted == false)
   end
@@ -62,7 +62,7 @@ class User < ApplicationRecord
     matchings.find_by(following_id: user_id).destroy
   end
 
-  # ユーザーのフォロー（マッチング）判定
+  # フォロー（マッチング）判定
   def following?(user)
     followings.include?(user)
   end
