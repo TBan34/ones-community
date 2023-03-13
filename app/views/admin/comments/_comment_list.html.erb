@@ -1,23 +1,21 @@
 <!--コメント一覧-->
-<div class="comment_list">
-  <p>＜コメント一覧＞</p>
-  <% post.comments.each do |comment| %>
-    <table class="comment_list">
-      <td style="width: 10%">
-        <%= image_tag comment.user.get_profile_image(100, 100), class: "rounded-circle" %>
-      </td>
-      <td style="width: 10%">
-        <%= comment.user.name %>
-      </td>
-      <td style="width: 70%">
-        <%= comment.content %>
-      </td>
-      <td class="text-center" style="width: 10%">
-        <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger" %>
-      </td>
-    </table>
-  <% end %>
-  <% unless post.comments.present? %>
-    <p>&emsp;コメントは特にありません</p>
-  <% end %>
-</div>
+<p>＜コメント一覧＞</p>
+<% post.comments.each do |comment| %>
+  <table class="CommentList">
+    <td style="width: 10%">
+      <%= image_tag comment.user.get_profile_image(100, 100), class: "rounded-circle" %>
+    </td>
+    <td style="width: 10%">
+      <%= comment.user.name %>
+    </td>
+    <td style="width: 70%">
+      <%= simple_format(h(comment.content)) %>
+    </td>
+    <td class="text-center" style="width: 10%">
+      <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-danger" %>
+    </td>
+  </table>
+<% end %>
+<% unless post.comments.present? %>
+  <p>&emsp;コメントは特にありません</p>
+<% end %>

@@ -2,7 +2,7 @@
 <header> 
   <nav class="navbar navbar-expand-lg" style="background-color: #365E94">
     <div class="container-fluid">
-      <!--ヘッダー左（管理者ログイン時、ロゴのリンクなし）-->
+      <!--ヘッダー左（※管理者ログイン時はロゴのリンクなし）-->
       <% if admin_signed_in? %>
         <%= image_tag "ones-community-logo.png", size: "100x100" %>
       <% else %>
@@ -12,9 +12,10 @@
           <% end %>
         </a>
       <% end %>
-      <!--ヘッダー右(ユーザー/ゲストユーザーログイン時)-->
+      <!--ヘッダー右-->
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ml-auto mr-5">
+          <!--ユーザー/ゲストユーザーログイン時-->
           <% if user_signed_in? %>
             <% if current_user.name != "guestuser" %>
               <li class="nav-item">

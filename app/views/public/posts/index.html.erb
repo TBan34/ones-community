@@ -15,10 +15,7 @@
         <% end %>
       </div>
     </div>
-    <%= render "posts_table", posts: @posts %>
-    
-    <div class="pagination justify-content-center">
-      <%= paginate @posts %>
-    </div>
+    <%= render "post_list",  posts: @posts %>
+    <%= render "pagination", posts: @posts %>
   </div>
 </div>

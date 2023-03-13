@@ -1,0 +1,3 @@
+$("#comment").html("<%= escape_javascript(render partial: 'admin/comments/comment_list', locals: {post: @post}) %>")
+
+$("textarea").val('');

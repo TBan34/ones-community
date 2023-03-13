@@ -24,7 +24,6 @@
           <% end %>
         <% end %>
       </div>
-      <!--投稿者情報-->
       <div class="PostUser my-3">
         <p class="font-weight-bold mb-0">投稿者</p>
         <%= link_to user_path(@user) do %>
@@ -69,18 +68,17 @@
           <% end %>
         </div>
         
-        <!--マッチング後に表示-->
-        <!--ルームボタン（投稿者本人・ゲストユーザー除く）-->
+        <!--ルームボタンをマッチング後に表示（※投稿者・ゲストユーザー除く）-->
+        <!--投稿に対して投稿者・マッチングユーザーのチャットルームが-->
+        <!--存在する場合「チャットへ」、存在しない場合「マッチング済（チャットを始める）」を表示-->
         <div class="RoomBtn text-right mt-2">
           <% if @user.followers.include?(current_user) %>
             <%= form_with model: @room, url: rooms_path do |f| %>
-              <!--投稿に対してユーザー同士のチャットルームが存在する場合-->
               <% if @is_room == true %>
                 <%= link_to room_path(@room_id) do %>
                   <%= f.submit "チャットへ", class: "btn btn-primary" %>
                 <% end %>
               <% else %>
-              <!--投稿に対してユーザー同士のチャットルームが存在しない場合-->
                 <%= fields_for @user_room do |ur| %>
                   <%= ur.hidden_field :user_id, value: @user.id %>
                 <% end %>
@@ -92,9 +90,9 @@
         </div>
       <% end %>
       
-      <!--コメント一覧・フォーム-->
+      <!--コメント一覧(フォーム含）-->
       <div id="comment">
-        <%= render "public/comments/comment", post: @post, comment: @comment %>
+        <%= render "public/comments/comment_list", post: @post, comment: @comment %>
       </div>
     </div>
   </div>

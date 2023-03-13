@@ -37,7 +37,7 @@ class Public::PostsController < ApplicationController
 
     # マッチング・チャットルームの作成
     # 投稿に対して投稿者・マッチングユーザーのチャットルームが
-    # 存在する場合「チャットへ」を表示、存在しない場合「マッチング済（チャットを始める）」を表示
+    # 存在する場合「チャットへ」、存在しない場合「マッチング済（チャットを始める）」を表示
     @user_rooms = UserRoom.eager_load(:room).where(user_id: [current_user.id, @user.id]).where(room: { post_id: @post.id })
     if @user_rooms.exists?(user_id: current_user.id)
       @is_room = true

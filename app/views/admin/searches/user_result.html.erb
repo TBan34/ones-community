@@ -7,10 +7,7 @@
   <div class="SearchResult">
     <h2 class="font-weight-bold">＜検索結果＞</h2>
     <p>"<%= @search_user %>"で検索しています</p>
-    <%= render "admin/users/users_table", users: @users %>
-    
-    <div class="Pagination justify-content-center">
-      <%= paginate @users %>
-    </div>
+    <%= render "admin/users/user_list",  users: @users %>
+    <%= render "admin/users/pagination", users: @users %>
   </div>
 </div>
