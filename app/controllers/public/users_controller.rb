@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :is_login_user?, only: [:edit, :update]
+  before_action :is_login_user?,    only: [:edit, :update]
   before_action :ensure_guest_user, only: [:edit]
 
   def show

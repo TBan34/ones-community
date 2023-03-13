@@ -19,7 +19,7 @@ class Public::RoomsController < ApplicationController
 
   def show
     @room = Room.find_by(id: params[:id])
-    # 管理者によってルームが削除された際に、ユーザーが通知等からルームへ入れないよう制限（return）
+    # 管理者によってルームが削除された際に、ユーザーが通知等からルームへ入れないよう制限（return行）
     return redirect_to request.referer unless @room.present?
     if UserRoom.where(user_id: current_user.id, room_id: @room.id).present?
       @chat = Chat.new(room_id: params[:id])

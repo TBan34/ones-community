@@ -1,5 +1,5 @@
 class Public::ChatsController < ApplicationController
-  # チャット通知を作成する際にuser_idが必要
+  # チャット通知を作成する際にuser_idが必要なため、マージしている
   def create
     @chat = Chat.new(chat_params.merge({ user_id: current_user.id }))
     if @chat.save
