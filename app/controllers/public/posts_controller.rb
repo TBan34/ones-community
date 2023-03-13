@@ -30,18 +30,18 @@ class Public::PostsController < ApplicationController
     @user = @post.user
     @comment = Comment.new
 
-    # 他のユーザーが非公開（下書き）の投稿を閲覧できないよう制限
+    # 自分以外のユーザーが非公開（下書き）の投稿を閲覧できないよう制限
     if @post.status_private? && @user != current_user
       redirect_to posts_path
     end
 
     # マッチング・チャットルームの作成
+    # 投稿に対して投稿者・マッチングユーザーのチャットルームが
+    # 存在する場合「チャットへ」を表示、存在しない場合「マッチング済（チャットを始める）」を表示
     @user_rooms = UserRoom.eager_load(:room).where(user_id: [current_user.id, @user.id]).where(room: { post_id: @post.id })
-    # 投稿に対して投稿者・マッチングユーザーのチャットルームが存在する場合、「チャットへ」を表示
     if @user_rooms.exists?(user_id: current_user.id)
       @is_room = true
       @room_id = @user_rooms.find_by(user_id: current_user.id).room_id
-    # 投稿に対して投稿者・マッチングユーザーのチャットルームが存在しない場合、「マッチング済（チャットを始める）」を表示
     else
       @is_room = false
       @room = Room.new
