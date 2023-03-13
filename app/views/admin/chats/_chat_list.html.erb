@@ -1,0 +1,34 @@
+<!--チャットメッセージ-->
+<% chats.each do |chat| %>
+  <table class="w-100" style="table-layout: fixed;">
+    <% if chat.user_id == chat.room.post.user.id %>
+      <tr class="MyChat text-right">
+        <td width="10%"></td>
+        <td width="80%">
+          <h6><%= simple_format(h(chat.message)) %></h6>
+          <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        </td>
+        <td width="10%">
+          <%= link_to admin_user_path(chat.room.post.user) do %>
+            <%= image_tag chat.room.post.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= chat.room.post.user.display_name %>
+          <% end %>
+        </td>
+      </tr>
+    <% else %>
+      <tr class="YourChat text-left">
+        <td width="10%">
+          <%= link_to admin_user_path(chat.user) do %>
+            <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= chat.user.display_name %>
+          <% end %>
+        </td>
+        <td width="80%">
+          <h6><%= simple_format(h(chat.message)) %></h6>
+          <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        </td>
+        <td width="10%"></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

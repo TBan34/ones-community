@@ -9,7 +9,7 @@ class Public::FavoritesController < ApplicationController
 
   def index
     favorited_post_ids = Favorite.where(user_id: current_user.id).pluck(:post_id)
-    @favorited_posts = Post.where(id: favorited_post_ids).order(created_at: :desc).page(params[:page])
+    @posts = Post.where(id: favorited_post_ids).order(created_at: :desc).page(params[:page])
   end
 
   def destroy

@@ -1,20 +1,8 @@
 <!--いいねした投稿一覧-->
-<div class="container-fluid w-75 mt-3">
-  <h2 class="font-weight-bold">＜いいねした投稿＞</h2>
-  
-  <% if @favorited_posts.present? %>
-    <table class="table table-bordered text-center">
-      <%= render "public/posts/posts-thead" %>
-      <% @favorited_posts.each do |post| %>
-        <%= render "public/posts/posts-tbody", post: post %>
-      <% end %>
-    </table>
-  <% else %>
-    <p class="text-center my-5">いいねした投稿はありません</p>
-  <% end %>
-  
-  <!--ページネーション-->
-  <div class="pagination justify-content-center">
-    <%= paginate @favorited_posts %>
+<div class="container-fluid w-75 my-3">
+  <div class="PostFavoriteList">
+    <h2 class="font-weight-bold">＜いいねした投稿＞</h2>
+    <%= render "public/posts/post_list",  posts: @posts %>
+    <%= render "public/posts/pagination", posts: @posts %>
   </div>
 </div>

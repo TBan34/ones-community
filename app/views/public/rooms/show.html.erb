@@ -1,7 +1,6 @@
 <!--ルーム詳細-->
 <div class="container-fluid w-75" style="background-color: #eaf4fc;">
-  <!--ルームタイトル-->
-  <div class="row justify-content-center py-3">
+  <div class="RoomTitle text-center py-3">
     <% @user_rooms.each do |ur| %>
       <% if ur.user != current_user %>
         <h2><u><%= link_to "#{ur.room.post.title}", post_path(ur.room.post) %></u></h2>
@@ -11,9 +10,9 @@
   
   <!--チャットメッセージ-->
   <div id="chats">
-    <%= render "public/chats/chat_messages", chats: @chats %>
+    <%= render "public/chats/chat_list", chats: @chats %>
   </div>
   
   <!--新規メッセージフォーム-->
-  <%= render "public/chats/form_chat", chat: @chat %>
+  <%= render "public/chats/form", chat: @chat %>
 </div>

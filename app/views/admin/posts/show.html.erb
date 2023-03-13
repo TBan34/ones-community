@@ -1,18 +1,17 @@
 <!--投稿詳細-->
-<div class="container mt-3">
-  <div class="row">
+<div class="container-fluid w-75 my-3">
+  <div class="PostListMenu d-inline-flex justify-content-between w-100">
     <h2 class="font-weight-bold">＜投稿詳細＞</h2>
-    <!--編集・削除ボタン-->
-    <div class="col text-right">
-      <%= link_to "編集", edit_admin_post_path(@post.id), class: "btn btn-success" %>
+    <div class="PostBtn">
+      <%= link_to "編集", edit_admin_post_path(@post.id), class: "btn btn-success mr-4" %>
       <%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
     </div>
   </div>
   
-  <!--イメージ画像、いいね、タグ、投稿者情報-->
+  <!--投稿情報①-->
   <div class="row mt-3">
-    <div class="col-4 text-center">
-      <div class="post-image border-bottom">
+    <div class="PostLeft col-4 text-center">
+      <div class="PostImage border-bottom">
         <%= image_tag @post.get_image(200, 200) %>
         <div style="color: red">♥<%= @post.favorites.count %></div>
         <% @post.tags.each do |tag| %>
@@ -21,7 +20,7 @@
           <% end %>
         <% end %>
       </div>
-      <div class="post-user my-3">
+      <div class="PostUser my-3">
         <p class="font-weight-bold mb-0">投稿者</p>
         <%= link_to admin_user_path(@user) do %>
           <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle my-2" %><br>
@@ -30,8 +29,8 @@
       </div>
     </div>
     
-    <!--投稿情報-->
-    <div class="col-8">
+    <!--投稿情報②-->
+    <div class="PostRight col-8">
       <table class="table table-bordered">
         <tr>
           <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>
@@ -56,7 +55,9 @@
       </table>
       
       <!--コメント一覧-->
-      <%= render "admin/comments/comment_list", post: @post %>
+      <div id="comment">
+        <%= render "admin/comments/comment_list", post: @post %>
+      </div>
     </div>
   </div>
 </div>

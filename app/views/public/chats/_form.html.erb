@@ -1,6 +1,6 @@
 <!--新規メッセージフォーム-->
 <%= form_with model: chat do |f| %>
-  <div class="chat_form form-group field mb-0 py-5">
+  <div class="ChatForm form-group field mb-0 py-5">
     <%= f.label "新しいメッセージ", class: "control-label" %>
     <%= f.hidden_field :room_id %>
     <%= f.text_area :message, class: "form-control", rows: "1", placeholder: "メッセージを入力してください" %>

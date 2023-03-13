@@ -9,43 +9,45 @@
 <% end %>
 
 <!--投稿編集-->
-<div class="container my-3">
+<div class="container-fluid w-75 my-3">
   <h2 class="font-weight-bold">＜投稿編集画面＞</h2>
-  <%= form_with model: [:admin, @post] do |f| %>
-    <div class="form-group field">
-      <%= f.label :"イメージ画像" %><br>
-      <%= f.file_field :image, accept: "image/*" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"タグ", class: "control-label" %><br>
-      <%= f.text_field :tag, value: @post.tags.pluck(:name).join(','), class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"タイトル", class: "control-label" %>
-      <%= f.text_field :title, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"日時", class: "control-label" %>
-      <%= f.datetime_field :since_when, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"場所", class: "control-label" %>
-      <%= f.text_field :at_where, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"持ち物", class: "control-label" %>
-      <%= f.text_field :for_playing, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"詳細情報", class: "control-label" %>
-      <%= f.text_area :body, class: "form-control col-sm-6" %>
-    </div>
-    <div class="form-group field">
-      <%= f.label :"公開" %>
-      <%= f.radio_button :status, :public %><br>
-      <%= f.label :"非公開（下書き）" %>
-      <%= f.radio_button :status, :private %>
-    </div>
-    <%= f.submit "変更を保存する", class: "btn btn-success" %>
-  <% end %>
+  <div class="PostForm">
+    <%= form_with model: [:admin, @post] do |f| %>
+      <div class="form-group field">
+        <%= f.label :"イメージ画像" %><br>
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+      <div class="form-group field">
+        <%= f.label :"タグ", class: "control-label" %><br>
+        <%= f.text_field :tag, value: @post.tags.pluck(:name).join(','), class: "form-control col-sm-6" %>
+      </div>
+      <div class="form-group field">
+        <%= f.label :"タイトル", class: "control-label" %>
+        <%= f.text_field :title, class: "form-control col-sm-6" %>
+      </div>
+      <div class="form-group field">
+        <%= f.label :"日時", class: "control-label" %>
+        <%= f.datetime_field :since_when, class: "form-control col-sm-6" %>
+      </div>
+      <div class="form-group field">
+        <%= f.label :"場所", class: "control-label" %>
+        <%= f.text_field :at_where, class: "form-control col-sm-6" %>
+      </div>
+      <div class="form-group field">
+        <%= f.label :"持ち物", class: "control-label" %>
+        <%= f.text_field :for_playing, class: "form-control col-sm-6" %>
+      </div>
+      <div class="form-group field">
+        <%= f.label :"詳細情報", class: "control-label" %>
+        <%= f.text_area :body, class: "form-control col-sm-6" %>
+      </div>
+      <div class="form-group field">
+        <%= f.label :"公開" %>
+        <%= f.radio_button :status, :public %><br>
+        <%= f.label :"非公開（下書き）" %>
+        <%= f.radio_button :status, :private %>
+      </div>
+      <%= f.submit "変更を保存する", class: "btn btn-success" %>
+    <% end %>
+  </div>
 </div>

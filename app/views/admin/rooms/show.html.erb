@@ -1,15 +1,14 @@
 <!--ルーム詳細-->
 <div class="container-fluid w-75 py-3" style="background-color: #eaf4fc;">
-  <!--ルーム削除ボタン、ルームタイトル-->
-  <div class="delete-link text-right">
+  <div class="RoomBtn text-right">
     <%= link_to "削除", admin_room_path, method: :delete, class: "btn btn-danger" %>
   </div>
-  <div class="row justify-content-center py-3">
+  <div class="RoomTitle text-center py-3">
     <h2><u><%= link_to "#{@room.post.title}", admin_post_path(@room.post) %></u></h2>
   </div>
   
   <!--チャットメッセージ-->
   <div id="chats">
-    <%= render "admin/chats/chat_messages", chats: @chats %>
+    <%= render "admin/chats/chat_list", chats: @chats %>
   </div>
 </div>
