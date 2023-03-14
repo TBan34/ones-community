@@ -2,25 +2,25 @@
   <div class="MainVisual w-100 px-0">
     <%= image_tag asset_path("top-image.jpg"), class: "img-responsive mx-auto d-block", width: "900", height: "500" %>
   </div>
-  <%# if user_signed_in? && current_user != User.guest %>
-    <div class="GuestBtn text-center my-3">
-      <% if current_user == User.guest %>
-        <h4>アカウントを作成するためには、一度ログアウトする必要があります</h4>
-        <%= link_to "ゲストログアウト", users_guest_sign_out_path, class: "btn btn-secondary btn-lg my-2", method: :post %>
-        <p>
-          ※アカウントを作成すると、以下の機能を利用できます<br>
-          ユーザー機能 / 投稿機能（公開・非公開の設定含む） / マッチング機能 / いいね機能 / コメント機能 / チャット機能 / 通知機能
-        </p>
-      <% else %>
-        <h4>ゲストログインすることで、他の人の投稿を確認することができます</h4>
-        <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-lg my-2", method: :post %>
-        <p>
-          ※アカウントを作成すると、以下の機能を利用できます<br>
-          ユーザー機能 / 投稿機能（公開・非公開の設定含む） / マッチング機能 / いいね機能 / コメント機能 / チャット機能 / 通知機能
-        </p>
-      <% end %>
-    </div>
-  <%# end %>
+  <div class="GuestBtn text-center my-3">
+    <% if user_signed_in? && current_user != User.guest %>
+      <h4 style="color: green">ログイン中</h4>
+    <% elsif current_user == User.guest %>
+      <h4>アカウントを作成するためには、一度ログアウトする必要があります</h4>
+      <%= link_to "ゲストログアウト", users_guest_sign_out_path, class: "btn btn-secondary btn-lg my-2", method: :post %>
+      <p>
+        ※アカウントを作成すると、以下の機能を利用できます<br>
+        ユーザー機能 / 投稿機能（公開・非公開の設定含む） / マッチング機能 / いいね機能 / コメント機能 / チャット機能 / 通知機能
+      </p>
+    <% else %>
+      <h4>ゲストログインすることで、他の人の投稿を確認することができます</h4>
+      <%= link_to "ゲストログイン（閲覧用）", users_guest_sign_in_path, class: "btn btn-secondary btn-lg my-2", method: :post %>
+      <p>
+        ※アカウントを作成すると、以下の機能を利用できます<br>
+        ユーザー機能 / 投稿機能（公開・非公開の設定含む） / マッチング機能 / いいね機能 / コメント機能 / チャット機能 / 通知機能
+      </p>
+    <% end %>
+  </div>
   
   <!--新着投稿（最新8件）-->
   <div class="LatestPosts w-100">
