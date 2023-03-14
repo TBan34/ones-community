@@ -9,7 +9,7 @@
     <div class="PostListMenu d-inline-flex justify-content-between w-100">
       <h2 class="font-weight-bold">＜投稿一覧＞</h2>
       <div class="PostBtn">
-        <% if current_user.name != "guestuser" %>
+        <% if current_user != User.guest %>
           <%= link_to "新規投稿", new_post_path, class: "btn btn-info mr-4" %>
           <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary" %>
         <% end %>
