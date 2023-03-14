@@ -7,6 +7,7 @@ class Public::CommentsController < ApplicationController
     content.post_id = post.id
     if content.save
       post.create_notification_comment!(current_user, @comment.id)
+      flash.now[:secondary] = "コメントを投稿しました"
     else
       redirect_to request.referer, danger: "コメントを入力してください"
     end
@@ -16,6 +17,7 @@ class Public::CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = Comment.find(params[:id])
     @comment.destroy
+    flash.now[:danger] = "コメントを削除しました"
   end
 
   private
