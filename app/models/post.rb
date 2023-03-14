@@ -20,7 +20,7 @@ class Post < ApplicationRecord
 
   # 投稿のタグ保存/更新
   def save_tags(tag_data)
-    posting_tags = tag_data.split(",")
+    posting_tags = tag_data.split(/[[:blank:]]+/)
     current_tags = self.tags.pluck(:name)
     
     old_tags = current_tags - posting_tags
@@ -66,8 +66,8 @@ class Post < ApplicationRecord
 
   # キーワード検索（部分一致）
   def self.search_word(search_word)
-    @post = Post.where("title LIKE? OR body LIKE? OR since_when LIKE? OR at_where LIKE?", 
-    "%#{search_word}%", "%#{search_word}%", "%#{search_word}%", "%#{search_word}%")
+    @post = Post.where("title LIKE? OR body LIKE? OR at_where LIKE?", 
+    "%#{search_word}%", "%#{search_word}%", "%#{search_word}%")
   end
 
   # いいね通知の作成（投稿に対して自分以外のユーザーから初めていいねされた場合）

@@ -1,8 +1,14 @@
 class Admin::SearchesController < ApplicationController
-  # キーワード検索用
+  # キーワード検索用（複数ワード対応）
   def search_post
     @search_word = params[:search_word]
-    @posts = Post.search_word(params[:search_word]).page(params[:page])
+    @posts = []
+    @search_word.split(/[[:blank:]]+/).each do |search_word|
+      next if search_word == ""
+      @posts += Post.search_word(search_word)
+    end
+    @posts.uniq!
+    @posts = Kaminari.paginate_array(@posts).page(params[:page])
     render "/admin/searches/post_result"
   end
   
