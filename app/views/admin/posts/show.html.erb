@@ -1,7 +1,7 @@
 <!--投稿詳細-->
 <div class="container-fluid w-75 my-3">
   <div class="PostListMenu d-inline-flex justify-content-between w-100">
-    <h2 class="font-weight-bold">＜投稿詳細＞</h2>
+    <h2 class="font-weight-bold"><i class="fas fa-file"></i> 投稿詳細</h2>
     <div class="PostBtn">
       <%= link_to "編集", edit_admin_post_path(@post.id), class: "btn btn-success mr-4" %>
       <%= link_to "削除", admin_post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>

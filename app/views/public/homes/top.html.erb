@@ -24,7 +24,7 @@
   
   <!--新着投稿（最新8件）-->
   <div class="LatestPosts w-100">
-    <h2 class="font-weight-bold">＜新着投稿＞</h2>
+    <h2 class="font-weight-bold"><i class="fas fa-plane-arrival"></i> 新着投稿</h2>
     <% if user_signed_in? %>
       <% if @posts.present? %>
         <%= render "public/posts/latest", posts: @posts %>

@@ -5,7 +5,7 @@
   </div>
   
   <div class="SearchResult">
-    <h2 class="font-weight-bold">＜検索結果＞</h2>
+    <h2 class="font-weight-bold"><i class="fas fa-search"></i> 検索結果</h2>
     <p>"<%= @search_user %>"で検索しています</p>
     <%= render "admin/users/user_list",  users: @users %>
     <%= render "admin/users/pagination", users: @users %>

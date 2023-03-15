@@ -4,7 +4,7 @@
     <div class="card-img flex-row text-center" style="width: 200px; height: 200px;">
       <%= image_tag post.get_image(200, 200), class: "h-100" %>
     </div>
-    <div class="card-body">
+    <div class="card-body" style="width: 200px;">
       <h5 class="card-title"><%= truncate(post.title, length: 7) %></h5>
       <p class="card-text mb-0" style="height: 72px;"><%= truncate(post.body, length: 30) %></p>
       <p class="text-right"><%= link_to "詳細", post_path(post.id), class: "btn btn-info" %></p>

@@ -7,7 +7,7 @@
   
   <div class="SearchResult">
     <div class="PostListMenu d-inline-flex justify-content-between w-100">
-      <h2 class="font-weight-bold">＜検索結果＞</h2>
+      <h2 class="font-weight-bold"><i class="fas fa-search"></i> 検索結果</h2>
       <div class="PostBtn">
         <% if current_user.name != "guestuser" %>
           <%= link_to "新規投稿", new_post_path, class: "btn btn-info mr-4" %>
