@@ -17,7 +17,6 @@ class User < ApplicationRecord
   has_many :active_notifications,  class_name: "Notification",     foreign_key: "sender_id",    dependent: :destroy
   has_many :passive_notifications, class_name: "Notification",     foreign_key: "receiver_id",  dependent: :destroy
 
-  # プロフィール画像を添付
   has_one_attached :profile_image
 
   validates :display_name,     presence: true

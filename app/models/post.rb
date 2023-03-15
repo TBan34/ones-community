@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  MAX_POST_TAGS_COUNT = 5
+    
   belongs_to :user
   has_many   :rooms,         dependent: :destroy
   has_many   :notifications, dependent: :destroy
@@ -9,11 +11,11 @@ class Post < ApplicationRecord
 
   has_one_attached :image
 
-  validates :title, presence: true
-  validates :since_when, presence: true
-  validates :at_where, presence: true
+  validates :title,       presence: true
+  validates :since_when,  presence: true
+  validates :at_where,    presence: true
   validates :for_playing, presence: true
-  validates :body, presence: true
+  validates :body,        presence: true
 
   # 投稿の公開・非公開を設定
   enum status: { public: 0, private: 1 }, _prefix: true
@@ -21,6 +23,11 @@ class Post < ApplicationRecord
   # 投稿のタグ保存/更新
   def save_tags(tag_data)
     posting_tags = tag_data.split(/[[:blank:]]+/)
+    if posting_tags.count > MAX_POST_TAGS_COUNT
+      errors.add(:base, "タグの数は最大#{MAX_POST_TAGS_COUNT}個までです")
+      return false
+    end
+    
     current_tags = self.tags.pluck(:name)
     
     old_tags = current_tags - posting_tags
@@ -33,6 +40,8 @@ class Post < ApplicationRecord
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
     end
+    
+    true
   end
 
   # 投稿データからステータスが公開でアクティブなユーザを取得、タグ検索用にtagsも結合

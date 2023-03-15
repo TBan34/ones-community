@@ -56,8 +56,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.user_id = current_user.id
-    if @post.update(post_params)
-      @post.save_tags(params[:post][:tag])
+    if @post.update(post_params) && @post.save_tags(params[:post][:tag])
       redirect_to post_path(@post.id), success: "投稿を更新しました"
     else
       render :edit
