@@ -1,7 +1,7 @@
 <!--いいねした投稿一覧-->
 <div class="container-fluid w-75 my-3">
   <div class="PostFavoriteList">
-    <h2 class="font-weight-bold">＜いいねした投稿＞</h2>
+    <h2 class="font-weight-bold"><i class="fas fa-heart" style="color: red"></i> いいねした投稿</h2>
     <%= render "public/posts/post_list",  posts: @posts %>
     <%= render "public/posts/pagination", posts: @posts %>
   </div>
