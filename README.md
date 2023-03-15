@@ -37,21 +37,21 @@ SNSでいつでもどこでも繋がれる時代に、旅行やカラオケな�
   - ランニング
 
 ## 設計書
-画面遷移図<br>
+- 画面遷移図<br>
 https://drive.google.com/file/d/1hhZIg01QBfKfxUbvk1ERsmIFvjZadFLr/view?usp=sharing
 
-ワイヤーフレーム<br>
+- ワイヤーフレーム<br>
 https://wireframe.cc/U8tpWK<br>
 https://wireframe.cc/rrucOV<br>
 https://wireframe.cc/TQAhPa<br>
-
-ER図<br>
+s
+- ER図<br>
 https://drive.google.com/file/d/1yO4Akv6JM-B9yoWx5h8hSnnb6Eue1xGT/view?usp=sharing
 
-テーブル定義書<br>
+- テーブル定義書<br>
 https://docs.google.com/spreadsheets/d/1CIDbczVA2r9simExCdwBUR-MgDt47bf3zef-umwfz8E/edit?usp=sharing
 
-アプリケーション詳細設計書<br>
+- アプリケーション詳細設計書<br>
 https://docs.google.com/spreadsheets/d/16fjd6fSGAEJocXSU4oh5ZTSpbqYs_IPGHEYMIabPcRQ/edit?usp=sharing
 
 ## 開発環境
