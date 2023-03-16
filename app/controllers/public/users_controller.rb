@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
-  before_action :is_login_user?,    only: [:edit, :update]
-  before_action :ensure_guest_user, only: [:edit]
+  before_action :is_user_themselves?, only: [:edit, :update]
+  before_action :ensure_guest_user,   only: [:edit]
 
   def show
     @user = User.find(params[:id])
@@ -33,7 +33,7 @@ class Public::UsersController < ApplicationController
     end
 
     # 本人以外がユーザー情報を編集できないよう制限
-    def is_login_user?
+    def is_user_themselves?
       user_id = params[:id].to_i
       unless user_id == current_user.id
         redirect_to root_path
