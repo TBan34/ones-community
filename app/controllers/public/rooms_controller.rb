@@ -1,4 +1,6 @@
 class Public::RoomsController < ApplicationController
+  before_action :is_participant_themselves?, only: [:show]
+  
   def create
     @room = Room.create(room_params)
     @user_room_1 = UserRoom.create(user_id: current_user.id, room_id: @room.id)
@@ -42,5 +44,15 @@ class Public::RoomsController < ApplicationController
   private
     def room_params
       params.require(:room).permit(:post_id)
+    end
+    
+    # 当事者以外がチャットルームに入れないよう制限
+    def is_participant_themselves?
+      @room = Room.find(params[:id])
+      @user_rooms = @room.user_rooms
+      collaborator_ids = @user_rooms.pluck(:user_id)
+      unless collaborator_ids.include?(current_user.id)
+        redirect_to root_path
+      end
     end
 end

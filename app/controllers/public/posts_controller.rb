@@ -1,5 +1,5 @@
 class Public::PostsController < ApplicationController
-  before_action :is_post_user?, only: [:edit, :update, :destroy]
+  before_action :is_contributor_themselves?, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new
@@ -81,7 +81,7 @@ class Public::PostsController < ApplicationController
     end
 
     # 投稿者以外が投稿を編集できないよう制限
-    def is_post_user?
+    def is_contributor_themselves?
       @post = Post.find(params[:id])
       user_id = @post.user.id
       unless user_id == current_user.id
