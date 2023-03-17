@@ -84,23 +84,25 @@ class Post < ApplicationRecord
     temp_favorite = Notification.where(["sender_id = ? and receiver_id = ? and post_id = ? and action = ?", current_user.id, user_id, id, "favorite"])
     if temp_favorite.blank?
       notification = current_user.active_notifications.new(post_id: id, receiver_id: user_id, action: "favorite")
-      notification.checked = false unless notification.sender_id != notification.receiver_id
+      notification.checked = true if notification.sender_id == notification.receiver_id
       notification.save if notification.valid?
     end
   end
 
-  # コメント通知の作成（投稿に対して自分以外のユーザーからコメントがあった場合）
+  # コメント通知の作成
   def create_notification_comment!(current_user, comment_id)
+    # 投稿者に通知を送る
+    save_notification_comment!(current_user, comment_id, user_id) unless current_user.id == user_id
+    # 自分以外のコメント投稿者に通知を送る
     temp_users = Comment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
     temp_users.each do |temp_user|
       save_notification_comment!(current_user, comment_id, temp_user["user_id"])
     end
-    save_notification_comment!(current_user, comment_id, user_id) if temp_users.blank?
   end
 
   def save_notification_comment!(current_user, comment_id, receiver_id)
     notification = current_user.active_notifications.new(post_id: id, comment_id: comment_id, receiver_id: receiver_id, action: "comment")
-    notification.checked = false unless notification.sender_id != notification.receiver_id
+    notification.checked = true if notification.sender_id == notification.receiver_id
     notification.save if notification.valid?
   end
 end
