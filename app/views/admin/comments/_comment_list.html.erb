@@ -1,9 +1,9 @@
 <!--コメント一覧-->
 <p>【コメント一覧】</p>
 <% post.comments.each do |comment| %>
-  <table class="CommentList">
+  <table class="CommentList w-100">
     <td style="width: 8%">
-      <%= image_tag comment.user.get_profile_image(100, 100), class: "rounded-circle" %>
+      <%= image_tag comment.user.get_profile_image(50, 50), class: "rounded-circle" %>
     </td>
     <td style="width: 12%">
       <%= comment.user.display_name %>

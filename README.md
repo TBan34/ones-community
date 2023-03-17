@@ -41,10 +41,8 @@ SNSでいつでもどこでも繋がれる時代に、旅行やカラオケな�
 https://drive.google.com/file/d/1hhZIg01QBfKfxUbvk1ERsmIFvjZadFLr/view?usp=sharing
 
 - ワイヤーフレーム<br>
-https://wireframe.cc/U8tpWK<br>
-https://wireframe.cc/rrucOV<br>
-https://wireframe.cc/TQAhPa<br>
-s
+https://docs.google.com/presentation/d/1R3z8lhsqhvvzs8VpeQIEQWmapQRtxzSZbCIDTN4fm6k/edit?usp=sharing
+
 - ER図<br>
 https://drive.google.com/file/d/1yO4Akv6JM-B9yoWx5h8hSnnb6Eue1xGT/view?usp=sharing
 
