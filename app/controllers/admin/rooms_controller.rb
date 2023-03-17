@@ -1,6 +1,11 @@
 class Admin::RoomsController < ApplicationController
   def index
     @rooms = Room.order(created_at: :desc).page(params[:page])
+    
+    # 投稿に関連するチャット一覧
+    if params[:post_id]
+      @rooms = Room.where(post_id: params[:post_id]).order(created_at: :desc).page(params[:page])
+    end
   end
 
   def show

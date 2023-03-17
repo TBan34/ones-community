@@ -2,7 +2,7 @@
 <p>【コメント一覧】</p>
 <% if current_user != User.guest %>
   <% post.comments.each do |comment| %>
-    <table class="CommentList">
+    <table class="CommentList w-100">
       <td style="width: 8%">
         <%= image_tag comment.user.get_profile_image(50, 50), class: "rounded-circle" %>
       </td>

@@ -54,6 +54,10 @@
         </tr>
       </table>
       
+      <div class="RoomsPerPost text-right">
+        <%= link_to "関連するチャット一覧", admin_rooms_path(post_id: @post.id), class: "btn btn-primary" %>
+      </div>
+      
       <!--コメント一覧-->
       <div id="comment">
         <%= render "admin/comments/comment_list", post: @post %>
