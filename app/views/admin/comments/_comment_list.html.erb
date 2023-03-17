@@ -2,14 +2,14 @@
 <p>【コメント一覧】</p>
 <% post.comments.each do |comment| %>
   <table class="CommentList">
-    <td style="width: 10%">
+    <td style="width: 8%">
       <%= image_tag comment.user.get_profile_image(100, 100), class: "rounded-circle" %>
     </td>
-    <td style="width: 10%">
-      <%= comment.user.name %>
+    <td style="width: 12%">
+      <%= comment.user.display_name %>
     </td>
     <td style="width: 70%">
-      <%= simple_format(h(comment.content)) %>
+      <%= simple_format(h(comment.content), class: "my-0") %>
     </td>
     <td class="text-center" style="width: 10%">
       <%= link_to "削除", admin_post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn btn-danger" %>
