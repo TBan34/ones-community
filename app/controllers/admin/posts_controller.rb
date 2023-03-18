@@ -16,7 +16,11 @@ class Admin::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params) && @post.save_tags(params[:post][:tag])
-      redirect_to admin_post_path(@post.id), success: "投稿を更新しました"
+      if @post.status_public?
+        redirect_to admin_post_path(@post.id), success: "投稿を更新しました"
+      else
+        redirect_to admin_posts_path, secondary: "投稿を非公開（下書き）にしました"
+      end
     end
   end
 

@@ -1,4 +1,11 @@
 <div class="container-fluid">
+  <div class="AdminLogin w-100 text-center my-3">
+    <p>
+      ポートフォリオの機能確認のため、一時的に管理者ログインリンクを設置しました<br>
+      ※ユーザー又はゲストユーザーからログアウト後、下記より管理者ログインを行なってください
+    </p>
+    <%= link_to "管理者ログインはこちら", new_admin_session_path %>
+  </div>
   <div class="MainVisual w-100 px-0">
     <%= image_tag asset_path("top-image.jpg"), class: "img-responsive mx-auto d-block", width: "900", height: "500" %>
   </div>

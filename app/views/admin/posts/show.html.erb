@@ -38,7 +38,7 @@
         </tr>
         <tr>
           <th scope="row" class="table-secondary">日時</th>
-          <td><%= @post.since_when %></td>
+          <td><%= @post.since_when.strftime("%Y/%m/%d %H:%M") %></td>
         </tr>
         <tr>
           <th scope="row" class="table-secondary">場所</th>

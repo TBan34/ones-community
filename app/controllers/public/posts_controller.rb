@@ -8,12 +8,11 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    if @post.save
-      @post.save_tags(params[:post][:tag])
+    if @post.save && @post.save_tags(params[:post][:tag])
       if @post.status_public?
         redirect_to posts_path, success: "投稿しました"
       else
-        redirect_to post_draft_path(current_user), secondary: "非公開（下書き）にしました"
+        redirect_to post_draft_path(current_user), secondary: "投稿を非公開（下書き）にしました"
       end
     else
       render :new
@@ -57,7 +56,11 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post.user_id = current_user.id
     if @post.update(post_params) && @post.save_tags(params[:post][:tag])
-      redirect_to post_path(@post.id), success: "投稿を更新しました"
+      if @post.status_public?
+        redirect_to post_path(@post.id), success: "投稿を更新しました"
+      else
+        redirect_to post_draft_path(current_user), secondary: "投稿を非公開（下書き）にしました"
+      end
     else
       render :edit
     end

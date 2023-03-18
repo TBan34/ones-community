@@ -11,7 +11,7 @@ ja:
         display_name: ユーザー名
       post:
         title: タイトル
-        time: 日時
-        place: 場所
-        belonging: 持ち物
+        since_when: 日時
+        at_where: 場所
+        for_playing: 持ち物
         body: 詳細情報

@@ -8,7 +8,7 @@
           <h6><%= simple_format(h(chat.message)) %></h6>
           <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
         </td>
-        <td width="10%">
+        <td class="text-center", width="10%">
           <%= link_to user_path(chat.user) do %>
             <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
             <%= simple_format(h(chat.user.display_name)) %>
@@ -17,7 +17,7 @@
       </tr>
     <% else %>
       <tr class="YourChat text-left">
-        <td width="10%">
+        <td class ="text-center", width="10%">
           <%= link_to user_path(chat.user) do %>
             <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
             <%= chat.user.display_name %>
