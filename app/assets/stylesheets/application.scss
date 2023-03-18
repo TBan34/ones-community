@@ -13,39 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
-// タグデザイン
-.Tag {
-  display: inline-block;
-	margin: 0 .1em .6em 0;
-	padding: .4em;
-	line-height: 1;
-	text-decoration: none;
-	color: #0000ee;
-	background-color: #fff;
-	border: 1px solid #0000ee;
-	border-radius: 2em;
-}
-
-// マウスカーソルがタグに重なった際に色を変更（script.js）
-.Tag:Hover {
-  background-color: #c1e4e9;
-  text-decoration: none;
-}
-
-//コンテンツ量に関わらずフッターを最下部に表示 
-.FixedFooterBottom{
-  min-height: 100vh; //コンテンツ高さの最小値=ブラウザの高さ
-  position: relative; //footerを相対位置で指定
-  padding-bottom: 60px; //footer直上のコンテンツとの間隔
-  box-sizing: border-box;
-}
-
-footer{
-  position: absolute; //footerの絶対位置
-  bottom: 0; //ブラウザの一番下
-  width: 100%;
-  height: 50px;
-  background-color: #365E94;
-  color: white;
-}
