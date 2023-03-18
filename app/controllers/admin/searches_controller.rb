@@ -11,7 +11,7 @@ class Admin::SearchesController < ApplicationController
     @posts = Kaminari.paginate_array(@posts).page(params[:page])
     render "/admin/searches/post_result"
   end
-  
+
   # ユーザー検索用
   def search_user
     @search_user = params[:search_user]

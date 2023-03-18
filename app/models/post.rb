@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   MAX_POST_TAGS_COUNT = 5
-    
+
   belongs_to :user
   has_many   :rooms,         dependent: :destroy
   has_many   :notifications, dependent: :destroy
@@ -27,20 +27,20 @@ class Post < ApplicationRecord
       errors.add(:base, "タグの数は最大#{MAX_POST_TAGS_COUNT}個までです")
       return false
     end
-    
+
     current_tags = self.tags.pluck(:name)
-    
+
     old_tags = current_tags - posting_tags
     old_tags.each do |old|
       self.tags.delete Tag.find_by(name: old)
     end
-    
+
     new_tags = posting_tags - current_tags
     new_tags.each do |new|
       new_post_tag = Tag.find_or_create_by(name: new)
       self.tags << new_post_tag
     end
-    
+
     true
   end
 
@@ -56,7 +56,7 @@ class Post < ApplicationRecord
     end
 
     posts = posts.order(created_at: :desc).page(page)
-    return posts
+    posts
   end
 
   # デフォルト画像の設定、サイズの指定
@@ -75,7 +75,7 @@ class Post < ApplicationRecord
 
   # キーワード検索（部分一致）
   def self.search_word(search_word)
-    @post = Post.where("title LIKE? OR body LIKE? OR at_where LIKE?", 
+    @post = Post.where("title LIKE? OR body LIKE? OR at_where LIKE?",
     "%#{search_word}%", "%#{search_word}%", "%#{search_word}%")
   end
 

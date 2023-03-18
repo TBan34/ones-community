@@ -1,6 +1,6 @@
 class Public::RoomsController < ApplicationController
   before_action :is_participant_themselves?, only: [:show]
-  
+
   def create
     @room = Room.create(room_params)
     @user_room_1 = UserRoom.create(user_id: current_user.id, room_id: @room.id)
@@ -30,7 +30,7 @@ class Public::RoomsController < ApplicationController
     else
       redirect_to request.referer
     end
-    
+
     # 退会済ユーザーの情報を取得し、チャット画面上部に表示（最大1名）
     user_ids = @user_rooms.pluck(:user_id)
     users = User.where(id: user_ids).where(is_deleted: true)
@@ -45,7 +45,7 @@ class Public::RoomsController < ApplicationController
     def room_params
       params.require(:room).permit(:post_id)
     end
-    
+
     # 当事者以外がチャットルームに入れないよう制限
     def is_participant_themselves?
       @room = Room.find(params[:id])
