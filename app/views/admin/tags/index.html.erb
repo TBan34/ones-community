@@ -1,16 +1,24 @@
 <!--タグ一覧-->
 <div class="container-fluid w-25 my-3">
-  <h2 class="font-weight-bold">＜タグ一覧＞</h2>
-  <table class="table table-bordered w-100 text-center" style="table-layout: fixed;">
-    <tr class="table table-secondary" width="20%">
-      <th scope="col">ID</th>
-      <th scope="col">タグ名</th>
-    </tr>
-    <% @tags.each do |tag| %>
-    <tr>
-      <td><%= tag.id %></td>
-      <td><%= tag.name %></td>
-    </tr>
-    <% end %>
-  </table>
+  <div class="TagList">
+    <h2 class="font-weight-bold"><i class="fas fa-tags"></i> タグ一覧</h2>
+    <table class="table table-bordered w-100 text-center" style="table-layout: fixed;">
+      <tr class="table table-secondary" width="20%">
+        <th scope="col">ID</th>
+        <th scope="col">タグ名</th>
+        <th scope="col"></th>
+      </tr>
+      <% @tags.each do |tag| %>
+      <tr>
+        <td><%= tag.id %></td>
+        <td><%= tag.name %></td>
+        <td><%= link_to "削除", admin_tag_path(tag.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %></td>
+      </tr>
+      <% end %>
+    </table>
+    
+    <div class="pagination justify-content-center">
+      <%= paginate @tags %>
+    </div>
+  </div>
 </div>

@@ -1,16 +1,15 @@
-<!--投稿一覧テーブル-->
 <% if posts.present? %>
   <table class="table table-bordered text-center" style="table-layout: fixed;">
     <tr class="table table-secondary">
-      <th scope="col"></th>
+      <th scope="col" width="10%"></th>
       <th scope="col">投稿者</th>
       <th scope="col">タイトル</th>
       <th scope="col">タグ</th>
       <th scope="col">日時</th>
       <th scope="col">場所</th>
-      <th scope="col" width="8%">いいね</th>
-      <th scope="col" width="10%">コメント</th>
-      <th scope="col" width="8%"></th>
+      <th scope="col" width="7%">いいね</th>
+      <th scope="col" width="8%">コメント</th>
+      <th scope="col" width="6%"></th>
     </tr>
     <% posts.each do |post| %>
     <tr>
@@ -19,12 +18,14 @@
       <td><%= post.title %></td>
       <td>
         <% post.tags.each do |tag| %>
-          <%= tag.name %>
+          <%= link_to admin_posts_path(tag_id: tag.id), class: "Tag" do %>
+            <h7><small>#<%= tag.name %></small></h7>
+          <% end %>
         <% end %>
       </td>
-      <td><%= post.time %></td>
-      <td><%= post.place %></td>
-      <td>♥<%= post.favorites.count %></td>
+      <td><%= post.since_when.strftime("%Y/%m/%d %H:%M") %></td>
+      <td><%= post.at_where %></td>
+      <td style="color: red">♥<%= post.favorites.count %></td>
       <td><%= post.comments.count %>件</td>
       <td><%= link_to "詳細", admin_post_path(post.id) %></td>
     </tr>

@@ -5,9 +5,9 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer "room_id", null: true
       t.string "title", null: false
       t.text "body", null: false
-      t.string "time", null: false
-      t.string "place", null: false
-      t.string "belonging", null: false
+      t.datetime "since_when", null: false
+      t.string "at_where", null: false
+      t.string "for_playing", null: false
       t.integer "status", null: false, default: 0
       t.timestamps
     end

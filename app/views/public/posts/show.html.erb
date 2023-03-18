@@ -1,29 +1,30 @@
 <!--投稿詳細-->
-<div class="container mt-3">
-  <div class="row">
-    <h2 class="font-weight-bold">＜投稿詳細＞</h2>
-    <% if @user == current_user %>
-      <div class="col text-right">
-        <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success" %>
+<div class="container-fluid w-75 my-3">
+  <div class="PostListMenu d-inline-flex justify-content-between w-100">
+    <h2 class="font-weight-bold"><i class="fas fa-file"></i> 投稿詳細</h2>
+    <div class="PostBtn">
+      <% if @user == current_user %>
+        <%= link_to "編集", edit_post_path(@post.id), class: "btn btn-success mr-4" %>
         <%= link_to "削除", post_path(@post.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
   
-  <!--イメージ画像、いいね、タグ-->
+  <!--投稿情報①-->
   <div class="row mt-3">
-    <div class="col-4 text-center">
-      <div class="post-image border-bottom">
+    <div class="PostLeft col-4 text-center">
+      <div class="PostImage border-bottom">
         <%= image_tag @post.get_image(200, 200) %>
         <div id="favorites-btn_<%= @post.id %>">
           <%= render "public/favorites/favorites-btn", post: @post %>
         </div>
         <% @post.tags.each do |tag| %>
-          <p>#<%= tag.name %></p>
+          <%= link_to posts_path(tag_id: tag.id), class: "Tag" do %>
+            <h7><small>#<%= tag.name %></small></h7>
+          <% end %>
         <% end %>
       </div>
-      <!--投稿者情報-->
-      <div class="post-user my-3">
+      <div class="PostUser my-3">
         <p class="font-weight-bold mb-0">投稿者</p>
         <%= link_to user_path(@user) do %>
           <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle" %><br>
@@ -32,8 +33,8 @@
       </div>
     </div>
     
-    <!--投稿情報-->
-    <div class="col-8">
+    <!--投稿情報②-->
+    <div class="PostRight col-8">
       <table class="table table-bordered">
         <tr>
           <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>
@@ -41,32 +42,36 @@
         </tr>
         <tr>
           <th scope="row" class="table-secondary">日時</th>
-          <td><%= @post.time %></td>
+          <td><%= @post.since_when.strftime("%Y/%m/%d %H:%M") %></td>
         </tr>
         <tr>
           <th scope="row" class="table-secondary">場所</th>
-          <td><%= @post.place %></td>
+          <td><%= @post.at_where %></td>
         </tr>
         <tr>
           <th scope="row" class="table-secondary">持ち物</th>
-          <td><%= @post.belonging %></td>
+          <td><%= @post.for_playing %></td>
         </tr>
         <tr>
           <th scope="row" class="table-secondary">詳細情報</th>
           <td><%= simple_format(h(@post.body)) %></td>
         </tr>
       </table>
+      
+      <!--マッチングボタン（投稿者本人・ゲストユーザー除く）-->
       <% unless @user.id == current_user.id || current_user.name == "guestuser" %>
-        <!--マッチングボタン（投稿者本人・ゲストユーザー除く）-->
-        <div class="matching-btn text-right">
+        <div class="MatchingBtn text-right">
           <% if current_user.following?(@user) %>
             <%= link_to "マッチングを解除する", user_matchings_path(@user.id), method: :delete, class: "btn btn-danger" %>
           <% else %>
             <%= link_to "マッチングする", user_matchings_path(@user.id), method: :post, class: "btn btn-primary" %>
           <% end %>
         </div>
-        <!--ルームボタン（投稿者本人・ゲストユーザー除く）-->
-        <div class="room-link-btn text-right mt-2">
+        
+        <!--ルームボタンをマッチング後に表示（※投稿者・ゲストユーザー除く）-->
+        <!--投稿に対して投稿者・マッチングユーザーのチャットルームが-->
+        <!--存在する場合「チャットへ」、存在しない場合「マッチング済（チャットを始める）」を表示-->
+        <div class="RoomBtn text-right mt-2">
           <% if @user.followers.include?(current_user) %>
             <%= form_with model: @room, url: rooms_path do |f| %>
               <% if @is_room == true %>
@@ -85,9 +90,9 @@
         </div>
       <% end %>
       
-      <!--コメント一覧・フォーム-->
+      <!--コメント一覧(フォーム含）-->
       <div id="comment">
-        <%= render "public/comments/comment", post: @post, comment: @comment %>
+        <%= render "public/comments/comment_list", post: @post, comment: @comment %>
       </div>
     </div>
   </div>

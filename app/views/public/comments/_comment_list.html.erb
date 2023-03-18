@@ -1,16 +1,16 @@
 <!--コメント一覧-->
-<p>＜コメント一覧＞</p>
-<% if current_user.name != "guestuser" %>
+<p>【コメント一覧】</p>
+<% if current_user != User.guest %>
   <% post.comments.each do |comment| %>
-    <table class="comment_list">
-      <td style="width: 10%">
-        <%= image_tag comment.user.get_profile_image(100, 100), class: "rounded-circle" %>
+    <table class="CommentList w-100">
+      <td style="width: 8%">
+        <%= image_tag comment.user.get_profile_image(50, 50), class: "rounded-circle" %>
       </td>
-      <td style="width: 10%">
-        <%= comment.user.name %>
+      <td style="width: 12%">
+        <%= comment.user.display_name %>
       </td>
       <td style="width: 70%">
-        <%= comment.content %>
+        <%= simple_format(h(comment.content), class: "my-0") %>
       </td>
       <td class="text-center" style="width: 10%">
         <% if comment.user == current_user %>
@@ -23,10 +23,9 @@
     <p>&emsp;コメントは特にありません</p>
   <% end %>
   
-  <!--コメントフォーム-->
   <%= form_with model: [post, comment], local: false do |f| %>
-    <div class="comment_form form-group field mt-4">
-      <%= f.label :"＜新規コメント＞", class: "control-label" %>
+    <div class="CommentForm form-group field mt-4">
+      <%= f.label :"【新規コメント】", class: "control-label" %>
       <%= f.text_area :content, class: "form-control" %>
       <%= f.submit "送信する", class: "my-2" %>
     </div>

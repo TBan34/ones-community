@@ -1,8 +1,8 @@
 class CreateNotifications < ActiveRecord::Migration[6.1]
   def change
     create_table :notifications do |t|
-      t.integer "visitor_id", null: false
-      t.integer "visited_id", null: false
+      t.integer "sender_id", null: false
+      t.integer "receiver_id", null: false
       t.integer "post_id"
       t.integer "comment_id"
       t.integer "chat_id"

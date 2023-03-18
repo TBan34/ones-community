@@ -2,13 +2,15 @@
 <%= render "error_messages", post: @post %>
 
 <!--新規投稿-->
-<div class="container mt-3">
-  <div class="d-flex">
-    <h2 class="font-weight-bold">＜新規投稿＞</h2>
-    <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-outline-secondary ml-5" %>
+<div class="container-fluid w-75 my-3">
+  <div class="PostBtn d-inline-flex">
+    <h2 class="font-weight-bold"><i class="fas fa-paper-plane"></i> 新規投稿</h2>
+    <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary ml-5" %>
   </div>
-  <%= form_with model: @post do |f| %>
-    <%= render "form_post", f: f %>
-    <%= f.submit "投稿する", class: "btn btn-success my-2" %>
-  <% end %>
+  <div class="PostForm">
+    <%= form_with model: @post do |f| %>
+      <%= render "form", f: f, post: @post %>
+      <%= f.submit "投稿する", class: "btn btn-success my-2" %>
+    <% end %>
+  </div>
 </div>

@@ -83,8 +83,8 @@ ActiveRecord::Schema.define(version: 2023_02_06_081657) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "visitor_id", null: false
-    t.integer "visited_id", null: false
+    t.integer "sender_id", null: false
+    t.integer "receiver_id", null: false
     t.integer "post_id"
     t.integer "comment_id"
     t.integer "chat_id"
@@ -106,9 +106,9 @@ ActiveRecord::Schema.define(version: 2023_02_06_081657) do
     t.integer "room_id"
     t.string "title", null: false
     t.text "body", null: false
-    t.string "time", null: false
-    t.string "place", null: false
-    t.string "belonging", null: false
+    t.datetime "since_when", null: false
+    t.string "at_where", null: false
+    t.string "for_playing", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

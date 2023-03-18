@@ -2,10 +2,12 @@
 <%= render "error_messages", post: @post %>
 
 <!--投稿編集-->
-<div class="container my-3">
-  <h2 class="font-weight-bold">＜投稿編集画面＞</h2>
-  <%= form_with model: @post do |f| %>
-    <%= render "form_post", f: f %>
-    <%= f.submit "変更を保存する", class: "btn btn-success" %>
-  <% end %>
+<div class="container-fluid w-75 my-3">
+  <h2 class="font-weight-bold"><i class="fas fa-edit"></i> 投稿編集</h2>
+  <div class="PostForm">
+    <%= form_with model: @post do |f| %>
+      <%= render "form", f: f, post: @post %>
+      <%= f.submit "変更を保存する", class: "btn btn-success" %>
+    <% end %>
+  </div>
 </div>

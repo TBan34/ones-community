@@ -1,18 +1,17 @@
 <!--通知一覧-->
 <div class="container-fluid w-50 my-3">
-  <h2 class="font-weight-bold">＜通知一覧＞</h2>
+  <h2 class="font-weight-bold"><i class="fas fa-bell"></i> 通知一覧</h2>
   
-  <div class="notification-list my-3">
+  <div class="NotificationList my-3">
     <% if @notifications.present? %>
       <% @notifications.each do |notification| %>
-        <%= render "notifications", notification: notification %>
+        <%= render "notification_list", notification: notification %>
       <% end %>
     <% else %>
       <p class="text-center">通知はありません</p>
     <% end %>
   </div>
   
-  <!--ページネーション-->
   <div class="pagination justify-content-center">
     <%= paginate @notifications %>
   </div>

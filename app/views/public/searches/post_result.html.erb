@@ -1,0 +1,22 @@
+<!--キーワード検索結果-->
+<div class="container-fluid w-75 my-3">
+  <div class="SearchForm d-inline-flex justify-content-end w-100 my-3">
+    <%= render "public/posts/search_word" %>
+    <%= render "public/posts/search_tag" %>
+  </div>
+  
+  <div class="SearchResult">
+    <div class="PostListMenu d-inline-flex justify-content-between w-100">
+      <h2 class="font-weight-bold"><i class="fas fa-search"></i> 検索結果</h2>
+      <div class="PostBtn">
+        <% if current_user.name != "guestuser" %>
+          <%= link_to "新規投稿", new_post_path, class: "btn btn-info mr-4" %>
+          <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary" %>
+        <% end %>
+      </div>
+    </div>
+    <p>"<%= @search_word %>"で検索しています</p>
+    <%= render "public/posts/post_list", posts: @posts %>
+    <%= render "public/posts/pagination", posts: @posts %>
+  </div>
+</div>

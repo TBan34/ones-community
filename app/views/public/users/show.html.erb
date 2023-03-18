@@ -1,18 +1,17 @@
 <!--ユーザー詳細-->
+<!--各種ボタン、過去の投稿はユーザー本人にのみ表示-->
 <div class="container mt-3">
-  <h2 class="font-weight-bold">＜ユーザー詳細画面＞</h2>
-  
-  <div class="row">
-    <!--編集、通知、いいねした投稿、非公開（下書き）一覧はユーザー本人のみ閲覧可能-->
+  <h2 class="font-weight-bold"><i class="fas fa-user"></i> ユーザー詳細</h2>
+  <div class="UserBtn row">
     <% if @user == current_user %>
       <div class="col-10 offset-2 text-right">
         <%= link_to "編集", edit_user_path(@user.id), class: "btn btn-success" %>
         <% if current_user.passive_notifications.where(checked: false).any? %>
-          <%= link_to notifications_path(visited_id: @user.id), class: "btn btn-warning text-white ml-3" do %>
+          <%= link_to notifications_path(receiver_id: @user.id), class: "btn btn-warning text-white ml-3" do %>
             通知<i class="fas fa-exclamation-circle"></i>
           <% end %>
         <% else %>
-          <%= link_to "通知", notifications_path(visited_id: @user.id), class: "btn btn-warning text-white ml-3" %>
+          <%= link_to "通知", notifications_path(receiver_id: @user.id), class: "btn btn-warning text-white ml-3" %>
         <% end %>
         <%= link_to "いいねした投稿", user_favorites_path(@user.id), class: "btn btn-info ml-3" %>
         <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary ml-3" %>
@@ -20,16 +19,14 @@
     <% end %>
   </div>
   
-  <!--プロフィール画像-->
-  <div class="row">
+  <div class="UserImage row">
     <div class="col text-center">
-      <%= image_tag @user.get_profile_image(300, 300), class: "rounded-circle" %>
+      <%= image_tag @user.get_profile_image(300, 300), class: "rounded-circle my-2" %>
     </div>
   </div>
   
-  <!--ユーザー情報-->
-  <div class="row">
-    <!--ユーザー本人の閲覧時-->
+  <div class="UserInfo row">
+    <!--ユーザー本人閲覧時-->
     <% if @user == current_user %>
       <div class="col-4">
         <table class="table table-bordered">
@@ -67,8 +64,8 @@
           </tr>
         </table>
       </div>
-    <!--他のユーザーの閲覧時-->
     <% else %>
+    <!--自分以外のユーザー閲覧時-->
       <div class="col-8 mx-auto">
         <table class="table table-bordered" style="table-layout: fixed;">
           <tr>
@@ -92,8 +89,7 @@
     <% end %>
   </div>
   
-  <!--過去の投稿はユーザー本人のみ閲覧可能-->
-  <div class="row">
+  <div class="UserPosted row">
     <% if @user == current_user %>
       <div class="col text-right">
         <p><%= link_to posts_path(user_id: @user.id) do %><u>過去の投稿</u><% end %></p>
