@@ -35,6 +35,13 @@
     
     <!--投稿情報②-->
     <div class="PostRight col-8">
+      <div class="PostStatus">
+        <% if @post.status_public? %>
+          <h6 class="text-success"><i class="fas fa-circle"></i><%= @post.status_i18n %></h6>
+        <% else %>
+          <h6 class="text-secondary"><i class="fas fa-circle"></i><%= @post.status_i18n %></h6>
+        <% end %>
+      </div>
       <table class="table table-bordered">
         <tr>
           <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>
