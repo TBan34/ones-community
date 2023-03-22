@@ -13,7 +13,7 @@
   <div class="UserForm">
     <h2 class="font-weight-bold"><i class="fas fa-user-edit"></i> ユーザー編集</h2>
     <div class="row d-block">
-       <%= form_with model: [:admin, @user] do |f| %>
+      <%= form_with model: [:admin, @user] do |f| %>
       <div class="col-6">
         <div class="form-group field">
           <%= f.label :"プロフィール画像" %><br>
@@ -31,14 +31,6 @@
           <%= f.label :"メールアドレス", class: "control-label" %>
           <%= f.text_field :email, placeholder: "test@example.com", class: "form-control" %>
         </div>
-      </div>
-      <div class="col-6">
-        <div class="form-group field">
-          <%= f.label :is_deleted, "ステータス（退会）", class: "control-label" %>
-          <%= f.radio_button :is_deleted, :true, class: "form-control" %>
-          <%= f.label :is_deleted, "ステータス（有効）", class: "control-label" %>
-          <%= f.radio_button :is_deleted, :false, class: "form-control" %>
-        </div>
         <div class="form-group field">
           <%= f.label :"ユーザー名", class: "control-label" %>
           <%= f.text_field :display_name, placeholder: "テスト太郎", class: "form-control" %>
@@ -55,9 +47,15 @@
           <%= f.label :"自己紹介", class: "control-label" %>
           <%= f.text_area :self_introduction, placeholder: "宜しくお願いします", class: "form-control" %>
         </div>
+        <div class="form-group field">
+          <%= f.radio_button :is_deleted, :false %>
+          <%= f.label :is_deleted_false, "有効" %><br>
+          <%= f.radio_button :is_deleted, :true %>
+          <%= f.label :is_deleted_true, "退会" %>
+        </div>
         <%= f.submit "変更を保存する", class: "btn btn-success" %>
       </div>
-      <% end %>
+    <% end %>
     </div>
   </div>
 </div>
