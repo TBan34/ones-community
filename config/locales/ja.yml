@@ -109,7 +109,7 @@ ja:
     post:
       status:
         public: 公開
-        private: 非公開
+        private: 非公開（下書き）
   errors:
     format: "%{attribute}%{message}"
     messages:
