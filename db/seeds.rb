@@ -8,8 +8,8 @@
 
 # 管理者ログイン用
 Admin.create!(
-  email: "admin@admin",
-  password: "testtest"
+  email:    "admin@test.com",
+  password: "password"
 )
 
 # 基本的な投稿タグ
