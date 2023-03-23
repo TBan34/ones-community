@@ -10,7 +10,7 @@
         </td>
         <td class="text-center", width="10%">
           <%= link_to user_path(chat.user) do %>
-            <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= image_tag chat.user.get_profile_image(100, 100), class: "ChatUserImg" %><br>
             <%= simple_format(h(chat.user.display_name)) %>
           <% end %>
         </td>
@@ -19,7 +19,7 @@
       <tr class="YourChat text-left">
         <td class ="text-center", width="10%">
           <%= link_to user_path(chat.user) do %>
-            <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= image_tag chat.user.get_profile_image(100, 100), class: "ChatUserImg" %><br>
             <%= chat.user.display_name %>
           <% end %>
         </td>

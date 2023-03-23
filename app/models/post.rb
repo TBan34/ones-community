@@ -65,7 +65,7 @@ class Post < ApplicationRecord
       file_path = Rails.root.join("app/assets/images/no_image_square.jpeg")
       image.attach(io: File.open(file_path), filename: "default-sports-image.jpg", content_type: "image/jpeg")
     end
-    image.variant(resize: "#{width}x#{height}!").processed
+    image.variant(resize: "#{width}x#{height}^").processed
   end
 
   # いいねされているか確認

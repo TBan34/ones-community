@@ -16,7 +16,7 @@
     <% posts.each do |post| %>
       <tbody>
         <tr>
-          <td><%= image_tag post.get_image(100, 100) %></td>
+          <td><%= image_tag post.get_image(100, 100), class: "PostIndexImg" %></td>
           <td><%= post.user.display_name %></td>
           <td><%= post.title %></td>
           <td>

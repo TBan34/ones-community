@@ -13,7 +13,7 @@
       <tr class="border-bottom text-center">
         <td>
           <%= link_to room_path(aur.room.id) do %>
-            <%= image_tag aur.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= image_tag aur.user.get_profile_image(100, 100), class: "RoomUserImg" %><br>
             <%= aur.user.display_name %>
           <% end %>
         </td>
