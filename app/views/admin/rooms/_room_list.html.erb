@@ -1,0 +1,39 @@
+<% if rooms.present? %>
+  <table class="w-100" style="table-layout: fixed;">
+    <thead>
+      <tr class="table table-secondary text-center">
+        <th scope="col" width="20%">投稿者</th>
+        <th scope="col" width="20%">タイトル</th>
+        <th scope="col">メッセージ</th>
+        <th scope="col" width="15%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% rooms.each do |room| %>
+      <tr class="border-bottom text-center">
+        <td>
+          <%= link_to admin_room_path(room.id) do %>
+            <%= room.post.user.display_name %>
+          <% end %>
+        </td>
+        <td>
+          <strong><%= room.post.title %></strong>
+        </td>
+        <td>
+          <% if room.chats.present? %>
+            <% chat = Chat.find_by(id: room.chat_ids.last).message %>
+            <%= truncate(chat, length: 30) %>
+          <% else %>
+            <p class="text-center my-5">チャットを始めましょう</p>
+          <% end %>
+        </td>
+        <td>
+          <h6 style="color: #C0C0C0;"><%= room.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="text-center my-5">チャットが見つかりませんでした</p>
+<% end %>

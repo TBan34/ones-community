@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     root to: "homes#top"
     get "/about" => "homes#about"
     get "/search_post" => "searches#search_post"
+    get "/search_room" => "searches#search_room"
     resources :users, only: [:show, :edit, :update] do
       get   "unsubscribe" => "users#unsubscribe"
       patch "withdrawal"  => "users#withdrawal"
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get "/search_user" => "searches#search_user"
     get "/search_post" => "searches#search_post"
+    get "/search_room" => "searches#search_room"
     resources :users, only: [:index, :show, :edit, :update]
     resources :posts, only: [:index, :show, :edit, :update, :destroy] do
       resources :comments, only: [:destroy]
