@@ -13,6 +13,7 @@
       <tr class="border-bottom text-center">
         <td>
           <%= link_to admin_room_path(room.id) do %>
+            <%= image_tag room.post.user.get_profile_image(100, 100), class: "RoomUserImg" %><br>
             <%= room.post.user.display_name %>
           <% end %>
         </td>

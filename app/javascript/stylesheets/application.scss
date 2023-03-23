@@ -1,6 +1,75 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+// プロフィール画像・投稿イメージ画像のサイズ調整
+// 保守性を考慮し、ページ毎にクラス指定
+.UserIndexImg{
+  width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.UserShowImg{
+  width: 300px;
+	height: 300px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.PostTopImg{
+  width: 200px;
+	height: 200px;
+	object-fit: cover;
+}
+
+.PostIndexImg{
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+}
+
+.PostShowImg{
+  width: 200px;
+	height: 200px;
+	object-fit: cover;
+}
+
+.PostShowUserImg{
+  width: 120px;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.CommentUserImg{
+  width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.RoomUserImg{
+  width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.ChatUserImg{
+  width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.NotificationUserImg{
+  width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
 // タグデザイン
 .Tag {
   display: inline-block;
