@@ -11,7 +11,7 @@
   <!--投稿情報①-->
   <div class="row mt-3">
     <div class="PostLeft col-4 text-center">
-      <div class="PostImage border-bottom">
+      <div class="PostImage border-bottom"><br>
         <%= image_tag @post.get_image(200, 200), class: "PostShowImg" %>
         <div style="color: red">♥<%= @post.favorites.count %></div>
         <% @post.tags.each do |tag| %>

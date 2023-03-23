@@ -29,7 +29,7 @@
   <%= form_with model: [post, comment], local: false do |f| %>
     <div class="CommentForm form-group field mt-4">
       <%= f.label :"【新規コメント】", class: "control-label" %>
-      <%= f.text_area :content, class: "form-control" %>
+      <%= f.text_area :content, placeholder: "コメントを入力してください", class: "form-control" %>
       <%= f.submit "送信する", class: "my-2" %>
     </div>
   <% end %>
