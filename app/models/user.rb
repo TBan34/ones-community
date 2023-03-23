@@ -36,7 +36,7 @@ class User < ApplicationRecord
 
   # 退会ステータスのユーザーをログインさせない
   def active_for_authentication?
-    super && (is_deleted == false)
+    super && (self.is_deleted == false)
   end
 
   # ユーザー検索（管理者画面）

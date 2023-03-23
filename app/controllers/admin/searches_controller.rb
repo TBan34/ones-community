@@ -25,16 +25,13 @@ class Admin::SearchesController < ApplicationController
     @search_room = params[:search_room]
     
     if @range == "ユーザー"
-      # 検索にヒットした全てのユーザーのID（投稿者ID）
-      # 投稿者の全ての投稿のID
-      # 上記投稿IDを持つ全てのルームを抽出
+      # 検索にヒットした全ユーザーのID、及び関連する投稿のIDを取得し、ルームを絞り込み
       user_ids = User.where("display_name LIKE ?", "%#{@search_room}%").pluck(:id)
       post_ids = Post.where(user_id: user_ids).pluck(:id)
       @rooms = Room.where(post_id: post_ids).page(params[:page])
       render "admin/searches/room_result"
     else
-      # 検索にヒットした全ての投稿のID
-      # 上記投稿IDを持つ全てのルームを抽出
+      # 検索にヒットした全投稿のIDから、ルームを絞り込み
       post_ids = Post.where("title LIKE ?", "%#{@search_room}%").pluck(:id)
       @rooms = Room.where(post_id: post_ids).page(params[:page])
       render "admin/searches/room_result"
