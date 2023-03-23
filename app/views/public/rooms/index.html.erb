@@ -1,50 +1,11 @@
 <!--ルーム一覧-->
 <div class="container-fluid w-75 my-3">
+  <div class="SearchForm d-inline-flex justify-content-end w-100">
+    <%= render "search_room" %>
+  </div>
   <div class="RoomList">
     <h2 class="font-weight-bold"><i class="fas fa-comments"></i> チャット一覧</h2>
-    <% if current_user.name != "guestuser" && @another_user_room.present? %>
-    <table class="w-100" style="table-layout: fixed;">
-      <thead>
-        <tr class="table table-secondary text-center">
-          <th scope="col" width="20%">ユーザー</th>
-          <th scope="col" width="20%">タイトル</th>
-          <th scope="col">メッセージ</th>
-          <th scope="col" width="15%"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @another_user_room.each do |aur| %>
-        <tr class="border-bottom text-center">
-          <td>
-            <%= link_to room_path(aur.room.id) do %>
-              <%= image_tag aur.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
-              <%= aur.user.display_name %>
-            <% end %>
-          </td>
-          <td>
-            <strong><%= aur.room.post.title %></strong>
-          </td>
-          <td>
-            <% if aur.room.chats.present? %>
-              <% chat = Chat.find_by(id: aur.room.chat_ids.last).message %>
-              <%= truncate(chat, length: 30) %>
-            <% else %>
-              <p class="text-center my-5">チャットを始めましょう</p>
-            <% end %>
-          </td>
-          <td>
-            <h6 style="color: #C0C0C0;"><%= aur.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
-          </td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <% else %>
-      <p class="text-center my-5">チャットが見つかりませんでした</p>
-    <% end %>
-    
-    <div class="pagination justify-content-center">
-      <%= paginate @another_user_room %>
-    </div>
+    <%= render "room_list", another_user_room: @another_user_room %>
+    <%= render "pagination", another_user_room: @another_user_room %>
   </div>
 </div>
