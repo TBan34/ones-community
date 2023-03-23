@@ -6,7 +6,7 @@
   <div class="SearchResult">
     <h2 class="font-weight-bold"><i class="fas fa-search"></i> 検索結果</h2>
     <p>"<%= @search_room %>"で検索しています</p>
-    <%= render "public/rooms/room_list", another_user_room: @another_user_room %>
-    <%= render "public/rooms/pagination", another_user_room: @another_user_room %>
+    <%= render "public/rooms/room_list", post_user_room: @post_user_room %>
+    <%= render "public/rooms/pagination", post_user_room: @post_user_room %>
   </div>
 </div>

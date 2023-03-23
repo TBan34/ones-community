@@ -1,4 +1,4 @@
-<% if another_user_room.present? %>
+<% if post_user_room.present? %>
   <table class="w-100" style="table-layout: fixed;">
     <thead>
       <tr class="table table-secondary text-center">
@@ -9,27 +9,27 @@
       </tr>
     </thead>
     <tbody>
-      <% another_user_room.each do |aur| %>
+      <% post_user_room.each do |pur| %>
       <tr class="border-bottom text-center">
         <td>
-          <%= link_to room_path(aur.room.id) do %>
-            <%= image_tag aur.user.get_profile_image(100, 100), class: "RoomUserImg" %><br>
-            <%= aur.user.display_name %>
+          <%= link_to room_path(pur.room.id) do %>
+            <%= image_tag pur.user.get_profile_image(100, 100), class: "RoomUserImg" %><br>
+            <%= pur.user.display_name %>
           <% end %>
         </td>
         <td>
-          <strong><%= aur.room.post.title %></strong>
+          <strong><%= pur.room.post.title %></strong>
         </td>
         <td>
-          <% if aur.room.chats.present? %>
-            <% chat = Chat.find_by(id: aur.room.chat_ids.last).message %>
+          <% if pur.room.chats.present? %>
+            <% chat = Chat.find_by(id: pur.room.chat_ids.last).message %>
             <%= truncate(chat, length: 30) %>
           <% else %>
             <p class="text-center my-5">チャットを始めましょう</p>
           <% end %>
         </td>
         <td>
-          <h6 style="color: #C0C0C0;"><%= aur.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
+          <h6 style="color: #C0C0C0;"><%= pur.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
         </td>
       </tr>
       <% end %>

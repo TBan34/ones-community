@@ -18,21 +18,18 @@ class Public::SearchesController < ApplicationController
     @search_room = params[:search_room]
     
     if @range == "ユーザー"
-      # 検索にヒットした全てのユーザーのID
-      # current_userの持っている全てのルームID
-      # ユーザーIDとルームIDから結果を絞り込み
+      # 検索にヒットした全ユーザーのID、及びカレントユーザーを含む全ルームのIDを取得し、結果を絞り込み
       user_ids = User.where("display_name LIKE ?", "%#{@search_room}%").pluck(:id)
       room_ids = UserRoom.where(user_id: current_user.id).pluck(:room_id)
-      @another_user_room = UserRoom.where(user_id: user_ids, room_id: room_ids).page(params[:page])
+      @post_user_room = UserRoom.where(user_id: user_ids, room_id: room_ids).page(params[:page])
       render "public/searches/room_result"
     else
-      # 検索にヒットした全ての投稿
-      # 上記投稿の持っているログインユーザーの全てのチャットルームのルームID
-      # 上記のチャットルームで、ユーザーIDが投稿者（チャット相手）のものを抽出
+      # 検索にヒットした全投稿、及びその投稿が持つカレントユーザーを含む全ルームのIDを取得し、
+      # 上記ルームで、ユーザーIDが投稿者の結果を絞り込み
       posts = Post.where("title LIKE ?", "%#{@search_room}%")
       posts.each do |post|
         room_ids = UserRoom.where(user_id: current_user.id, room_id: post.rooms.ids).pluck(:room_id)
-        @another_user_room = UserRoom.where(room_id: room_ids).where(user_id: post.user_id).page(params[:page])
+        @post_user_room = UserRoom.where(room_id: room_ids).where(user_id: post.user_id).page(params[:page])
       end
       render "public/searches/room_result"
     end
