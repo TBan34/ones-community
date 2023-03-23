@@ -65,8 +65,8 @@
         </tr>
       </table>
       
-      <!--マッチングボタン（投稿者本人・ゲストユーザー除く）-->
-      <% unless @user.id == current_user.id || current_user.name == "guestuser" %>
+      <!--マッチング/ルームボタン（投稿者本人・ゲストユーザー除く）-->
+      <% unless @user == current_user || User.guest == current_user %>
         <div class="MatchingBtn text-right">
           <% if current_user.following?(@user) %>
             <%= link_to "マッチングを解除する", user_matchings_path(@user.id), method: :delete, class: "btn btn-danger" %>
@@ -75,20 +75,15 @@
           <% end %>
         </div>
         
-        <!--ルームボタンをマッチング後に表示（※投稿者・ゲストユーザー除く）-->
-        <!--投稿に対して投稿者・マッチングユーザーのチャットルームが-->
+        <!--ルームボタンをマッチング後に表示-->
+        <!--投稿に対して投稿者とカレントユーザーのチャットルームが-->
         <!--存在する場合「チャットへ」、存在しない場合「マッチング済（チャットを始める）」を表示-->
         <div class="RoomBtn text-right mt-2">
-          <% if @user.followers.include?(current_user) %>
-            <%= form_with model: @room, url: rooms_path do |f| %>
-              <% if @is_room == true %>
-                <%= link_to room_path(@room_id) do %>
-                  <%= f.submit "チャットへ", class: "btn btn-primary" %>
-                <% end %>
-              <% else %>
-                <%= fields_for @user_room do |ur| %>
-                  <%= ur.hidden_field :user_id, value: @user.id %>
-                <% end %>
+          <% if current_user.following?(@user) %>
+            <% if @is_room == true %>
+              <%= link_to "チャットへ", room_path(@room_id), class: "btn btn-primary" %>
+            <% else %>
+              <%= form_with model: @room, url: rooms_path do |f| %>
                 <%= f.hidden_field :post_id, value: @post.id %>
                 <%= f.submit "マッチング済（チャットを始める）", class: "btn btn-success" %>
               <% end %> 
