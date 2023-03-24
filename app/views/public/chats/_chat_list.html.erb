@@ -4,8 +4,8 @@
     <% if chat.user_id == current_user.id %>
       <tr class="MyChat text-right">
         <td width="10%"></td>
-        <td width="80%">
-          <h6><%= simple_format(h(chat.message)) %></h6>
+        <td class="Message Mine">
+          <h6 class="text-left"><%= simple_format(h(chat.message)) %></h6>
           <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
         </td>
         <td class="text-center", width="10%">
@@ -23,7 +23,7 @@
             <%= chat.user.display_name %>
           <% end %>
         </td>
-        <td width="80%">
+        <td class="Message Yours">
           <h6><%= simple_format(h(chat.message)) %></h6>
           <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
         </td>
