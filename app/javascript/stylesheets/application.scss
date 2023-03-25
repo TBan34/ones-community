@@ -109,21 +109,21 @@
 
 .Message.Mine::after{
   right: 10px;
-  border-radius: 0px 0  0 17px/ 0px 0 0 13px; 
-  box-shadow: 14px 2px 0 -3px #fff inset; 
+  border-radius: 0px 0  0 17px/ 0px 0 0 13px;
+  box-shadow: 14px 2px 0 -3px #98d98e inset;
 }
 
-.Message.Yours::after{
+.Message.Others::after{
   left: 10px;
-  border-radius: 0px 0 17px 0/ 0px 0 13px 0; 
-  box-shadow: -14px 2px 0 -3px #fff inset; 
+  border-radius: 0px 0 17px 0/ 0px 0 13px 0;
+  box-shadow: -14px 2px 0 -3px #fff inset;
 }
 
 //コンテンツ量に関わらずフッターを最下部に表示 
 .FixedFooterBottom{
   min-height: 100vh; //コンテンツ高さの最小値=ブラウザの高さ
   position: relative; //footerを相対位置で指定
-  padding-bottom: 60px; //footer直上のコンテンツとの間隔
+  padding-bottom: 50px; //footer直上のコンテンツとの間隔
   box-sizing: border-box;
 }
 
@@ -133,5 +133,5 @@ footer{
   width: 100%;
   height: 50px;
   background-color: #365E94;
-  color: white;
+  color: #fff;
 }
