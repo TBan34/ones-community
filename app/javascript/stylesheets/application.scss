@@ -70,6 +70,12 @@
 	border-radius: 50%;
 }
 
+.PreviewImg{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
 // タグデザイン
 .Tag {
   display: inline-block;

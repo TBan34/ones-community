@@ -17,6 +17,7 @@
         <%= f.label :"イメージ画像" %><br>
         <%= f.file_field :image, accept: "image/*" %>
       </div>
+      <div id="preview-img"></div>
       <div class="form-group field">
         <%= f.label :"タグ ※最大5個まで", class: "control-label" %><br>
         <%= f.text_field :tag, value: @post.tags.pluck(:name), placeholder: "野球 キャッチボール 初心者", class: "form-control col-sm-6" %>
