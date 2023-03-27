@@ -1,0 +1,12 @@
+<!--ルーム検索結果-->
+<div class="container-fluid w-75 my-3">
+  <div class="SearchForm d-inline-flex justify-content-end w-100">
+    <%= render "public/rooms/search_room" %>
+  </div>
+  <div class="SearchResult">
+    <h2 class="font-weight-bold"><i class="fas fa-search"></i> 検索結果</h2>
+    <p>"<%= @search_room %>"で検索しています</p>
+    <%= render "public/rooms/room_list", post_user_room: @post_user_room %>
+    <%= render "public/rooms/pagination", post_user_room: @post_user_room %>
+  </div>
+</div>

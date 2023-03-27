@@ -4,26 +4,26 @@
     <% if chat.user_id == chat.room.post.user.id %>
       <tr class="MyChat text-right">
         <td width="10%"></td>
-        <td width="80%">
-          <h6><%= simple_format(h(chat.message)) %></h6>
-          <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        <td class="Message Mine" style="background-color: #98d98e;">
+          <h6 class="text-left"><%= simple_format(h(chat.message)) %></h6>
+          <h6 style="color: #afafb0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
         </td>
-        <td class="text-center", width="10%">
+        <td class="text-center align-bottom", width="10%">
           <%= link_to admin_user_path(chat.room.post.user) do %>
-            <%= image_tag chat.room.post.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= image_tag chat.room.post.user.get_profile_image(100, 100), class: "ChatUserImg" %><br>
             <%= chat.room.post.user.display_name %>
           <% end %>
         </td>
       </tr>
     <% else %>
-      <tr class="YourChat text-left">
-        <td class="text-center", width="10%">
+      <tr class="OtherChat text-left">
+        <td class="text-center align-bottom", width="10%">
           <%= link_to admin_user_path(chat.user) do %>
-            <%= image_tag chat.user.get_profile_image(100, 100), class: "rounded-circle" %><br>
+            <%= image_tag chat.user.get_profile_image(100, 100), class: "ChatUserImg" %><br>
             <%= chat.user.display_name %>
           <% end %>
         </td>
-        <td width="80%">
+        <td class="Message Others">
           <h6><%= simple_format(h(chat.message)) %></h6>
           <h6 style="color: #C0C0C0;"><%= chat.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
         </td>

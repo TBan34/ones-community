@@ -13,8 +13,8 @@
   <!--投稿情報①-->
   <div class="row mt-3">
     <div class="PostLeft col-4 text-center">
-      <div class="PostImage border-bottom">
-        <%= image_tag @post.get_image(200, 200) %>
+      <div class="PostImage border-bottom"><br>
+        <%= image_tag @post.get_image(200, 200), class: "PostShowImg" %>
         <div id="favorites-btn_<%= @post.id %>">
           <%= render "public/favorites/favorites-btn", post: @post %>
         </div>
@@ -27,7 +27,7 @@
       <div class="PostUser my-3">
         <p class="font-weight-bold mb-0">投稿者</p>
         <%= link_to user_path(@user) do %>
-          <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle" %><br>
+          <%= image_tag @user.get_profile_image(120, 120), class: "PostShowUserImg" %><br>
           <%= @user.display_name %>
         <% end %>
       </div>
@@ -35,6 +35,13 @@
     
     <!--投稿情報②-->
     <div class="PostRight col-8">
+      <div class="PostStatus">
+        <% if @post.status_public? %>
+          <h6 class="text-success"><i class="fas fa-circle"></i><%= @post.status_i18n %></h6>
+        <% else %>
+          <h6 class="text-secondary"><i class="fas fa-circle"></i><%= @post.status_i18n %></h6>
+        <% end %>
+      </div>
       <table class="table table-bordered">
         <tr>
           <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>
@@ -58,8 +65,8 @@
         </tr>
       </table>
       
-      <!--マッチングボタン（投稿者本人・ゲストユーザー除く）-->
-      <% unless @user.id == current_user.id || current_user.name == "guestuser" %>
+      <!--マッチング/ルームボタン（投稿者本人・ゲストユーザー除く）-->
+      <% unless @user == current_user || User.guest == current_user %>
         <div class="MatchingBtn text-right">
           <% if current_user.following?(@user) %>
             <%= link_to "マッチングを解除する", user_matchings_path(@user.id), method: :delete, class: "btn btn-danger" %>
@@ -68,20 +75,15 @@
           <% end %>
         </div>
         
-        <!--ルームボタンをマッチング後に表示（※投稿者・ゲストユーザー除く）-->
-        <!--投稿に対して投稿者・マッチングユーザーのチャットルームが-->
+        <!--ルームボタンをマッチング後に表示-->
+        <!--投稿に対して投稿者とカレントユーザーのチャットルームが-->
         <!--存在する場合「チャットへ」、存在しない場合「マッチング済（チャットを始める）」を表示-->
         <div class="RoomBtn text-right mt-2">
-          <% if @user.followers.include?(current_user) %>
-            <%= form_with model: @room, url: rooms_path do |f| %>
-              <% if @is_room == true %>
-                <%= link_to room_path(@room_id) do %>
-                  <%= f.submit "チャットへ", class: "btn btn-primary" %>
-                <% end %>
-              <% else %>
-                <%= fields_for @user_room do |ur| %>
-                  <%= ur.hidden_field :user_id, value: @user.id %>
-                <% end %>
+          <% if current_user.following?(@user) %>
+            <% if @is_room == true %>
+              <%= link_to "チャットへ", room_path(@room_id), class: "btn btn-primary" %>
+            <% else %>
+              <%= form_with model: @room, url: rooms_path do |f| %>
                 <%= f.hidden_field :post_id, value: @post.id %>
                 <%= f.submit "マッチング済（チャットを始める）", class: "btn btn-success" %>
               <% end %> 

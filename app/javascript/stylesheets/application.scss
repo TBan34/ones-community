@@ -1,6 +1,82 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 
+// プロフィール画像・投稿イメージ画像のサイズ調整
+// 保守性を考慮し、ページ毎にクラス指定
+.UserIndexImg{
+  width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.UserShowImg{
+  width: 300px;
+	height: 300px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.PostTopImg{
+  width: 200px;
+	height: 200px;
+	object-fit: cover;
+}
+
+.PostIndexImg{
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+}
+
+.PostShowImg{
+  width: 200px;
+	height: 200px;
+	object-fit: cover;
+}
+
+.PostShowUserImg{
+  width: 120px;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.CommentUserImg{
+  width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.RoomUserImg{
+  width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.ChatUserImg{
+  width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+.NotificationUserImg{
+  width: 50px;
+	height: 50px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+// 投稿画像のプレビュー表示（preview.js）
+.PreviewImg{
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
 // タグデザイン
 .Tag {
   display: inline-block;
@@ -20,11 +96,41 @@
   text-decoration: none;
 }
 
+// チャット画面のレイアウト（フキダシ）
+.Message{
+  position: relative;
+  display: inline-block;
+  margin-bottom: 30px;
+  padding: 20px 30px 10px;
+  background-color: #fff;
+  border-radius: 50px;
+}
+
+.Message::after{
+  position: absolute;
+  content: "";
+  width: 17px;
+  height: 17px;
+  bottom: 0;
+}
+
+.Message.Mine::after{
+  right: 10px;
+  border-radius: 0px 0  0 17px/ 0px 0 0 13px;
+  box-shadow: 14px 2px 0 -3px #98d98e inset;
+}
+
+.Message.Others::after{
+  left: 10px;
+  border-radius: 0px 0 17px 0/ 0px 0 13px 0;
+  box-shadow: -14px 2px 0 -3px #fff inset;
+}
+
 //コンテンツ量に関わらずフッターを最下部に表示 
 .FixedFooterBottom{
   min-height: 100vh; //コンテンツ高さの最小値=ブラウザの高さ
   position: relative; //footerを相対位置で指定
-  padding-bottom: 60px; //footer直上のコンテンツとの間隔
+  padding-bottom: 50px; //footer直上のコンテンツとの間隔
   box-sizing: border-box;
 }
 
@@ -34,5 +140,5 @@ footer{
   width: 100%;
   height: 50px;
   background-color: #365E94;
-  color: white;
+  color: #fff;
 }

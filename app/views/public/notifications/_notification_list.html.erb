@@ -4,7 +4,7 @@
   <div class="d-flex justify-content-between border-bottom">
     <span>
       <%= link_to user_path(sender) do %>
-        <%= image_tag sender.get_profile_image(50, 50), class: "rounded-circle" %>
+        <%= image_tag sender.get_profile_image(50, 50), class: "NotificationUserImg" %>
         <%= sender.display_name %>
       <% end %>
       さんが

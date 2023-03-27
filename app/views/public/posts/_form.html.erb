@@ -3,6 +3,7 @@
   <%= f.label :"イメージ画像" %><br>
   <%= f.file_field :image, accept: "image/*" %>
 </div>
+<div id="preview-img"></div>
 <div class="form-group field">
   <%= f.label :"タグ ※最大5個まで", class: "control-label" %><br>
   <%= f.text_field :tag, value: post.tags.pluck(:name), placeholder: "野球 キャッチボール 初心者", class: "form-control col-sm-6" %>
@@ -28,8 +29,8 @@
   <%= f.text_area :body, placeholder: "宜しくお願いします", class: "form-control col-sm-6" %>
 </div>
 <div class="form-group field">
-  <%= f.label :"公開" %>
-  <%= f.radio_button :status, :public %><br>
-  <%= f.label :"非公開（下書き）" %>
+  <%= f.radio_button :status, :public %>
+  <%= f.label :status_public, "公開" %><br>
   <%= f.radio_button :status, :private %>
+  <%= f.label :status_private, "非公開（下書き）" %>
 </div>

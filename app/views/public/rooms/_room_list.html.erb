@@ -1,0 +1,40 @@
+<% if post_user_room.present? %>
+  <table class="w-100" style="table-layout: fixed;">
+    <thead>
+      <tr class="table table-secondary text-center">
+        <th scope="col" width="20%">ユーザー</th>
+        <th scope="col" width="20%">タイトル</th>
+        <th scope="col">メッセージ</th>
+        <th scope="col" width="15%"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% post_user_room.each do |pur| %>
+      <tr class="border-bottom text-center">
+        <td>
+          <%= link_to room_path(pur.room.id) do %>
+            <%= image_tag pur.user.get_profile_image(100, 100), class: "RoomUserImg" %><br>
+            <%= pur.user.display_name %>
+          <% end %>
+        </td>
+        <td>
+          <strong><%= pur.room.post.title %></strong>
+        </td>
+        <td>
+          <% if pur.room.chats.present? %>
+            <% chat = Chat.find_by(id: pur.room.chat_ids.last).message %>
+            <%= truncate(chat, length: 30) %>
+          <% else %>
+            <p class="text-center my-5">チャットを始めましょう</p>
+          <% end %>
+        </td>
+        <td>
+          <h6 style="color: #C0C0C0;"><%= pur.updated_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="text-center my-5">チャットが見つかりませんでした</p>
+<% end %>

@@ -11,8 +11,8 @@
   <!--投稿情報①-->
   <div class="row mt-3">
     <div class="PostLeft col-4 text-center">
-      <div class="PostImage border-bottom">
-        <%= image_tag @post.get_image(200, 200) %>
+      <div class="PostImage border-bottom"><br>
+        <%= image_tag @post.get_image(200, 200), class: "PostShowImg" %>
         <div style="color: red">♥<%= @post.favorites.count %></div>
         <% @post.tags.each do |tag| %>
           <%= link_to admin_posts_path(tag_id: tag.id), class: "Tag" do %>
@@ -23,7 +23,7 @@
       <div class="PostUser my-3">
         <p class="font-weight-bold mb-0">投稿者</p>
         <%= link_to admin_user_path(@user) do %>
-          <%= image_tag @user.get_profile_image(120, 120), class: "rounded-circle my-2" %><br>
+          <%= image_tag @user.get_profile_image(120, 120), class: "PostShowUserImg my-2" %><br>
           <%= @user.display_name %>
         <% end %>
       </div>
@@ -31,6 +31,13 @@
     
     <!--投稿情報②-->
     <div class="PostRight col-8">
+      <div class="PostStatus">
+        <% if @post.status_public? %>
+          <h6 class="text-success"><i class="fas fa-circle"></i><%= @post.status_i18n %></h6>
+        <% else %>
+          <h6 class="text-secondary"><i class="fas fa-circle"></i><%= @post.status_i18n %></h6>
+        <% end %>
+      </div>
       <table class="table table-bordered">
         <tr>
           <th scope="row" class="table-secondary" style="width: 20%">タイトル</th>

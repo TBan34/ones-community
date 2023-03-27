@@ -11,7 +11,7 @@
     </tr>
     <% users.each do |user| %>
     <tr>
-      <td><%= image_tag user.get_profile_image(100, 100) %></td>
+      <td><%= image_tag user.get_profile_image(100, 100), class: "UserIndexImg" %></td>
       <td><%= user.id %></td>
       <td><%= user.is_deleted ? "退会" : "有効" %></td>
       <td><%= user.display_name %></td>
