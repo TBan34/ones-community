@@ -2,14 +2,14 @@
 <div class="SearchTagForm">
   <!--特定のユーザーの投稿履歴からタグ検索する場合-->
   <% if params[:user_id] %>
-    <%= form_with url: posts_path, local: true, method: :get do |f| %>
+    <%= form_with url: posts_path, method: :get do |f| %>
       <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), { prompt: "タグ検索" } %>
       <%= f.hidden_field :user_id, value: params[:user_id] %>
       <%= f.submit "検索", class: "btn btn-secondary btn-sm" %>
     <% end %>
   <% else %>
   <!--通常のタグ検索-->
-    <%= form_with url: posts_path, local: true, method: :get do |f| %>
+    <%= form_with url: posts_path, method: :get do |f| %>
       <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :name, params[:tag_id]), { prompt: "タグ検索" } %>
       <%= f.submit "検索", class: "btn btn-secondary btn-sm" %>
     <% end %>

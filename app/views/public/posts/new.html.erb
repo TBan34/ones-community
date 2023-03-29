@@ -3,9 +3,9 @@
 
 <!--新規投稿-->
 <div class="container-fluid w-75 my-3">
-  <div class="PostBtn d-inline-flex">
+  <div class="PostBtn d-inline-flex w-50">
     <h2 class="font-weight-bold"><i class="fas fa-paper-plane"></i> 新規投稿</h2>
-    <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary ml-5" %>
+    <%= link_to "非公開（下書き）一覧", post_draft_path(current_user), class: "btn btn-secondary ml-auto" %>
   </div>
   <div class="PostForm">
     <%= form_with model: @post do |f| %>
