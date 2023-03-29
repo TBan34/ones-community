@@ -24,7 +24,7 @@ class Post < ApplicationRecord
   def save_tags(tag_data)
     posting_tags = tag_data.split(/[[:blank:]]+/)
     if posting_tags.count > MAX_POST_TAGS_COUNT
-      errors.add(:base, "タグの数は最大#{MAX_POST_TAGS_COUNT}個までです")
+      errors.add(:base, "タグの数は最大#{MAX_POST_TAGS_COUNT}つまでです")
       return false
     end
 
@@ -76,7 +76,7 @@ class Post < ApplicationRecord
   # キーワード検索（部分一致）
   def self.search_word(search_word)
     @post = Post.where("title LIKE? OR body LIKE? OR at_where LIKE?",
-    "%#{search_word}%", "%#{search_word}%", "%#{search_word}%")
+    "%#{search_word}%", "%#{search_word}%", "%#{search_word}%").order(created_at: :desc)
   end
 
   # いいね通知の作成（投稿に対して自分以外のユーザーから初めていいねされた場合）
