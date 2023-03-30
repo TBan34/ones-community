@@ -14,50 +14,43 @@
     <h2 class="font-weight-bold"><i class="fas fa-user-edit"></i> ユーザー編集</h2>
     <div class="row d-block">
       <%= form_with model: @user do |f| %>
-        <div class="col">
-          <table class="table table-bordered">
-            <tr>
-              <th scope="row" class="form-group field table-secondary"><%= f.label :"プロフィール画像" %></th>
-              <td><%= f.file_field :profile_image, accept: "image/*" %></td>
-            </tr>
-            <tr>
-              <th scope="row" class="form-group field table-secondary"><%= f.label :"氏名", class: "control-label" %></th>
-              <td><%= f.text_field :name, placeholder: "佐藤太郎", class: "form-control" %></td>
-            </tr>
-            <tr>
-              <th scope="row" class="form-group field table-secondary"><%= f.label :"電話番号", class: "control-label" %></th>
-              <td><%= f.text_field :telephone_number, placeholder: "00000000000", class: "form-control" %></td>
-            </tr>
-            <tr>
-              <th scope="row" class="form-group field table-secondary"><%= f.label :"メールアドレス", class: "control-label" %></th>
-              <td><%= f.text_field :email, placeholder: "test@example.com", class: "form-control" %></td>
-            </tr>
-            <tr>
-              <th scope="row" class="form-group field table-secondary"><%= f.label :"ユーザー名", class: "control-label" %></th>
-              <td><%= f.text_field :display_name, placeholder: "テスト太郎", class: "form-control" %></td>
-            </tr>
-            <tr>
-              <th scope="row" class="form-group field table-secondary"><%= f.label :"都道府県", class: "control-label" %></th>
-              <td><%= f.text_field :prefecture, placeholder: "東京都", class: "form-control" %></td>
-            </tr>
-            <tr>
-              <th scope="row" class="form-group field table-secondary"><%= f.label :"市区町村", class: "control-label" %></th>
-              <td><%= f.text_field :municipality, placeholder: "新宿区", class: "form-control" %></td>
-            </tr>
-            <tr>
-              <th scope="row" class="form-group field table-secondary"><%= f.label :"自己紹介", class: "control-label" %></th>
-              <td><%= f.text_area :self_introduction, placeholder: "宜しくお願いします", class: "form-control" %></td>
-            </tr>
-          </table>
-          <p class="text-right"><%= f.submit "変更を保存する", class: "btn btn-success" %></p>
-        </div>
+        <table class="table table-bordered">
+          <tr>
+            <th scope="row" class="form-group table-secondary"><%= f.label :"プロフィール画像" %></th>
+            <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="form-group table-secondary"><%= f.label :"氏名" %></th>
+            <td><%= f.text_field :name, placeholder: "佐藤太郎", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="form-group table-secondary"><%= f.label :"電話番号" %></th>
+            <td><%= f.text_field :telephone_number, placeholder: "00000000000", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="form-group table-secondary"><%= f.label :"メールアドレス" %></th>
+            <td><%= f.text_field :email, placeholder: "test@example.com", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="form-group table-secondary"><%= f.label :"ユーザー名" %></th>
+            <td><%= f.text_field :display_name, placeholder: "テスト太郎", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="form-group table-secondary"><%= f.label :"都道府県" %></th>
+            <td><%= f.text_field :prefecture, placeholder: "東京都", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="form-group table-secondary"><%= f.label :"市区町村" %></th>
+            <td><%= f.text_field :municipality, placeholder: "新宿区", class: "form-control" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="form-group table-secondary"><%= f.label :"自己紹介" %></th>
+            <td><%= f.text_area :self_introduction, placeholder: "宜しくお願いします", class: "form-control" %></td>
+          </tr>
+        </table>
+        <p class="text-right"><%= f.submit "変更を保存する", class: "btn btn-success" %></p>
       <% end %>
     </div>
-    
-    <div class="row">
-      <div class="col">
-        <p class="text-right"><u><%= link_to user_unsubscribe_path(current_user) do %>退会を希望する<% end %></u></p>
-      </div>
-    </div>
+    <p class="text-right"><u><%= link_to user_unsubscribe_path(current_user) do %>退会を希望する<% end %></u></p>
   </div>
 </div>
