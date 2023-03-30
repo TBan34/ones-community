@@ -1,21 +1,21 @@
 <!--ユーザー詳細-->
 <div class="container mt-3">
   <h2 class="font-weight-bold"><i class="fas fa-user"></i> ユーザー詳細</h2>
-  <div class="UserBtn row">
-    <div class="col-10 offset-2 text-right">
+  <div class="UserBtn">
+    <div class="UserBtn text-right">
       <%= link_to "編集", edit_admin_user_path(@user.id), class: "btn btn-success" %>
     </div>
   </div>
   
-  <div class="UserImage row">
-    <div class="col text-center">
+  <div class="UserImg">
+    <div class="text-center">
       <%= image_tag @user.get_profile_image(300, 300), class: "UserShowImg my-2" %>
     </div>
   </div>
   
   <div class="UserInfo row">
     <div class="col-4">
-      <table class="table table-bordered">
+      <table class="table table-bordered table-responsive-lg">
         <tr>
           <th scope="row" class="table-secondary">氏名</th>
           <td><%= @user.name %></td>
@@ -60,8 +60,8 @@
     </div>
   </div>
   
-  <div class="UserPosted row">
-    <div class="col text-right">
+  <div class="UserPosted">
+    <div class="text-right">
       <p><%= link_to admin_posts_path(user_id: @user.id) do %><u>過去の投稿</u><% end %></p>
     </div>
   </div>
