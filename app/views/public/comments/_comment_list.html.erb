@@ -1,29 +1,30 @@
 <!--コメント一覧-->
 <p>【コメント一覧】</p>
 <% if current_user != User.guest %>
-  <% post.comments.each do |comment| %>
-    <table class="CommentList w-100">
-      <td style="width: 8%">
-        <%= image_tag comment.user.get_profile_image(50, 50), class: "CommentUserImg" %>
-      </td>
-      <td style="width: 12%">
-        <%= comment.user.display_name %>
-      </td>
-      <td style="width: 50%">
-        <%= simple_format(h(comment.content), class: "my-0") %>
-      </td>
-      <td style="width: 20%">
-        <h6 style="color: #C0C0C0;"><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
-      </td>
-      <td class="text-center" style="width: 10%">
-        <% if comment.user == current_user %>
-          <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-        <% end %>
-      </td>
-    </table>
-  <% end %>
-  <% unless post.comments.present? %>
-    <p>&emsp;コメントは特にありません</p>
+  <% if post.comments.present? %>
+    <% post.comments.each do |comment| %>
+      <table class="CommentList w-100">
+        <td style="width: 8%">
+          <%= image_tag comment.user.get_profile_image(50, 50), class: "CommentUserImg" %>
+        </td>
+        <td style="width: 12%">
+          <%= comment.user.display_name %>
+        </td>
+        <td style="width: 50%">
+          <%= simple_format(h(comment.content), class: "my-0") %>
+        </td>
+        <td style="width: 20%">
+          <h6 style="color: #C0C0C0;"><%= comment.created_at.strftime("%Y/%m/%d %H:%M") %></h6>
+        </td>
+        <td class="text-center" style="width: 10%">
+          <% if comment.user == current_user %>
+            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+          <% end %>
+        </td>
+      </table>
+    <% end %>
+  <% else %>
+    <p class="text-center my-5">コメントが見つかりませんでした</p>
   <% end %>
   
   <%= form_with model: [post, comment], local: false do |f| %>

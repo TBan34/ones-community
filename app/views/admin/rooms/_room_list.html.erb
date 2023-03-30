@@ -1,7 +1,7 @@
 <% if rooms.present? %>
-  <table class="w-100" style="table-layout: fixed;">
+  <table class="table-responsive text-center w-100" style="table-layout: fixed;">
     <thead>
-      <tr class="table table-secondary text-center">
+      <tr class="table table-secondary">
         <th scope="col" width="20%">投稿者</th>
         <th scope="col" width="20%">タイトル</th>
         <th scope="col">メッセージ</th>
@@ -10,7 +10,7 @@
     </thead>
     <tbody>
       <% rooms.each do |room| %>
-      <tr class="border-bottom text-center">
+      <tr class="border-bottom">
         <td>
           <%= link_to admin_room_path(room.id) do %>
             <%= image_tag room.post.user.get_profile_image(100, 100), class: "RoomUserImg" %><br>
@@ -25,7 +25,7 @@
             <% chat = Chat.find_by(id: room.chat_ids.last).message %>
             <%= truncate(chat, length: 30) %>
           <% else %>
-            <p class="text-center my-5">チャットを始めましょう</p>
+            <p class="my-5">チャットを始めましょう</p>
           <% end %>
         </td>
         <td>
