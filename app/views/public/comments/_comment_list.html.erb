@@ -3,7 +3,7 @@
 <% if current_user != User.guest %>
   <% if post.comments.present? %>
     <% post.comments.each do |comment| %>
-      <table class="CommentList w-100">
+      <table class="CommentList table-responsive text-nowrap w-100">
         <td style="width: 8%">
           <%= image_tag comment.user.get_profile_image(50, 50), class: "CommentUserImg" %>
         </td>

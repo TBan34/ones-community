@@ -1,6 +1,6 @@
 <!--チャットメッセージ-->
 <% chats.each do |chat| %>
-  <table class="table-responsive-lg w-100" style="table-layout: fixed;">
+  <table class="table-responsive-lg text-nowrap w-100" style="table-layout: fixed;">
     <% if chat.user_id == current_user.id %>
       <tr class="MyChat text-right">
         <td width="10%"></td>
